@@ -1,0 +1,3192 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-[#FAF8F5]">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XIEMBRA CONTROL CENTER V1 | Sistema Operativo de Lanzamiento</title>
+  <link rel="icon" type="image/png" href="images/xiembra_logo_compacto_verde_nature.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              campo: '#006148',
+              campoDark: '#004734',
+              campoDarker: '#062319',
+              nature: '#CBEC8A',
+              natureDark: '#9FC94F',
+              lemon: '#FFFC88',
+              crema: '#FFFCD2',
+              marfil: '#FAF8F5',
+              arena: '#F4EFE6',
+              surface: '#FFFFFF',
+              border: '#E8E2D8',
+              borderLight: '#F0EBE2',
+              textMain: '#141F18',
+              textMuted: '#5C6B61',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Outfit"', 'sans-serif'],
+          },
+          boxShadow: {
+            card: '0 1px 3px rgba(0,0,0,0.03), 0 8px 24px -4px rgba(0, 97, 72, 0.05)',
+            hover: '0 4px 14px rgba(0,0,0,0.06), 0 16px 32px -4px rgba(0, 97, 72, 0.08)',
+            modal: '0 25px 50px -12px rgba(6, 35, 25, 0.25)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #141F18;
+      background-color: #FAF8F5;
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #D8D2C6; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #B4ACA0; }
+
+    dialog::backdrop {
+      background: rgba(6, 35, 25, 0.55);
+      backdrop-filter: blur(4px);
+    }
+    dialog[open] {
+      animation: modalFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.96) translateY(8px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .nav-btn.active {
+      background-color: #004734;
+      color: #CBEC8A;
+      font-weight: 600;
+    }
+    .nav-btn.active svg {
+      stroke: #CBEC8A;
+    }
+
+    .view-pane {
+      display: none;
+    }
+    .view-pane.active {
+      display: block;
+      animation: viewSlideIn 0.18s ease-out;
+    }
+    @keyframes viewSlideIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="h-full flex overflow-hidden bg-[#FAF8F5]">
+
+  <!-- ======================================================== -->
+  <!-- SIDEBAR (IZQUIERDA)                                      -->
+  <!-- ======================================================== -->
+  <aside id="sidebar" class="w-64 bg-brand-campoDarker border-r border-[#0d3b2c] flex flex-col justify-between shrink-0 transition-all duration-300 z-30 fixed inset-y-0 left-0 md:static md:translate-x-0 -translate-x-full">
+    
+    <!-- Top Brand Area -->
+    <div class="p-5 border-b border-[#0d3b2c]">
+      <div class="flex items-center gap-3">
+        <!-- Logo Oficial Xiembra (images/xiembra_logo_compacto_verde_nature.png) -->
+        <img src="images/xiembra_logo_compacto_verde_nature.png" alt="Xiembra" class="h-10 w-auto object-contain" onerror="this.src='../02_Identidad_y_Diseno/1. Logos Oficiales/Manual y Renders JPG/Pagina_04_Logo_Horizontal_Verde_Nature.jpg'">
+        <div>
+          <h1 class="text-white font-display font-bold text-base tracking-wide leading-none">CONTROL CENTER</h1>
+          <p class="text-brand-nature text-[11px] font-medium tracking-wider uppercase mt-1">Hijos de la Tierra</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Menu (11 Items Simples sin Submenús) -->
+    <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+      <button onclick="switchView('inicio')" id="nav-inicio" class="nav-btn active w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-white/80 hover:text-white hover:bg-brand-campoDark text-sm font-medium transition">
+        <i data-lucide="layout-dashboard" class="w-4 h-4 text-brand-nature"></i>
+        <span>Inicio</span>
+      </button>
+
+      <button onclick="switchView('tareas')" id="nav-tareas" class="nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-white/80 hover:text-white hover:bg-brand-campoDark text-sm font-medium transition">
+        <div class="flex items-center gap-3">
+          <i data-lucide="check-square" class="w-4 h-4 text-white/60"></i>
+          <span>Tareas</span>
+        </div>
+        <span id="badge-tareas-count" class="bg-[#004734] text-brand-nature text-[11px] font-bold px-2 py-0.5 rounded-full">24</span>
+      </button>
+
+      <button onclick="switchView('clientes')" id="nav-clientes" class="nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-white/80 hover:text-white hover:bg-brand-campoDark text-sm font-medium transition">
+        <div class="flex items-center gap-3">
+          <i data-lucide="store" class="w-4 h-4 text-white/60"></i>
+          <span>Clientes B2B</span>
+        </div>
+        <span class="bg-[#004734] text-brand-nature text-[11px] font-bold px-2 py-0.5 rounded-full">25</span>
+      </button>
+
+      <button onclick="switchView('pipeline')" id="nav-pipeline" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-white/80 hover:text-white hover:bg-brand-campoDark text-sm font-medium transition">
+        <i data-lucide="kanban" class="w-4 h-4 text-white/60"></i>
+        <span>Pipeline Comercial</span>
+      </button>
+
+      <button onclick="switchView('inventario')" id="nav-inventario" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-white/80 hover:text-white hover:bg-brand-campoDark text-sm font-medium transition">
+        <i data-lucide="boxes" class="w-4 h-4 text-white/60"></i>
+        <span>Inventario</span>
+      </button>
+
+      <button onclick="switchView('ventas')" id="nav-ventas" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-white/80 hover:text-white hover:bg-brand-campoDark text-sm font-medium transition">
+        <i data-lucide="receipt" class="w-4 h-4 text-white/60"></i>
+        <span>Ventas</span>
+      </button>
+
+      <button onclick="switchView('finanzas')" id="nav-finanzas" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-white/80 hover:text-white hover:bg-brand-campoDark text-sm font-medium transition">
+        <i data-lucide="wallet" class="w-4 h-4 text-white/60"></i>
+        <span>Finanzas</span>
+      </button>
+
+      <button onclick="switchView('calendario')" id="nav-calendario" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-white/80 hover:text-white hover:bg-brand-campoDark text-sm font-medium transition">
+        <i data-lucide="calendar" class="w-4 h-4 text-white/60"></i>
+        <span>Calendario</span>
+      </button>
+
+      <button onclick="switchView('reportes')" id="nav-reportes" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-white/80 hover:text-white hover:bg-brand-campoDark text-sm font-medium transition">
+        <i data-lucide="bar-chart-2" class="w-4 h-4 text-white/60"></i>
+        <span>Reportes</span>
+      </button>
+
+      <div class="pt-3 pb-1">
+        <div class="border-t border-[#0d3b2c]"></div>
+      </div>
+
+      <button onclick="switchView('jarvis')" id="nav-jarvis" class="nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-white/80 hover:text-white hover:bg-brand-campoDark text-sm font-medium transition">
+        <div class="flex items-center gap-3">
+          <i data-lucide="bot" class="w-4 h-4 text-brand-nature"></i>
+          <span>JARVIS 24/7</span>
+        </div>
+        <span class="inline-flex items-center gap-1 text-[10px] text-emerald-400 font-semibold bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-800">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Online
+        </span>
+      </button>
+
+      <button onclick="switchView('configuracion')" id="nav-configuracion" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-white/80 hover:text-white hover:bg-brand-campoDark text-sm font-medium transition">
+        <i data-lucide="settings" class="w-4 h-4 text-white/60"></i>
+        <span>Configuración</span>
+      </button>
+    </nav>
+
+    <!-- User Profile Switcher (Diseñado para Karla & Roger) -->
+    <div class="p-4 border-t border-[#0d3b2c] bg-[#041a13]">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div id="user-avatar" class="w-9 h-9 rounded-full bg-brand-campo flex items-center justify-center text-white font-bold text-sm border border-brand-nature/40 shadow-inner">
+            KL
+          </div>
+          <div>
+            <p id="user-name" class="text-white text-xs font-bold leading-tight">Karla Linares</p>
+            <p id="user-role" class="text-brand-nature text-[10px] font-medium leading-tight">Operaciones & Campo</p>
+          </div>
+        </div>
+        <button onclick="toggleActiveUser()" title="Cambiar usuario activo (Karla / Roger)" class="p-1.5 rounded-lg bg-brand-campoDark hover:bg-brand-campo text-white/70 hover:text-white transition">
+          <i data-lucide="arrow-left-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div class="mt-2.5 pt-2 border-t border-[#0d3b2c] flex items-center justify-between text-[11px] text-white/50">
+        <span>RUC: 20616165365</span>
+        <button onclick="exportAllData()" class="hover:text-brand-nature transition flex items-center gap-1">
+          <i data-lucide="download" class="w-3 h-3"></i> Respaldo
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobile Overlay -->
+  <div id="mobile-backdrop" onclick="toggleMobileSidebar()" class="fixed inset-0 bg-black/50 z-20 hidden md:hidden"></div>
+
+  <!-- ======================================================== -->
+  <!-- MAIN WORKSPACE                                           -->
+  <!-- ======================================================== -->
+  <main class="flex-1 flex flex-col h-full overflow-hidden">
+    
+    <!-- Top Action Bar -->
+    <header class="bg-brand-surface border-b border-brand-border h-16 px-6 flex items-center justify-between shrink-0 z-10">
+      <div class="flex items-center gap-4">
+        <button onclick="toggleMobileSidebar()" class="md:hidden p-2 rounded-lg text-brand-textMuted hover:bg-brand-arena transition">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+        <div>
+          <h2 id="view-title" class="font-display font-bold text-lg text-brand-textMain leading-none">Centro de Comando</h2>
+          <p id="view-subtitle" class="text-xs text-brand-textMuted mt-1 hidden sm:block">Panel ejecutivo y seguimiento operativo diario de Xiembra</p>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons (Requisito 7: 5 acciones claras) -->
+      <div class="flex items-center gap-2">
+        <button onclick="openModal('modal-nueva-tarea')" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-brand-campo hover:bg-brand-campoDark text-white text-xs font-semibold rounded-lg shadow-sm transition">
+          <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+          <span>Nueva Tarea</span>
+        </button>
+
+        <button onclick="openModal('modal-nuevo-cliente')" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-brand-arena hover:bg-[#eae3d5] text-brand-campoDark text-xs font-semibold rounded-lg border border-brand-border transition">
+          <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Nuevo Cliente</span>
+        </button>
+
+        <button onclick="openModal('modal-registrar-venta')" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-brand-arena hover:bg-[#eae3d5] text-brand-campoDark text-xs font-semibold rounded-lg border border-brand-border transition">
+          <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+          <span class="hidden md:inline">Registrar Venta</span>
+        </button>
+
+        <button onclick="openModal('modal-actualizar-inventario')" class="p-1.5 sm:px-2.5 sm:py-1.5 bg-brand-arena hover:bg-[#eae3d5] text-brand-campoDark text-xs font-semibold rounded-lg border border-brand-border transition" title="Actualizar Inventario">
+          <i data-lucide="package-plus" class="w-4 h-4"></i>
+        </button>
+
+        <button onclick="openModal('modal-registrar-seguimiento')" class="p-1.5 sm:px-2.5 sm:py-1.5 bg-brand-arena hover:bg-[#eae3d5] text-brand-campoDark text-xs font-semibold rounded-lg border border-brand-border transition" title="Registrar Seguimiento">
+          <i data-lucide="message-square-plus" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Scrollable Workspace Body -->
+    <div class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6">
+
+      <!-- ==================================================== -->
+      <!-- VIEW 1: INICIO (DASHBOARD PRINCIPAL)                 -->
+      <!-- ==================================================== -->
+      <section id="view-inicio" class="view-pane active space-y-6">
+        
+        <!-- Welcome Greeting for Karla / Roger -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-brand-surface p-5 rounded-2xl border border-brand-border shadow-card">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-brand-crema/70 flex items-center justify-center shrink-0 border border-brand-lemon/60">
+              <img src="images/xiembra_mascota_pacarana_transparente.png" alt="Pacarana" class="w-9 h-9 object-contain" onerror="this.style.display='none'">
+            </div>
+            <div>
+              <h3 id="greeting-title" class="font-display font-bold text-lg text-brand-textMain">¡Hola, Karla!</h3>
+              <p id="greeting-subtitle" class="text-xs text-brand-textMuted mt-0.5">Tienes <span class="font-bold text-brand-campo" id="greeting-task-count">3 tareas</span> programadas para seguimiento hoy.</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-2 self-start sm:self-center">
+            <span class="text-xs text-brand-textMuted font-medium">Filtrar por:</span>
+            <div class="inline-flex bg-brand-arena p-0.5 rounded-lg border border-brand-border text-xs">
+              <button onclick="setUserFilter('karla')" id="filter-user-karla" class="px-2.5 py-1 rounded-md font-semibold bg-brand-surface text-brand-campo shadow-sm">Karla</button>
+              <button onclick="setUserFilter('roger')" id="filter-user-roger" class="px-2.5 py-1 rounded-md text-brand-textMuted hover:text-brand-textMain font-medium">Roger</button>
+              <button onclick="setUserFilter('todos')" id="filter-user-todos" class="px-2.5 py-1 rounded-md text-brand-textMuted hover:text-brand-textMain font-medium">Todos</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- A. ESTADO GENERAL: 4 Indicadores Compactos (Requisito 4A) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <!-- Card 1: Ready to Sell -->
+          <div class="bg-brand-surface p-4 rounded-xl border border-brand-border shadow-card flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-brand-textMuted">Ready to Sell</span>
+              <span id="badge-rts-status" class="inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200">
+                🔴 Bloqueado
+              </span>
+            </div>
+            <div class="mt-2.5">
+              <div class="flex items-baseline justify-between">
+                <span id="stat-rts-pct" class="text-2xl font-display font-extrabold text-brand-textMain">16.7%</span>
+                <span class="text-xs text-brand-textMuted font-medium" id="stat-rts-ratio">3 de 18 tareas</span>
+              </div>
+              <div class="w-full bg-brand-arena h-1.5 rounded-full overflow-hidden mt-2">
+                <div id="bar-rts" class="bg-rose-500 h-full rounded-full transition-all duration-500" style="width: 16.7%"></div>
+              </div>
+            </div>
+            <p class="text-[11px] text-brand-textMuted mt-2.5 pt-2 border-t border-brand-borderLight flex items-center justify-between">
+              <span>Meta: 3–5 ventas piloto</span>
+              <span class="text-rose-600 font-semibold" id="rts-block-count">2 bloqueos</span>
+            </p>
+          </div>
+
+          <!-- Card 2: Ready to Scale -->
+          <div class="bg-brand-surface p-4 rounded-xl border border-brand-border shadow-card flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-brand-textMuted">Ready to Scale</span>
+              <span id="badge-scale-status" class="inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200">
+                🟡 En Proceso
+              </span>
+            </div>
+            <div class="mt-2.5">
+              <div class="flex items-baseline justify-between">
+                <span id="stat-scale-pct" class="text-2xl font-display font-extrabold text-brand-textMain">16.7%</span>
+                <span class="text-xs text-brand-textMuted font-medium" id="stat-scale-ratio">1 de 6 tareas</span>
+              </div>
+              <div class="w-full bg-brand-arena h-1.5 rounded-full overflow-hidden mt-2">
+                <div id="bar-scale" class="bg-amber-500 h-full rounded-full transition-all duration-500" style="width: 16.7%"></div>
+              </div>
+            </div>
+            <p class="text-[11px] text-brand-textMuted mt-2.5 pt-2 border-t border-brand-borderLight flex items-center justify-between">
+              <span>Producción de volumen</span>
+              <span class="text-amber-700 font-semibold">100kg + 20k bolsas</span>
+            </p>
+          </div>
+
+          <!-- Card 3: Prospectos B2B -->
+          <div class="bg-brand-surface p-4 rounded-xl border border-brand-border shadow-card flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-brand-textMuted">Prospectos B2B</span>
+              <span class="inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
+                🔵 Activos
+              </span>
+            </div>
+            <div class="mt-2.5">
+              <div class="flex items-baseline justify-between">
+                <span class="text-2xl font-display font-extrabold text-brand-textMain" id="stat-prospectos-total">25</span>
+                <span class="text-xs text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-full" id="stat-prospectos-contactados">1 contactado</span>
+              </div>
+              <div class="w-full bg-brand-arena h-1.5 rounded-full overflow-hidden mt-2">
+                <div class="bg-blue-500 h-full rounded-full" style="width: 4%"></div>
+              </div>
+            </div>
+            <p class="text-[11px] text-brand-textMuted mt-2.5 pt-2 border-t border-brand-borderLight flex items-center justify-between">
+              <span>16 Biomarkets + 9 Cafeterías</span>
+              <span class="text-brand-campo font-semibold">Canal Lima</span>
+            </p>
+          </div>
+
+          <!-- Card 4: Ventas Piloto -->
+          <div class="bg-brand-surface p-4 rounded-xl border border-brand-border shadow-card flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-brand-textMuted">Ventas Facturadas</span>
+              <span class="inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                🟢 Piloto
+              </span>
+            </div>
+            <div class="mt-2.5">
+              <div class="flex items-baseline justify-between">
+                <span class="text-2xl font-display font-extrabold text-brand-textMain" id="stat-ventas-monto">S/ 0.00</span>
+                <span class="text-xs text-brand-textMuted font-medium">Meta: 3 tiendas</span>
+              </div>
+              <div class="w-full bg-brand-arena h-1.5 rounded-full overflow-hidden mt-2">
+                <div class="bg-emerald-500 h-full rounded-full" style="width: 0%"></div>
+              </div>
+            </div>
+            <p class="text-[11px] text-brand-textMuted mt-2.5 pt-2 border-t border-brand-borderLight flex items-center justify-between">
+              <span>RUC 20616165365</span>
+              <button onclick="openModal('modal-registrar-venta')" class="text-brand-campo hover:underline font-bold">+ Registrar</button>
+            </p>
+          </div>
+        </div>
+
+        <!-- B & C. LAYOUT EN 2 COLUMNAS: HOY (IZQ) Y BLOQUEOS (DER) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          <!-- B. 🎯 HOY (Ancho 7/12 - Requisito 4B: máx 5-6 tareas, checkbox interactivo) -->
+          <div class="lg:col-span-7 bg-brand-surface p-5 rounded-2xl border border-brand-border shadow-card flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-brand-borderLight">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-brand-campo"></span>
+                  <h4 class="font-display font-bold text-base text-brand-textMain">🎯 HOY — Foco Prioritario</h4>
+                </div>
+                <span class="text-xs text-brand-textMuted" id="today-date-str">Jueves, 17 Sep</span>
+              </div>
+
+              <!-- Lista de tareas del día (máx 5-6) -->
+              <div id="today-tasks-container" class="divide-y divide-brand-borderLight my-2">
+                <!-- Injected via JavaScript -->
+              </div>
+            </div>
+
+            <!-- Footer: Ver todas -->
+            <div class="pt-3 border-t border-brand-borderLight flex items-center justify-between">
+              <span class="text-xs text-brand-textMuted">Mostrando tareas de alta prioridad</span>
+              <button onclick="switchView('tareas')" class="text-xs text-brand-campo hover:text-brand-campoDark font-bold inline-flex items-center gap-1 transition">
+                <span>Ver todas las tareas (24)</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- C. ⚠️ BLOQUEOS CRÍTICOS (Ancho 5/12 - Requisito 4C: solo bloqueado: true) -->
+          <div class="lg:col-span-5 bg-brand-surface p-5 rounded-2xl border border-brand-border shadow-card flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-brand-borderLight">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+                  <h4 class="font-display font-bold text-base text-brand-textMain">⚠️ Bloqueos Críticos</h4>
+                </div>
+                <span class="text-[11px] font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
+                  Requieren Atención
+                </span>
+              </div>
+
+              <!-- Lista de bloqueos de Ready to Sell -->
+              <div class="my-3 space-y-3" id="blocked-tasks-container">
+                <!-- Injected via JavaScript -->
+              </div>
+
+              <!-- Collapsible notice for scale tasks -->
+              <div class="bg-brand-arena/60 p-3 rounded-xl border border-brand-borderLight text-xs text-brand-textMuted mt-4">
+                <div class="flex items-center gap-2 font-semibold text-brand-textMain mb-1">
+                  <i data-lucide="info" class="w-3.5 h-3.5 text-blue-600"></i>
+                  <span>En espera externa (Ready to Scale):</span>
+                </div>
+                <p class="leading-relaxed text-[11px]">
+                  Las 20,000 bolsas (Multipack) y el lote de 100 kg (Highland) están en producción industrial. <strong>No bloquean tus primeras ventas con el stock piloto actual.</strong>
+                </p>
+              </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="pt-3 border-t border-brand-borderLight">
+              <button onclick="switchView('tareas'); setTaskFilter('bloqueadas');" class="w-full py-2 bg-brand-arena hover:bg-[#eae3d5] text-brand-campoDark text-xs font-bold rounded-lg border border-brand-border transition text-center block">
+                Gestionar todos los bloqueos en Tareas →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- D. PIPELINE B2B RESUMIDO (Requisito 4D: Stepper horizontal y botón ver pipeline) -->
+        <div class="bg-brand-surface p-5 rounded-2xl border border-brand-border shadow-card">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-brand-borderLight">
+            <div>
+              <h4 class="font-display font-bold text-base text-brand-textMain">💼 Embudo Comercial B2B</h4>
+              <p class="text-xs text-brand-textMuted">Ruta de cierre para las primeras 3 a 5 tiendas ancla</p>
+            </div>
+            <button onclick="switchView('pipeline')" class="text-xs font-bold text-brand-campo hover:text-brand-campoDark inline-flex items-center gap-1 self-start sm:self-center transition">
+              <span>Ver pipeline completo (25 tiendas)</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+          <!-- Stepper horizontal -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 my-4">
+            
+            <div class="bg-brand-arena/50 p-2.5 rounded-xl border border-brand-borderLight text-center">
+              <p class="text-[10px] font-bold text-brand-textMuted uppercase tracking-wider">Prospección</p>
+              <p class="text-lg font-display font-bold text-brand-textMain mt-0.5" id="step-count-prospeccion">24</p>
+            </div>
+
+            <div class="bg-emerald-50/70 p-2.5 rounded-xl border border-emerald-200 text-center">
+              <p class="text-[10px] font-bold text-emerald-800 uppercase tracking-wider">Contactado</p>
+              <p class="text-lg font-display font-bold text-emerald-900 mt-0.5" id="step-count-contactado">1</p>
+            </div>
+
+            <div class="bg-brand-arena/50 p-2.5 rounded-xl border border-brand-borderLight text-center">
+              <p class="text-[10px] font-bold text-brand-textMuted uppercase tracking-wider">Visita Agendada</p>
+              <p class="text-lg font-display font-bold text-brand-textMain mt-0.5" id="step-count-visita">0</p>
+            </div>
+
+            <div class="bg-brand-arena/50 p-2.5 rounded-xl border border-brand-borderLight text-center">
+              <p class="text-[10px] font-bold text-brand-textMuted uppercase tracking-wider">Muestra Entregada</p>
+              <p class="text-lg font-display font-bold text-brand-textMain mt-0.5" id="step-count-muestra">0</p>
+            </div>
+
+            <div class="bg-brand-arena/50 p-2.5 rounded-xl border border-brand-borderLight text-center">
+              <p class="text-[10px] font-bold text-brand-textMuted uppercase tracking-wider">Negociación</p>
+              <p class="text-lg font-display font-bold text-brand-textMain mt-0.5" id="step-count-negociacion">0</p>
+            </div>
+
+            <div class="bg-brand-arena/50 p-2.5 rounded-xl border border-brand-borderLight text-center">
+              <p class="text-[10px] font-bold text-brand-textMuted uppercase tracking-wider">Cerrado (Venta)</p>
+              <p class="text-lg font-display font-bold text-brand-textMain mt-0.5" id="step-count-cerrado">0</p>
+            </div>
+          </div>
+
+          <!-- Preview de 3 tiendas ancla prioritarias -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
+            
+            <div class="p-3.5 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-campo/50 transition cursor-pointer" onclick="openClientDetail('CLI-001')">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-brand-textMain">La Sanahoria</span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Contactado</span>
+              </div>
+              <p class="text-[11px] text-brand-textMuted mt-1">San Isidro · C. Miguel Dasso 101</p>
+              <div class="mt-2 pt-2 border-t border-brand-borderLight flex items-center justify-between text-[11px]">
+                <span class="text-brand-campo font-medium">Próx: 19 Sep</span>
+                <span class="text-brand-textMuted">Resp: Karla</span>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-campo/50 transition cursor-pointer" onclick="openClientDetail('CLI-002')">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-brand-textMain">Organa</span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Prioritario A1</span>
+              </div>
+              <p class="text-[11px] text-brand-textMuted mt-1">Miraflores · Av. Benavides 455</p>
+              <div class="mt-2 pt-2 border-t border-brand-borderLight flex items-center justify-between text-[11px]">
+                <span class="text-brand-campo font-medium">Próx: 19 Sep</span>
+                <span class="text-brand-textMuted">Resp: Karla</span>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-campo/50 transition cursor-pointer" onclick="openClientDetail('CLI-003')">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-brand-textMain">Flora y Fauna</span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Prioritario A1</span>
+              </div>
+              <p class="text-[11px] text-brand-textMuted mt-1">Miraflores · Av. La Mar 1110</p>
+              <div class="mt-2 pt-2 border-t border-brand-borderLight flex items-center justify-between text-[11px]">
+                <span class="text-brand-campo font-medium">Próx: 20 Sep</span>
+                <span class="text-brand-textMuted">Resp: Karla</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- VIEW 2: TAREAS (KANBAN + TABLA COMPLETA)             -->
+      <!-- ==================================================== -->
+      <section id="view-tareas" class="view-pane space-y-5">
+        
+        <!-- Toolbar & Filtros -->
+        <div class="bg-brand-surface p-4 rounded-xl border border-brand-border shadow-card flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div class="flex flex-wrap items-center gap-2">
+            
+            <div class="relative w-64">
+              <i data-lucide="search" class="w-4 h-4 text-brand-textMuted absolute left-3 top-2.5"></i>
+              <input type="text" id="search-tareas" oninput="renderTasks()" placeholder="Buscar tarea..." class="w-full pl-9 pr-3 py-1.5 text-xs bg-brand-arena rounded-lg border border-brand-border focus:outline-none focus:border-brand-campo">
+            </div>
+
+            <select id="filter-task-fase" onchange="renderTasks()" class="text-xs bg-brand-arena px-3 py-1.5 rounded-lg border border-brand-border text-brand-textMain font-medium focus:outline-none">
+              <option value="todas">Fase: Todas</option>
+              <option value="ready_to_sell">🟢 Ready to Sell</option>
+              <option value="ready_to_scale">🔵 Ready to Scale</option>
+            </select>
+
+            <select id="filter-task-resp" onchange="renderTasks()" class="text-xs bg-brand-arena px-3 py-1.5 rounded-lg border border-brand-border text-brand-textMain font-medium focus:outline-none">
+              <option value="todos">Responsable: Todos</option>
+              <option value="Karla">Solo Karla</option>
+              <option value="Roger">Solo Roger</option>
+              <option value="Ambos">Ambos</option>
+            </select>
+
+            <select id="filter-task-bloq" onchange="renderTasks()" class="text-xs bg-brand-arena px-3 py-1.5 rounded-lg border border-brand-border text-brand-textMain font-medium focus:outline-none">
+              <option value="todos">Estado: Todos</option>
+              <option value="bloqueadas">⚠️ Solo Bloqueadas</option>
+              <option value="activas">En Progreso / Pendientes</option>
+              <option value="terminadas">Terminadas</option>
+            </select>
+          </div>
+
+          <!-- View toggle: Kanban vs List -->
+          <div class="inline-flex bg-brand-arena p-0.5 rounded-lg border border-brand-border self-start md:self-auto">
+            <button onclick="setTaskViewMode('kanban')" id="btn-task-kanban" class="px-3 py-1 rounded-md text-xs font-bold bg-brand-surface text-brand-campo shadow-sm flex items-center gap-1.5">
+              <i data-lucide="kanban" class="w-3.5 h-3.5"></i> Kanban
+            </button>
+            <button onclick="setTaskViewMode('tabla')" id="btn-task-tabla" class="px-3 py-1 rounded-md text-xs font-medium text-brand-textMuted hover:text-brand-textMain flex items-center gap-1.5">
+              <i data-lucide="list" class="w-3.5 h-3.5"></i> Tabla
+            </button>
+          </div>
+        </div>
+
+        <!-- Kanban View Container -->
+        <div id="tasks-kanban-view" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Column: Pendiente -->
+          <div class="bg-[#F6F3EC] p-3 rounded-2xl border border-brand-border flex flex-col max-h-[75vh]">
+            <div class="flex items-center justify-between pb-2.5 mb-2 border-b border-brand-border">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
+                <h5 class="text-xs font-bold uppercase tracking-wider text-brand-textMain">Pendiente</h5>
+              </div>
+              <span id="col-count-pendiente" class="text-[11px] font-bold bg-brand-surface px-2 py-0.5 rounded-full text-brand-textMuted">0</span>
+            </div>
+            <div id="kanban-col-pendiente" class="space-y-2.5 overflow-y-auto flex-1 pr-1"></div>
+          </div>
+
+          <!-- Column: En Progreso -->
+          <div class="bg-[#F6F3EC] p-3 rounded-2xl border border-brand-border flex flex-col max-h-[75vh]">
+            <div class="flex items-center justify-between pb-2.5 mb-2 border-b border-brand-border">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                <h5 class="text-xs font-bold uppercase tracking-wider text-brand-textMain">En Progreso</h5>
+              </div>
+              <span id="col-count-en_progreso" class="text-[11px] font-bold bg-brand-surface px-2 py-0.5 rounded-full text-brand-textMuted">0</span>
+            </div>
+            <div id="kanban-col-en_progreso" class="space-y-2.5 overflow-y-auto flex-1 pr-1"></div>
+          </div>
+
+          <!-- Column: Esperando -->
+          <div class="bg-[#F6F3EC] p-3 rounded-2xl border border-brand-border flex flex-col max-h-[75vh]">
+            <div class="flex items-center justify-between pb-2.5 mb-2 border-b border-brand-border">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                <h5 class="text-xs font-bold uppercase tracking-wider text-brand-textMain">Esperando</h5>
+              </div>
+              <span id="col-count-esperando" class="text-[11px] font-bold bg-brand-surface px-2 py-0.5 rounded-full text-brand-textMuted">0</span>
+            </div>
+            <div id="kanban-col-esperando" class="space-y-2.5 overflow-y-auto flex-1 pr-1"></div>
+          </div>
+
+          <!-- Column: Terminado -->
+          <div class="bg-[#F6F3EC] p-3 rounded-2xl border border-brand-border flex flex-col max-h-[75vh]">
+            <div class="flex items-center justify-between pb-2.5 mb-2 border-b border-brand-border">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                <h5 class="text-xs font-bold uppercase tracking-wider text-brand-textMain">Terminado</h5>
+              </div>
+              <span id="col-count-terminado" class="text-[11px] font-bold bg-brand-surface px-2 py-0.5 rounded-full text-brand-textMuted">0</span>
+            </div>
+            <div id="kanban-col-terminado" class="space-y-2.5 overflow-y-auto flex-1 pr-1"></div>
+          </div>
+        </div>
+
+        <!-- Table View Container (Alternativa) -->
+        <div id="tasks-table-view" class="bg-brand-surface rounded-2xl border border-brand-border shadow-card overflow-hidden hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-brand-arena/60 border-b border-brand-border text-brand-textMuted font-bold uppercase tracking-wider">
+                <tr>
+                  <th class="p-3.5">ID</th>
+                  <th class="p-3.5">Tarea</th>
+                  <th class="p-3.5">Fase</th>
+                  <th class="p-3.5">Responsable</th>
+                  <th class="p-3.5">Prioridad</th>
+                  <th class="p-3.5">Estado</th>
+                  <th class="p-3.5">Fecha Límite</th>
+                  <th class="p-3.5 text-right">Acción</th>
+                </tr>
+              </thead>
+              <tbody id="tasks-table-body" class="divide-y divide-brand-borderLight"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- VIEW 3: CLIENTES B2B (DIRECTORIO COMPLETO 25)        -->
+      <!-- ==================================================== -->
+      <section id="view-clientes" class="view-pane space-y-5">
+        <div class="bg-brand-surface p-4 rounded-xl border border-brand-border shadow-card flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <div class="relative w-64">
+              <i data-lucide="search" class="w-4 h-4 text-brand-textMuted absolute left-3 top-2.5"></i>
+              <input type="text" id="search-clientes" oninput="renderClients()" placeholder="Buscar por nombre o distrito..." class="w-full pl-9 pr-3 py-1.5 text-xs bg-brand-arena rounded-lg border border-brand-border focus:outline-none focus:border-brand-campo">
+            </div>
+
+            <select id="filter-cliente-canal" onchange="renderClients()" class="text-xs bg-brand-arena px-3 py-1.5 rounded-lg border border-brand-border text-brand-textMain font-medium focus:outline-none">
+              <option value="todos">Canal: Todos</option>
+              <option value="biomarket">Biomarkets (16)</option>
+              <option value="cafeteria">Cafeterías (9)</option>
+            </select>
+
+            <select id="filter-cliente-etapa" onchange="renderClients()" class="text-xs bg-brand-arena px-3 py-1.5 rounded-lg border border-brand-border text-brand-textMain font-medium focus:outline-none">
+              <option value="todas">Etapa: Todas</option>
+              <option value="prospeccion">Prospección</option>
+              <option value="contactado">Contactado</option>
+              <option value="visita_agendada">Visita Agendada</option>
+              <option value="muestra_entregada">Muestra Entregada</option>
+              <option value="en_negociacion">Negociación</option>
+              <option value="cerrado">Cerrado</option>
+            </select>
+          </div>
+
+          <button onclick="openModal('modal-nuevo-cliente')" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-brand-campo hover:bg-brand-campoDark text-white text-xs font-semibold rounded-lg shadow-sm transition">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+            <span>Nuevo Prospecto</span>
+          </button>
+        </div>
+
+        <!-- Grid de Clientes (25 Fichas Claras) -->
+        <div id="clients-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- VIEW 4: PIPELINE COMERCIAL (KANBAN DE EMBUDO)        -->
+      <!-- ==================================================== -->
+      <section id="view-pipeline" class="view-pane space-y-5">
+        <div class="bg-brand-surface p-4 rounded-xl border border-brand-border shadow-card flex items-center justify-between">
+          <div>
+            <h4 class="font-display font-bold text-base text-brand-textMain">Embudo de Ventas B2B</h4>
+            <p class="text-xs text-brand-textMuted">Arrastra o cambia de etapa para avanzar tus prospectos comerciales</p>
+          </div>
+          <button onclick="openModal('modal-nuevo-cliente')" class="px-3 py-1.5 bg-brand-campo text-white text-xs font-bold rounded-lg shadow-sm">
+            + Agregar al Embudo
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3 overflow-x-auto pb-4">
+          <!-- Prospección -->
+          <div class="bg-[#F6F3EC] p-3 rounded-2xl border border-brand-border flex flex-col min-w-[210px] max-h-[75vh]">
+            <div class="flex items-center justify-between pb-2 border-b border-brand-border mb-2">
+              <span class="text-xs font-bold text-brand-textMain">Prospección</span>
+              <span id="pipe-count-prospeccion" class="text-[11px] font-bold bg-brand-surface px-2 py-0.5 rounded-full">0</span>
+            </div>
+            <div id="pipe-col-prospeccion" class="space-y-2 overflow-y-auto flex-1 pr-1"></div>
+          </div>
+
+          <!-- Contactado -->
+          <div class="bg-[#F6F3EC] p-3 rounded-2xl border border-brand-border flex flex-col min-w-[210px] max-h-[75vh]">
+            <div class="flex items-center justify-between pb-2 border-b border-brand-border mb-2">
+              <span class="text-xs font-bold text-emerald-800">Contactado</span>
+              <span id="pipe-count-contactado" class="text-[11px] font-bold bg-emerald-100 text-emerald-900 px-2 py-0.5 rounded-full">0</span>
+            </div>
+            <div id="pipe-col-contactado" class="space-y-2 overflow-y-auto flex-1 pr-1"></div>
+          </div>
+
+          <!-- Visita Agendada -->
+          <div class="bg-[#F6F3EC] p-3 rounded-2xl border border-brand-border flex flex-col min-w-[210px] max-h-[75vh]">
+            <div class="flex items-center justify-between pb-2 border-b border-brand-border mb-2">
+              <span class="text-xs font-bold text-brand-textMain">Visita</span>
+              <span id="pipe-count-visita_agendada" class="text-[11px] font-bold bg-brand-surface px-2 py-0.5 rounded-full">0</span>
+            </div>
+            <div id="pipe-col-visita_agendada" class="space-y-2 overflow-y-auto flex-1 pr-1"></div>
+          </div>
+
+          <!-- Muestra Entregada -->
+          <div class="bg-[#F6F3EC] p-3 rounded-2xl border border-brand-border flex flex-col min-w-[210px] max-h-[75vh]">
+            <div class="flex items-center justify-between pb-2 border-b border-brand-border mb-2">
+              <span class="text-xs font-bold text-brand-textMain">Muestra</span>
+              <span id="pipe-count-muestra_entregada" class="text-[11px] font-bold bg-brand-surface px-2 py-0.5 rounded-full">0</span>
+            </div>
+            <div id="pipe-col-muestra_entregada" class="space-y-2 overflow-y-auto flex-1 pr-1"></div>
+          </div>
+
+          <!-- Negociación -->
+          <div class="bg-[#F6F3EC] p-3 rounded-2xl border border-brand-border flex flex-col min-w-[210px] max-h-[75vh]">
+            <div class="flex items-center justify-between pb-2 border-b border-brand-border mb-2">
+              <span class="text-xs font-bold text-brand-textMain">Negociación</span>
+              <span id="pipe-count-en_negociacion" class="text-[11px] font-bold bg-brand-surface px-2 py-0.5 rounded-full">0</span>
+            </div>
+            <div id="pipe-col-en_negociacion" class="space-y-2 overflow-y-auto flex-1 pr-1"></div>
+          </div>
+
+          <!-- Cerrado -->
+          <div class="bg-[#F6F3EC] p-3 rounded-2xl border border-brand-border flex flex-col min-w-[210px] max-h-[75vh]">
+            <div class="flex items-center justify-between pb-2 border-b border-brand-border mb-2">
+              <span class="text-xs font-bold text-emerald-700">Cerrado 🎉</span>
+              <span id="pipe-count-cerrado" class="text-[11px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">0</span>
+            </div>
+            <div id="pipe-col-cerrado" class="space-y-2 overflow-y-auto flex-1 pr-1"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- VIEW 5: INVENTARIO                                   -->
+      <!-- ==================================================== -->
+      <section id="view-inventario" class="view-pane space-y-6">
+        <div class="flex items-center justify-between bg-brand-surface p-5 rounded-2xl border border-brand-border shadow-card">
+          <div>
+            <h4 class="font-display font-bold text-lg text-brand-textMain">Inventario Físico & Custodia</h4>
+            <p class="text-xs text-brand-textMuted">Control de unidades disponibles en Lima para muestras y primeras ventas</p>
+          </div>
+          <button onclick="openModal('modal-actualizar-inventario')" class="px-4 py-2 bg-brand-campo hover:bg-brand-campoDark text-white text-xs font-bold rounded-xl shadow-sm transition flex items-center gap-1.5">
+            <i data-lucide="plus" class="w-4 h-4"></i> Ajustar Stock
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <!-- Item 1: Bolsita 20g -->
+          <div class="bg-brand-surface p-5 rounded-2xl border border-brand-border shadow-card">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-brand-campoDark uppercase">Grajeas 20g (Retail)</span>
+              <span class="text-[10px] font-bold bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded-full">Stock Puente</span>
+            </div>
+            <p class="text-3xl font-display font-extrabold text-brand-textMain mt-3" id="inv-20g">120 <span class="text-sm font-normal text-brand-textMuted">unids</span></p>
+            <p class="text-[11px] text-brand-textMuted mt-2">Bolsa sellada de contingencia para degustación y counter.</p>
+            <div class="mt-4 pt-3 border-t border-brand-borderLight flex items-center justify-between">
+              <span class="text-xs font-bold text-brand-textMain">PVP S/ 6.90 · B2B S/ 4.80</span>
+              <div class="flex items-center gap-1">
+                <button onclick="adjustInventory('inv-20g', -5)" class="w-7 h-7 rounded-lg bg-brand-arena hover:bg-[#e6dfd1] text-brand-campoDark font-bold text-xs flex items-center justify-center">-5</button>
+                <button onclick="adjustInventory('inv-20g', 5)" class="w-7 h-7 rounded-lg bg-brand-arena hover:bg-[#e6dfd1] text-brand-campoDark font-bold text-xs flex items-center justify-center">+5</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2: Caja 100g -->
+          <div class="bg-brand-surface p-5 rounded-2xl border border-brand-border shadow-card">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-brand-campoDark uppercase">Caja Gourmet 100g</span>
+              <span class="text-[10px] font-bold bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded-full">Stock Piloto</span>
+            </div>
+            <p class="text-3xl font-display font-extrabold text-brand-textMain mt-3" id="inv-100g">45 <span class="text-sm font-normal text-brand-textMuted">cajas</span></p>
+            <p class="text-[11px] text-brand-textMuted mt-2">Caja rígida con bolsa interior sellada y mascota Pacarana.</p>
+            <div class="mt-4 pt-3 border-t border-brand-borderLight flex items-center justify-between">
+              <span class="text-xs font-bold text-brand-textMain">PVP S/ 24.00 · B2B S/ 17.50</span>
+              <div class="flex items-center gap-1">
+                <button onclick="adjustInventory('inv-100g', -1)" class="w-7 h-7 rounded-lg bg-brand-arena hover:bg-[#e6dfd1] text-brand-campoDark font-bold text-xs flex items-center justify-center">-1</button>
+                <button onclick="adjustInventory('inv-100g', 1)" class="w-7 h-7 rounded-lg bg-brand-arena hover:bg-[#e6dfd1] text-brand-campoDark font-bold text-xs flex items-center justify-center">+1</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3: Polos Camiseros -->
+          <div class="bg-brand-surface p-5 rounded-2xl border border-brand-border shadow-card">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-brand-campoDark uppercase">Polos Camiseros</span>
+              <span class="text-[10px] font-bold bg-blue-50 text-blue-800 px-2 py-0.5 rounded-full">Custodia Karla</span>
+            </div>
+            <p class="text-3xl font-display font-extrabold text-brand-textMain mt-3" id="inv-polos">24 <span class="text-sm font-normal text-brand-textMuted">polos</span></p>
+            <p class="text-[11px] text-brand-textMuted mt-2">12 corte hombre + 12 corte unisex para visitas de campo.</p>
+            <div class="mt-4 pt-3 border-t border-brand-borderLight flex items-center justify-between text-xs text-brand-textMuted">
+              <span>Verificado 08/09</span>
+              <span class="text-emerald-600 font-bold">100% OK</span>
+            </div>
+          </div>
+
+          <!-- Item 4: Llaveros Merchandising -->
+          <div class="bg-brand-surface p-5 rounded-2xl border border-brand-border shadow-card">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-brand-campoDark uppercase">Llaveros Xiembra</span>
+              <span class="text-[10px] font-bold bg-amber-50 text-amber-800 px-2 py-0.5 rounded-full">Merchandising</span>
+            </div>
+            <p class="text-3xl font-display font-extrabold text-brand-textMain mt-3" id="inv-llaveros">50 <span class="text-sm font-normal text-brand-textMuted">unids</span></p>
+            <p class="text-[11px] text-brand-textMuted mt-2">Llaveros con logo para entregar a jefes de tienda.</p>
+            <div class="mt-4 pt-3 border-t border-brand-borderLight flex items-center justify-between text-xs text-brand-textMuted">
+              <span>Saldo pendiente: S/ 50</span>
+              <span class="text-amber-700 font-bold">TAR-013</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- VIEW 6: VENTAS & FACTURACIÓN ASISTIDA                -->
+      <!-- ==================================================== -->
+      <section id="view-ventas" class="view-pane space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          <!-- Calculadora Express de Facturas / Boletas -->
+          <div class="lg:col-span-7 bg-brand-surface p-6 rounded-2xl border border-brand-border shadow-card space-y-4">
+            <div>
+              <h4 class="font-display font-bold text-base text-brand-textMain">🧾 Asistente de Facturación B2B (SUNAT)</h4>
+              <p class="text-xs text-brand-textMuted">Genera el desglose contable y el mensaje de WhatsApp para el cliente en segundos</p>
+            </div>
+
+            <div class="space-y-3 pt-2">
+              <div>
+                <label class="block text-xs font-bold text-brand-textMain mb-1">Seleccionar Cliente / Tienda</label>
+                <select id="venta-cliente" class="w-full text-xs bg-brand-arena px-3 py-2 rounded-lg border border-brand-border text-brand-textMain font-medium focus:outline-none focus:border-brand-campo">
+                  <option value="La Sanahoria (San Isidro)">La Sanahoria (San Isidro) - RUC 20601234567</option>
+                  <option value="Organa (Miraflores)">Organa (Miraflores) - RUC 20607654321</option>
+                  <option value="Flora y Fauna (Miraflores)">Flora y Fauna (Miraflores) - RUC 20551239874</option>
+                  <option value="Otro Cliente B2B">Otro Cliente / Tienda</option>
+                </select>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold text-brand-textMain mb-1">Cantidad Bolsas 20g (S/ 4.80 c/u)</label>
+                  <input type="number" id="venta-cant-20g" value="48" oninput="calculateVenta()" min="0" class="w-full text-xs bg-brand-arena px-3 py-2 rounded-lg border border-brand-border font-bold text-brand-textMain focus:outline-none focus:border-brand-campo">
+                  <span class="text-[10px] text-brand-textMuted">2 display de 24 unids</span>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-brand-textMain mb-1">Cantidad Cajas 100g (S/ 17.50 c/u)</label>
+                  <input type="number" id="venta-cant-100g" value="12" oninput="calculateVenta()" min="0" class="w-full text-xs bg-brand-arena px-3 py-2 rounded-lg border border-brand-border font-bold text-brand-textMain focus:outline-none focus:border-brand-campo">
+                  <span class="text-[10px] text-brand-textMuted">1 caja máster de 12</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Resumen de Cálculo Automático -->
+            <div class="bg-brand-arena/70 p-4 rounded-xl border border-brand-border space-y-1.5 text-xs">
+              <div class="flex items-center justify-between">
+                <span class="text-brand-textMuted">Operación Gravada (Base imponible sin IGV):</span>
+                <span class="font-bold text-brand-textMain" id="calc-base">S/ 373.22</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-brand-textMuted">IGV (18% SUNAT):</span>
+                <span class="font-bold text-brand-textMain" id="calc-igv">S/ 67.18</span>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-brand-border text-sm">
+                <span class="font-display font-bold text-brand-campoDark">TOTAL A FACTURAR:</span>
+                <span class="font-display font-extrabold text-brand-campo text-lg" id="calc-total">S/ 440.40</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 pt-2">
+              <button onclick="copyBillingMessage()" class="flex-1 py-2.5 bg-brand-campo hover:bg-brand-campoDark text-white font-bold text-xs rounded-xl shadow-sm transition flex items-center justify-center gap-2">
+                <i data-lucide="copy" class="w-4 h-4"></i>
+                <span>Copiar Mensaje WhatsApp para Cliente</span>
+              </button>
+              <button onclick="confirmRegisterVenta()" class="px-4 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-xl shadow-sm transition">
+                Registrar Venta
+              </button>
+            </div>
+          </div>
+
+          <!-- Datos de la Empresa (Facturación SUNAT) -->
+          <div class="lg:col-span-5 bg-brand-surface p-6 rounded-2xl border border-brand-border shadow-card space-y-4">
+            <h4 class="font-display font-bold text-base text-brand-textMain">🏛️ Datos SUNAT & Bancos</h4>
+            
+            <div class="space-y-2.5 text-xs">
+              <div class="p-2.5 bg-brand-arena/50 rounded-lg border border-brand-borderLight">
+                <span class="text-[10px] text-brand-textMuted uppercase font-bold block">Razón Social</span>
+                <span class="font-bold text-brand-textMain">Xiembra Agroindustrial S.A.C.</span>
+              </div>
+
+              <div class="p-2.5 bg-brand-arena/50 rounded-lg border border-brand-borderLight">
+                <span class="text-[10px] text-brand-textMuted uppercase font-bold block">RUC Oficial</span>
+                <span class="font-bold text-brand-textMain">20616165365</span> <span class="text-[10px] text-emerald-700 font-bold bg-emerald-100 px-1.5 py-0.5 rounded ml-2">Activo y Habido</span>
+              </div>
+
+              <div class="p-2.5 bg-brand-arena/50 rounded-lg border border-brand-borderLight">
+                <span class="text-[10px] text-brand-textMuted uppercase font-bold block">Registro Sanitario DIGESA</span>
+                <span class="font-bold text-brand-textMain">G100441/N-KCEPAR</span>
+              </div>
+
+              <div class="p-2.5 bg-brand-arena/50 rounded-lg border border-brand-borderLight">
+                <span class="text-[10px] text-brand-textMuted uppercase font-bold block">Cuenta Corriente BCP Soles</span>
+                <span class="font-bold text-brand-textMain">193-9821482-0-45 (CCI: 002-19300982148204518)</span>
+              </div>
+            </div>
+
+            <div class="pt-2 text-[11px] text-brand-textMuted">
+              💡 <em>Protocolo oficial: Para facturar a tiendas B2B en el portal SUNAT SOL, ingresa con tu Clave SOL, elige <strong>SEE-SOL Factura</strong> y digita los montos de la calculadora.</em>
+            </div>
+        </div>
+
+        <!-- Historial de Ventas Registradas -->
+        <div class="bg-brand-surface p-6 rounded-2xl border border-brand-border shadow-card space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="font-display font-bold text-base text-brand-textMain">📋 Historial de Ventas Registradas</h4>
+              <p class="text-xs text-brand-textMuted">Registro de transacciones comerciales y comprobantes emitidos</p>
+            </div>
+            <span class="text-xs font-bold text-brand-campo bg-brand-nature/30 px-3 py-1 rounded-full" id="ventas-count-badge">0 ventas registradas</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead>
+                <tr class="border-b border-brand-borderLight text-brand-textMuted font-bold text-[11px] uppercase">
+                  <th class="pb-2.5">ID</th>
+                  <th class="pb-2.5">Fecha / Hora</th>
+                  <th class="pb-2.5">Cliente</th>
+                  <th class="pb-2.5">Canal</th>
+                  <th class="pb-2.5">Detalle Productos</th>
+                  <th class="pb-2.5 text-right">Subtotal</th>
+                  <th class="pb-2.5 text-right">IGV (18%)</th>
+                  <th class="pb-2.5 text-right">Total</th>
+                  <th class="pb-2.5 text-center">Estado</th>
+                </tr>
+              </thead>
+              <tbody id="ventas-table-body" class="divide-y divide-brand-borderLight">
+                <!-- Se llena dinámicamente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- VIEW 7: FINANZAS                                     -->
+      <!-- ==================================================== -->
+      <section id="view-finanzas" class="view-pane space-y-6">
+        <div class="bg-brand-surface p-6 rounded-2xl border border-brand-border shadow-card">
+          <h4 class="font-display font-bold text-base text-brand-textMain mb-1">Estructura de Costos & Márgenes Unitarios</h4>
+          <p class="text-xs text-brand-textMuted mb-4">Consolidado financiero de insumos, maquila en Highland Coffee y empaque Multipack</p>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-brand-arena/60 border-b border-brand-border text-brand-textMuted font-bold uppercase">
+                <tr>
+                  <th class="p-3">Presentación</th>
+                  <th class="p-3">Costo Prod. + Empaque</th>
+                  <th class="p-3">Precio Mayorista (B2B)</th>
+                  <th class="p-3">PVP Sugerido</th>
+                  <th class="p-3">Margen Xiembra (B2B)</th>
+                  <th class="p-3">Margen Tienda (Retail)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-brand-borderLight">
+                <tr>
+                  <td class="p-3 font-bold text-brand-textMain">Bolsa 20g Retail (Impulso)</td>
+                  <td class="p-3 text-brand-textMuted">~S/ 1.40</td>
+                  <td class="p-3 font-bold text-brand-campo">S/ 4.80</td>
+                  <td class="p-3 font-semibold text-brand-textMain">S/ 6.90</td>
+                  <td class="p-3 font-bold text-emerald-700">~68%</td>
+                  <td class="p-3 font-bold text-blue-700">~30%</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-bold text-brand-textMain">Caja Gourmet 100g (Regalo)</td>
+                  <td class="p-3 text-brand-textMuted">~S/ 4.80</td>
+                  <td class="p-3 font-bold text-brand-campo">S/ 17.50</td>
+                  <td class="p-3 font-semibold text-brand-textMain">S/ 24.00</td>
+                  <td class="p-3 font-bold text-emerald-700">~71%</td>
+                  <td class="p-3 font-bold text-blue-700">~27%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- VIEW 8: CALENDARIO                                   -->
+      <!-- ==================================================== -->
+      <section id="view-calendario" class="view-pane space-y-6">
+        <div class="bg-brand-surface p-6 rounded-2xl border border-brand-border shadow-card">
+          <div class="flex items-center justify-between pb-4 border-b border-brand-borderLight mb-4">
+            <div>
+              <h4 class="font-display font-bold text-base text-brand-textMain">📅 Cronograma de Lanzamiento & Hitos Clave</h4>
+              <p class="text-xs text-brand-textMuted">Fechas límites y compromisos estratégicos</p>
+            </div>
+            <span class="text-xs font-bold text-brand-campo bg-brand-crema/60 px-3 py-1 rounded-full border border-brand-lemon/60">
+              Septiembre – Octubre 2026
+            </span>
+          </div>
+
+          <div class="relative border-l-2 border-brand-border pl-6 ml-3 space-y-6 my-2 text-xs">
+            
+            <div class="relative">
+              <span class="absolute -left-[31px] top-0.5 w-3.5 h-3.5 rounded-full bg-emerald-600 border-2 border-white"></span>
+              <p class="text-[10px] font-bold text-emerald-700 uppercase">15 Septiembre 2026 · Concluido</p>
+              <h5 class="font-bold text-brand-textMain mt-0.5">Contacto Inicial con La Sanahoria (San Isidro)</h5>
+              <p class="text-brand-textMuted text-[11px] mt-0.5">Primer contacto telefónico y de WhatsApp con gerencia de tienda.</p>
+            </div>
+
+            <div class="relative">
+              <span class="absolute -left-[31px] top-0.5 w-3.5 h-3.5 rounded-full bg-amber-500 border-2 border-white"></span>
+              <p class="text-[10px] font-bold text-amber-700 uppercase">18 – 22 Septiembre 2026 · En curso</p>
+              <h5 class="font-bold text-brand-textMain mt-0.5">Ruta de Visitas Presenciales y Entrega de Muestras</h5>
+              <p class="text-brand-textMuted text-[11px] mt-0.5">Visitas de Karla y Roger a La Sanahoria (Dasso) y Organa (Benavides).</p>
+            </div>
+
+            <div class="relative">
+              <span class="absolute -left-[31px] top-0.5 w-3.5 h-3.5 rounded-full bg-blue-600 border-2 border-white"></span>
+              <p class="text-[10px] font-bold text-blue-700 uppercase">23 Septiembre 2026 · 10:00 AM</p>
+              <h5 class="font-bold text-brand-textMain mt-0.5">Reunión Proyecto California con Ryan Vieira</h5>
+              <p class="text-brand-textMuted text-[11px] mt-0.5">Agendada en Google Calendar con vieiraryan@hotmail.com sobre microdosis.</p>
+            </div>
+
+            <div class="relative">
+              <span class="absolute -left-[31px] top-0.5 w-3.5 h-3.5 rounded-full bg-slate-400 border-2 border-white"></span>
+              <p class="text-[10px] font-bold text-slate-600 uppercase">05 Octubre 2026 · Estimado</p>
+              <h5 class="font-bold text-brand-textMain mt-0.5">Entrega de 20,000 Bolsas Trilaminadas Multipack</h5>
+              <p class="text-brand-textMuted text-[11px] mt-0.5">Recepción de bobinas y bolsas impresas para inicio de lote industrial.</p>
+            </div>
+
+            <div class="relative">
+              <span class="absolute -left-[31px] top-0.5 w-3.5 h-3.5 rounded-full bg-slate-400 border-2 border-white"></span>
+              <p class="text-[10px] font-bold text-slate-600 uppercase">10 Octubre 2026 · Estimado</p>
+              <h5 class="font-bold text-brand-textMain mt-0.5">Fabricación de Lote Industrial 100 kg en Highland Coffee</h5>
+              <p class="text-brand-textMuted text-[11px] mt-0.5">Producción y envasado en planta Chanchamayo (500 cajas 100g + 2,500 bolsas 20g).</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- VIEW 9: REPORTES                                     -->
+      <!-- ==================================================== -->
+      <section id="view-reportes" class="view-pane space-y-6">
+        <div class="bg-brand-surface p-6 rounded-2xl border border-brand-border shadow-card">
+          <h4 class="font-display font-bold text-base text-brand-textMain mb-1">Métricas de Habilitación Comercial</h4>
+          <p class="text-xs text-brand-textMuted mb-6">Diagnóstico del sistema operativo según tareas reales</p>
+
+          <div class="space-y-5 text-xs">
+            <div>
+              <div class="flex items-center justify-between font-bold mb-1.5">
+                <span class="text-brand-textMain">Ready to Sell (Habilitación Piloto)</span>
+                <span class="text-rose-600 font-extrabold" id="rep-rts-pct">16.7% (3/18 tareas)</span>
+              </div>
+              <div class="w-full bg-brand-arena h-3 rounded-full overflow-hidden">
+                <div class="bg-brand-campo h-full rounded-full" style="width: 16.7%"></div>
+              </div>
+              <span class="text-[11px] text-brand-textMuted mt-1 block">Faltan resolver 2 bloqueos de material (Ficha Técnica y Díptico) para habilitar venta.</span>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between font-bold mb-1.5">
+                <span class="text-brand-textMain">Ready to Scale (Producción Masiva)</span>
+                <span class="text-amber-600 font-extrabold" id="rep-scale-pct">16.7% (1/6 tareas)</span>
+              </div>
+              <div class="w-full bg-brand-arena h-3 rounded-full overflow-hidden">
+                <div class="bg-amber-500 h-full rounded-full" style="width: 16.7%"></div>
+              </div>
+              <span class="text-[11px] text-brand-textMuted mt-1 block">Adelanto Multipack pagado. En espera de fotograbado externo.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- VIEW 10: JARVIS 24/7                                 -->
+      <!-- ==================================================== -->
+      <section id="view-jarvis" class="view-pane space-y-6">
+        <div class="bg-brand-surface p-6 rounded-2xl border border-brand-border shadow-card space-y-4">
+          <div class="flex items-center justify-between pb-4 border-b border-brand-borderLight">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-brand-campoDark flex items-center justify-center text-brand-nature">
+                <i data-lucide="bot" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <h4 class="font-display font-bold text-base text-brand-textMain">JARVIS Assistant 24/7</h4>
+                <p class="text-xs text-brand-textMuted">Orquestador de Operaciones en Oracle Cloud Always Free (129.213.138.0)</p>
+              </div>
+            </div>
+            <span class="inline-flex items-center gap-1.5 text-xs text-emerald-700 font-bold bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Sistema Activo
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="p-3 bg-brand-arena/50 rounded-xl border border-brand-borderLight">
+              <span class="text-[10px] text-brand-textMuted uppercase font-bold block">Modelo de Inteligencia</span>
+              <span class="font-bold text-brand-textMain">Google Gemini 2.5 Flash</span>
+              <span class="text-[10px] text-emerald-700 font-semibold block mt-0.5">Vía Vertex AI (us-central1)</span>
+            </div>
+
+            <div class="p-3 bg-brand-arena/50 rounded-xl border border-brand-borderLight">
+              <span class="text-[10px] text-brand-textMuted uppercase font-bold block">Canal Oficial</span>
+              <span class="font-bold text-brand-textMain">WhatsApp Gateway (+51 981 011 816)</span>
+              <span class="text-[10px] text-brand-textMuted block mt-0.5">Bridge Baileys activo</span>
+            </div>
+
+            <div class="p-3 bg-brand-arena/50 rounded-xl border border-brand-borderLight">
+              <span class="text-[10px] text-brand-textMuted uppercase font-bold block">Daily Briefing</span>
+              <span class="font-bold text-brand-textMain">10:00 AM Diariamente</span>
+              <span class="text-[10px] text-emerald-700 font-semibold block mt-0.5">Grupo Oficial Xiembra</span>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <h5 class="font-bold text-xs text-brand-textMain mb-2">Comandos Rápidos recomendados para WhatsApp:</h5>
+            <div class="space-y-1.5 text-xs text-brand-textMuted">
+              <p class="p-2 bg-brand-arena/30 rounded-lg border border-brand-borderLight cursor-pointer hover:bg-brand-arena transition" onclick="navigator.clipboard.writeText('Jarvis, resumen de pendientes de hoy para Karla y Roger'); showToast('Comando copiado!')">
+                💬 <em>"Jarvis, resumen de pendientes de hoy para Karla y Roger"</em>
+              </p>
+              <p class="p-2 bg-brand-arena/30 rounded-lg border border-brand-borderLight cursor-pointer hover:bg-brand-arena transition" onclick="navigator.clipboard.writeText('Jarvis, prepara factura para Organa por 48 unidades de 20g y 12 cajas de 100g'); showToast('Comando copiado!')">
+                💬 <em>"Jarvis, prepara factura para Organa por 48 unidades de 20g y 12 cajas de 100g"</em>
+              </p>
+              <p class="p-2 bg-brand-arena/30 rounded-lg border border-brand-borderLight cursor-pointer hover:bg-brand-arena transition" onclick="navigator.clipboard.writeText('Jarvis, ¿cuáles son los bloqueos críticos de Ready to Sell?'); showToast('Comando copiado!')">
+                💬 <em>"Jarvis, ¿cuáles son los bloqueos críticos de Ready to Sell?"</em>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- VIEW 11: CONFIGURACIÓN                               -->
+      <!-- ==================================================== -->
+      <section id="view-configuracion" class="view-pane space-y-6">
+        <div class="bg-brand-surface p-6 rounded-2xl border border-brand-border shadow-card space-y-4">
+          <h4 class="font-display font-bold text-base text-brand-textMain">Configuración del Sistema Operativo</h4>
+          
+          <div class="space-y-3 text-xs">
+            <div class="p-3 bg-brand-arena/40 rounded-xl border border-brand-borderLight flex items-center justify-between">
+              <div>
+                <p class="font-bold text-brand-textMain">Respaldo Local en Navegador</p>
+                <p class="text-brand-textMuted text-[11px]">Todos los cambios de Karla y Roger se guardan automáticamente en localStorage.</p>
+              </div>
+              <button onclick="resetToInitialData()" class="px-3 py-1.5 text-xs text-rose-700 bg-rose-50 hover:bg-rose-100 rounded-lg border border-rose-200 font-semibold transition">
+                Restablecer Datos Iniciales
+              </button>
+            </div>
+
+            <div class="p-3 bg-brand-arena/40 rounded-xl border border-brand-borderLight flex items-center justify-between">
+              <div>
+                <p class="font-bold text-brand-textMain">Exportar Base de Datos</p>
+                <p class="text-brand-textMuted text-[11px]">Descarga el archivo JSON completo con todas las tareas y clientes actualizados.</p>
+              </div>
+              <button onclick="exportAllData()" class="px-3 py-1.5 text-xs text-brand-campo bg-brand-crema hover:bg-[#f2ebc2] rounded-lg border border-brand-lemon font-bold transition">
+                Descargar JSON
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- MODALS Y DRAWERS (DISEÑADOS PARA KARLA)                   -->
+  <!-- ======================================================== -->
+
+  <!-- Modal 1: Nueva Tarea -->
+  <dialog id="modal-nueva-tarea" class="p-0 rounded-2xl max-w-lg w-full bg-brand-surface border border-brand-border shadow-modal">
+    <div class="p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-brand-borderLight pb-3">
+        <h3 class="font-display font-bold text-base text-brand-textMain">Nueva Tarea</h3>
+        <button onclick="closeModal('modal-nueva-tarea')" class="text-brand-textMuted hover:text-brand-textMain"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+
+      <form id="form-nueva-tarea" onsubmit="saveNewTask(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-brand-textMain mb-1">Título de la Tarea</label>
+          <input type="text" id="nueva-tarea-titulo" required placeholder="Ej: Llamar a jefe de compras de Organa..." class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border focus:outline-none focus:border-brand-campo">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-brand-textMain mb-1">Responsable</label>
+            <select id="nueva-tarea-resp" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border focus:outline-none">
+              <option value="Karla">Karla</option>
+              <option value="Roger">Roger</option>
+              <option value="Ambos">Ambos</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-bold text-brand-textMain mb-1">Fase</label>
+            <select id="nueva-tarea-fase" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border focus:outline-none">
+              <option value="ready_to_sell">🟢 Ready to Sell (Piloto)</option>
+              <option value="ready_to_scale">🔵 Ready to Scale (Volumen)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-brand-textMain mb-1">Prioridad</label>
+            <select id="nueva-tarea-prio" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border focus:outline-none">
+              <option value="critica">Crítica (Urgente)</option>
+              <option value="alta" selected>Alta</option>
+              <option value="media">Media</option>
+              <option value="baja">Baja</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-bold text-brand-textMain mb-1">Fecha Límite</label>
+            <input type="date" id="nueva-tarea-fecha" value="2026-09-20" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border focus:outline-none">
+          </div>
+        </div>
+
+        <div class="pt-1">
+          <label class="flex items-center gap-2 cursor-pointer font-bold text-brand-textMain">
+            <input type="checkbox" id="nueva-tarea-bloqueada" onchange="document.getElementById('div-motivo-bloqueo').classList.toggle('hidden', !this.checked)" class="rounded text-brand-campo focus:ring-0">
+            <span>¿Esta tarea está bloqueada actualmente?</span>
+          </label>
+        </div>
+
+        <div id="div-motivo-bloqueo" class="hidden space-y-2 pt-1">
+          <div>
+            <label class="block font-bold text-rose-700 mb-1">Motivo del Bloqueo</label>
+            <input type="text" id="nueva-tarea-motivo" placeholder="Ej: Esperando arte final..." class="w-full bg-rose-50/50 px-3 py-2 rounded-lg border border-rose-200 focus:outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-rose-700 mb-1">Dependencia / ¿De quién depende?</label>
+            <input type="text" id="nueva-tarea-dep" placeholder="Ej: Proveedor imprenta..." class="w-full bg-rose-50/50 px-3 py-2 rounded-lg border border-rose-200 focus:outline-none">
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-3 border-t border-brand-borderLight">
+          <button type="button" onclick="closeModal('modal-nueva-tarea')" class="px-4 py-2 rounded-lg text-brand-textMuted hover:bg-brand-arena transition">Cancelar</button>
+          <button type="submit" class="px-4 py-2 rounded-lg bg-brand-campo hover:bg-brand-campoDark text-white font-bold transition">Guardar Tarea</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Modal 2: Nuevo Cliente -->
+  <dialog id="modal-nuevo-cliente" class="p-0 rounded-2xl max-w-lg w-full bg-brand-surface border border-brand-border shadow-modal">
+    <div class="p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-brand-borderLight pb-3">
+        <h3 class="font-display font-bold text-base text-brand-textMain">Nuevo Prospecto Comercial</h3>
+        <button onclick="closeModal('modal-nuevo-cliente')" class="text-brand-textMuted hover:text-brand-textMain"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+
+      <form id="form-nuevo-cliente" onsubmit="saveNewClient(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-brand-textMain mb-1">Nombre de la Tienda / Empresa</label>
+          <input type="text" id="nuevo-cliente-empresa" required placeholder="Ej: BioMarket Dasso..." class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border focus:outline-none focus:border-brand-campo">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-brand-textMain mb-1">Canal</label>
+            <select id="nuevo-cliente-canal" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border focus:outline-none">
+              <option value="biomarket">Biomarket / Orgánico</option>
+              <option value="cafeteria">Cafetería de Especialidad</option>
+              <option value="retail">Tienda Gourmet / Retail</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-bold text-brand-textMain mb-1">Contacto / WhatsApp</label>
+            <input type="text" id="nuevo-cliente-contacto" placeholder="+51 987 654 321" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-brand-textMain mb-1">Dirección / Distrito</label>
+          <input type="text" id="nuevo-cliente-notas" placeholder="Ej: Av. Conquistadores 450, San Isidro" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-brand-textMain mb-1">Etapa de Inicio</label>
+            <select id="nuevo-cliente-etapa" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border focus:outline-none">
+              <option value="prospeccion">Prospección</option>
+              <option value="contactado">Contactado</option>
+              <option value="visita_agendada">Visita Agendada</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-bold text-brand-textMain mb-1">Responsable</label>
+            <select id="nuevo-cliente-resp" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border focus:outline-none">
+              <option value="Karla">Karla</option>
+              <option value="Roger">Roger</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-3 border-t border-brand-borderLight">
+          <button type="button" onclick="closeModal('modal-nuevo-cliente')" class="px-4 py-2 rounded-lg text-brand-textMuted hover:bg-brand-arena transition">Cancelar</button>
+          <button type="submit" class="px-4 py-2 rounded-lg bg-brand-campo hover:bg-brand-campoDark text-white font-bold transition">Guardar Cliente</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Modal 3: Registrar Venta Rápida -->
+  <dialog id="modal-registrar-venta" class="p-0 rounded-2xl max-w-md w-full bg-brand-surface border border-brand-border shadow-modal">
+    <div class="p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-brand-borderLight pb-3">
+        <h3 class="font-display font-bold text-base text-brand-textMain">Registrar Venta / Factura</h3>
+        <button onclick="closeModal('modal-registrar-venta')" class="text-brand-textMuted hover:text-brand-textMain"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-brand-textMain mb-1">Cliente</label>
+          <select id="modal-venta-cliente" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border font-medium">
+            <option value="La Sanahoria">La Sanahoria (San Isidro)</option>
+            <option value="Organa">Organa (Miraflores)</option>
+            <option value="Flora y Fauna">Flora y Fauna (Miraflores)</option>
+            <option value="Venta Directa">Venta Directa / Feria</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-brand-textMain mb-1">Bolsas 20g (S/ 4.80)</label>
+            <input type="number" id="modal-venta-cant-20g" value="24" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border font-bold">
+          </div>
+          <div>
+            <label class="block font-bold text-brand-textMain mb-1">Cajas 100g (S/ 17.50)</label>
+            <input type="number" id="modal-venta-cant-100g" value="6" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border font-bold">
+          </div>
+        </div>
+
+        <div class="p-3 bg-brand-arena/50 rounded-lg text-xs font-semibold text-brand-campoDark">
+          Factura Electrónica SUNAT · RUC 20616165365
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-3 border-t border-brand-borderLight">
+          <button type="button" onclick="closeModal('modal-registrar-venta')" class="px-4 py-2 rounded-lg text-brand-textMuted hover:bg-brand-arena transition">Cancelar</button>
+          <button onclick="confirmModalVenta()" class="px-4 py-2 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold transition">Confirmar y Guardar</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Modal 4: Actualizar Inventario -->
+  <dialog id="modal-actualizar-inventario" class="p-0 rounded-2xl max-w-sm w-full bg-brand-surface border border-brand-border shadow-modal">
+    <div class="p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-brand-borderLight pb-3">
+        <h3 class="font-display font-bold text-base text-brand-textMain">Ajustar Inventario</h3>
+        <button onclick="closeModal('modal-actualizar-inventario')" class="text-brand-textMuted hover:text-brand-textMain"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-brand-textMain mb-1">Producto</label>
+          <select id="modal-inv-item" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border font-medium">
+            <option value="inv-20g">Bolsitas 20g Retail</option>
+            <option value="inv-100g">Cajas 100g Gourmet</option>
+            <option value="inv-polos">Polos Camiseros</option>
+            <option value="inv-llaveros">Llaveros Merchandising</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-bold text-brand-textMain mb-1">Nueva Cantidad Disponible</label>
+          <input type="number" id="modal-inv-cant" value="120" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border font-bold text-lg">
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-3 border-t border-brand-borderLight">
+          <button type="button" onclick="closeModal('modal-actualizar-inventario')" class="px-4 py-2 rounded-lg text-brand-textMuted hover:bg-brand-arena transition">Cancelar</button>
+          <button onclick="confirmInventoryUpdate()" class="px-4 py-2 rounded-lg bg-brand-campo hover:bg-brand-campoDark text-white font-bold transition">Actualizar</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Modal 5: Registrar Seguimiento a Cliente -->
+  <dialog id="modal-registrar-seguimiento" class="p-0 rounded-2xl max-w-md w-full bg-brand-surface border border-brand-border shadow-modal">
+    <div class="p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-brand-borderLight pb-3">
+        <h3 class="font-display font-bold text-base text-brand-textMain">Registrar Seguimiento</h3>
+        <button onclick="closeModal('modal-registrar-seguimiento')" class="text-brand-textMuted hover:text-brand-textMain"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-brand-textMain mb-1">Cliente</label>
+          <select id="modal-seg-cliente" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border font-medium"></select>
+        </div>
+
+        <div>
+          <label class="block font-bold text-brand-textMain mb-1">Actualizar Etapa Comercial</label>
+          <select id="modal-seg-etapa" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border font-medium">
+            <option value="prospeccion">Prospección</option>
+            <option value="contactado">Contactado</option>
+            <option value="visita_agendada">Visita Agendada</option>
+            <option value="muestra_entregada">Muestra Entregada</option>
+            <option value="en_negociacion">En Negociación</option>
+            <option value="cerrado">Cerrado (Venta realizada)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-bold text-brand-textMain mb-1">Próxima Fecha de Contacto</label>
+          <input type="date" id="modal-seg-prox" value="2026-09-21" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border font-medium">
+        </div>
+
+        <div>
+          <label class="block font-bold text-brand-textMain mb-1">Notas del Seguimiento</label>
+          <textarea id="modal-seg-nota" rows="2.5" placeholder="Ej: Se entregó muestra a administrador. Quedó encantado con el sabor del café tostado." class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border focus:outline-none"></textarea>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-3 border-t border-brand-borderLight">
+          <button type="button" onclick="closeModal('modal-registrar-seguimiento')" class="px-4 py-2 rounded-lg text-brand-textMuted hover:bg-brand-arena transition">Cancelar</button>
+          <button onclick="confirmSeguimiento()" class="px-4 py-2 rounded-lg bg-brand-campo hover:bg-brand-campoDark text-white font-bold transition">Guardar Seguimiento</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Modal 6: Editar Tarea (Super Simple para Karla) -->
+  <dialog id="modal-editar-tarea" class="p-0 rounded-2xl max-w-lg w-full bg-brand-surface border border-brand-border shadow-modal">
+    <div class="p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-brand-borderLight pb-3">
+        <div>
+          <span id="edit-task-id" class="text-[10px] font-bold text-brand-textMuted uppercase">TAR-001</span>
+          <h3 id="edit-task-title" class="font-display font-bold text-base text-brand-textMain leading-tight mt-0.5">Título</h3>
+        </div>
+        <button onclick="closeModal('modal-editar-tarea')" class="text-brand-textMuted hover:text-brand-textMain"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-brand-textMain mb-1.5">Estado de la Tarea</label>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 p-1 bg-brand-arena rounded-xl border border-brand-border">
+            <button type="button" onclick="setEditTaskState('pendiente')" id="btn-state-pendiente" class="py-1.5 rounded-lg font-bold text-xs transition text-center">Pendiente</button>
+            <button type="button" onclick="setEditTaskState('en_progreso')" id="btn-state-en_progreso" class="py-1.5 rounded-lg font-bold text-xs transition text-center">En Progreso</button>
+            <button type="button" onclick="setEditTaskState('esperando')" id="btn-state-esperando" class="py-1.5 rounded-lg font-bold text-xs transition text-center">Esperando</button>
+            <button type="button" onclick="setEditTaskState('terminado')" id="btn-state-terminado" class="py-1.5 rounded-lg font-bold text-xs transition text-center">Terminado</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 pt-1">
+          <div>
+            <label class="block font-bold text-brand-textMain mb-1">Responsable</label>
+            <select id="edit-task-resp" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border font-medium">
+              <option value="Karla">Karla</option>
+              <option value="Roger">Roger</option>
+              <option value="Ambos">Ambos</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-bold text-brand-textMain mb-1">Fecha Límite</label>
+            <input type="date" id="edit-task-fecha" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border font-medium">
+          </div>
+        </div>
+
+        <!-- Block toggle -->
+        <div class="pt-2">
+          <label class="flex items-center gap-2 cursor-pointer font-bold text-brand-textMain">
+            <input type="checkbox" id="edit-task-bloq" onchange="document.getElementById('edit-block-section').classList.toggle('hidden', !this.checked)" class="rounded text-rose-600 focus:ring-0">
+            <span>Marcar tarea como bloqueada</span>
+          </label>
+        </div>
+
+        <div id="edit-block-section" class="hidden space-y-2 p-3 bg-rose-50/60 rounded-xl border border-rose-200">
+          <div>
+            <label class="block font-bold text-rose-800 mb-1">Motivo del Bloqueo</label>
+            <input type="text" id="edit-task-motivo" class="w-full bg-white px-3 py-2 rounded-lg border border-rose-200 text-xs">
+          </div>
+          <div>
+            <label class="block font-bold text-rose-800 mb-1">Dependencia / Responsable que destraba</label>
+            <input type="text" id="edit-task-dep" class="w-full bg-white px-3 py-2 rounded-lg border border-rose-200 text-xs">
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-brand-borderLight">
+          <button type="button" onclick="deleteCurrentTask()" class="text-rose-600 hover:text-rose-800 text-xs font-semibold">Eliminar</button>
+          <div class="flex items-center gap-2">
+            <button type="button" onclick="closeModal('modal-editar-tarea')" class="px-4 py-2 rounded-lg text-brand-textMuted hover:bg-brand-arena transition">Cancelar</button>
+            <button onclick="saveTaskEdits()" class="px-4 py-2 rounded-lg bg-brand-campo hover:bg-brand-campoDark text-white font-bold transition">Guardar Cambios</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Modal 7: Ficha Detalle Cliente (Simple para Karla) -->
+  <dialog id="modal-cliente-detalle" class="p-0 rounded-2xl max-w-lg w-full bg-brand-surface border border-brand-border shadow-modal">
+    <div class="p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-brand-borderLight pb-3">
+        <div>
+          <span id="det-cliente-id" class="text-[10px] font-bold text-brand-textMuted uppercase">CLI-001</span>
+          <h3 id="det-cliente-empresa" class="font-display font-bold text-lg text-brand-textMain leading-tight mt-0.5">La Sanahoria</h3>
+        </div>
+        <button onclick="closeModal('modal-cliente-detalle')" class="text-brand-textMuted hover:text-brand-textMain"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div class="p-3 bg-brand-arena/60 rounded-xl border border-brand-border space-y-1">
+          <p><strong class="text-brand-textMain">Canal:</strong> <span id="det-cliente-canal">Biomarket</span></p>
+          <p><strong class="text-brand-textMain">Dirección:</strong> <span id="det-cliente-notas">San Isidro, Dasso 101</span></p>
+          <p><strong class="text-brand-textMain">Contacto / Tel:</strong> <span id="det-cliente-contacto">+51 913 733 367</span></p>
+        </div>
+
+        <div>
+          <label class="block font-bold text-brand-textMain mb-1">Etapa Comercial Actual</label>
+          <select id="det-cliente-etapa" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border font-bold text-brand-campoDark">
+            <option value="prospeccion">Prospección</option>
+            <option value="contactado">Contactado</option>
+            <option value="visita_agendada">Visita Agendada</option>
+            <option value="muestra_entregada">Muestra Entregada</option>
+            <option value="en_negociacion">En Negociación</option>
+            <option value="cerrado">Cerrado 🎉</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-brand-textMain mb-1">Próximo Contacto</label>
+            <input type="date" id="det-cliente-prox" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border font-medium">
+          </div>
+          <div>
+            <label class="block font-bold text-brand-textMain mb-1">Responsable</label>
+            <select id="det-cliente-resp" class="w-full bg-brand-arena px-3 py-2 rounded-lg border border-brand-border font-medium">
+              <option value="Karla">Karla</option>
+              <option value="Roger">Roger</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 pt-2">
+          <button id="btn-whatsapp-cliente" onclick="openWhatsAppChat()" class="flex-1 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition">
+            <i data-lucide="phone-call" class="w-4 h-4"></i>
+            <span>Abrir WhatsApp</span>
+          </button>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-3 border-t border-brand-borderLight">
+          <button type="button" onclick="closeModal('modal-cliente-detalle')" class="px-4 py-2 rounded-lg text-brand-textMuted hover:bg-brand-arena transition">Cerrar</button>
+          <button onclick="saveClientEdits()" class="px-4 py-2 rounded-lg bg-brand-campo hover:bg-brand-campoDark text-white font-bold transition">Guardar Cambios</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Modal 8: Confirmar Tarea Completada (1 clic) -->
+  <dialog id="modal-confirm-task" class="p-0 rounded-2xl max-w-sm w-full bg-brand-surface border border-brand-border shadow-modal">
+    <div class="p-6 text-center space-y-4">
+      <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center">
+        <i data-lucide="check" class="w-6 h-6 stroke-[3]"></i>
+      </div>
+      <div>
+        <h4 class="font-display font-bold text-base text-brand-textMain">¿Marcar tarea como terminada?</h4>
+        <p id="confirm-task-title" class="text-xs text-brand-textMuted mt-1">Título de la tarea</p>
+      </div>
+      <div class="flex items-center justify-center gap-2 pt-2">
+        <button onclick="closeModal('modal-confirm-task')" class="px-4 py-2 text-xs font-semibold rounded-lg text-brand-textMuted hover:bg-brand-arena transition">Cancelar</button>
+        <button onclick="executeConfirmComplete()" class="px-5 py-2 text-xs font-bold rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white transition">Sí, completada</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Floating Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 bg-brand-campoDarker text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-2xl border border-brand-nature/30 transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-2.5 pointer-events-none">
+    <i data-lucide="check-circle" class="w-4 h-4 text-brand-nature"></i>
+    <span id="toast-msg">Acción realizada con éxito</span>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- APPLICATION DATA & CONTROLLER JAVASCRIPT                 -->
+  <!-- ======================================================== -->
+  <script>
+    // Initial pre-loaded data from Xiembra Vault
+    const INITIAL_DATA = {
+    "tasks":  [
+                  {
+                      "id":  "TAR-001",
+                      "titulo":  "Diseño de Ficha Técnica Oficial B2B (1 Página)",
+                      "fase":  "ready_to_sell",
+                      "area":  "comercial",
+                      "estado":  "pendiente",
+                      "prioridad":  "critica",
+                      "responsable":  "Roger",
+                      "fecha_limite":  "2026-09-20",
+                      "bloqueado":  true,
+                      "motivo_bloqueo":  "Falta maquetar en PDF de 1 página los ingredientes, alérgenos, tabla nutricional y Registro DIGESA para compras de retail.",
+                      "dependencia":  "Validación final de tabla nutricional y arte de rotulado",
+                      "critica_lanzamiento":  true
+                  },
+                  {
+                      "id":  "TAR-002",
+                      "titulo":  "Diseño e Impresión de Díptico Brochure Comercial",
+                      "fase":  "ready_to_sell",
+                      "area":  "marketing",
+                      "estado":  "pendiente",
+                      "prioridad":  "critica",
+                      "responsable":  "Ambos",
+                      "fecha_limite":  "2026-09-21",
+                      "bloqueado":  true,
+                      "motivo_bloqueo":  "Falta arte final del díptico e impresión física de 100-200 unidades para visitas presenciales.",
+                      "dependencia":  "Aprobación de diseño gráfico final e imprenta",
+                      "critica_lanzamiento":  true
+                  },
+                  {
+                      "id":  "TAR-003",
+                      "titulo":  "Protocolo de Visitas y Entrega de Kits de Muestras B2B",
+                      "fase":  "ready_to_sell",
+                      "area":  "comercial",
+                      "estado":  "pendiente",
+                      "prioridad":  "critica",
+                      "responsable":  "Roger",
+                      "fecha_limite":  "2026-09-20",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Coordinación interna con Karla",
+                      "critica_lanzamiento":  true
+                  },
+                  {
+                      "id":  "TAR-004",
+                      "titulo":  "Seguimiento a Prospectos Prioritarios en Biomarkets (La Sanahoria y Organa)",
+                      "fase":  "ready_to_sell",
+                      "area":  "comercial",
+                      "estado":  "en_progreso",
+                      "prioridad":  "critica",
+                      "responsable":  "Karla",
+                      "fecha_limite":  "2026-09-19",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Directorio comercial de Canales D2C y B2B",
+                      "critica_lanzamiento":  true
+                  },
+                  {
+                      "id":  "TAR-005",
+                      "titulo":  "Preparación de Muestras de Degustación en Bolsitas para Visitas",
+                      "fase":  "ready_to_sell",
+                      "area":  "operaciones",
+                      "estado":  "en_progreso",
+                      "prioridad":  "critica",
+                      "responsable":  "Karla",
+                      "fecha_limite":  "2026-09-19",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Stock de contingencia de chocograjeas",
+                      "critica_lanzamiento":  true
+                  },
+                  {
+                      "id":  "TAR-006",
+                      "titulo":  "Configuración de Flujo Asistido de Facturación y Cobro con Jarvis",
+                      "fase":  "ready_to_sell",
+                      "area":  "finanzas",
+                      "estado":  "terminado",
+                      "prioridad":  "critica",
+                      "responsable":  "Roger",
+                      "fecha_limite":  "2026-09-17",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Protocolo tributario SUNAT y cuentas bancarias",
+                      "critica_lanzamiento":  true
+                  },
+                  {
+                      "id":  "TAR-007",
+                      "titulo":  "Configuración de Jarvis para Asistencia en Campo vía WhatsApp",
+                      "fase":  "ready_to_sell",
+                      "area":  "operaciones",
+                      "estado":  "terminado",
+                      "prioridad":  "alta",
+                      "responsable":  "Roger",
+                      "fecha_limite":  "2026-09-16",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Servidor Oracle Cloud y Google Cloud Vertex AI",
+                      "critica_lanzamiento":  true
+                  },
+                  {
+                      "id":  "TAR-008",
+                      "titulo":  "Filtro y Registro de Consultas Entrantes en WhatsApp e Instagram",
+                      "fase":  "ready_to_sell",
+                      "area":  "comercial",
+                      "estado":  "en_progreso",
+                      "prioridad":  "alta",
+                      "responsable":  "Karla",
+                      "fecha_limite":  "2026-09-30",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Líneas de WhatsApp (+51 981 011 816) e Instagram",
+                      "critica_lanzamiento":  true
+                  },
+                  {
+                      "id":  "TAR-009",
+                      "titulo":  "Inventario Físico y Custodia de 24 Polos Institucionales",
+                      "fase":  "ready_to_sell",
+                      "area":  "operaciones",
+                      "estado":  "terminado",
+                      "prioridad":  "media",
+                      "responsable":  "Karla",
+                      "fecha_limite":  "2026-09-08",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Recepción de confección de 24 polos",
+                      "critica_lanzamiento":  false
+                  },
+                  {
+                      "id":  "TAR-010",
+                      "titulo":  "Actualizar Lista de Compras del Focus Group con Facturas",
+                      "fase":  "ready_to_sell",
+                      "area":  "finanzas",
+                      "estado":  "pendiente",
+                      "prioridad":  "media",
+                      "responsable":  "Karla",
+                      "fecha_limite":  "2026-09-21",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Comprobantes de pago de compras de insumos",
+                      "critica_lanzamiento":  false
+                  },
+                  {
+                      "id":  "TAR-011",
+                      "titulo":  "Seguir Enviando Encuesta Focus Group",
+                      "fase":  "ready_to_sell",
+                      "area":  "marketing",
+                      "estado":  "en_progreso",
+                      "prioridad":  "media",
+                      "responsable":  "Roger",
+                      "fecha_limite":  "2026-09-22",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Formulario online y contactos de consumidores",
+                      "critica_lanzamiento":  false
+                  },
+                  {
+                      "id":  "TAR-012",
+                      "titulo":  "Pedir Muestras Highland Coffee (Envío con Empaques)",
+                      "fase":  "ready_to_sell",
+                      "area":  "producto",
+                      "estado":  "pendiente",
+                      "prioridad":  "media",
+                      "responsable":  "Roger",
+                      "fecha_limite":  "2026-09-22",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Coordinación con planta Chanchamayo",
+                      "critica_lanzamiento":  false
+                  },
+                  {
+                      "id":  "TAR-013",
+                      "titulo":  "Pago Final de Llaveros Xiembra (Saldo S/ 50 + IGV)",
+                      "fase":  "ready_to_sell",
+                      "area":  "finanzas",
+                      "estado":  "pendiente",
+                      "prioridad":  "baja",
+                      "responsable":  "Roger",
+                      "fecha_limite":  "2026-09-24",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Entrega final de lote de 50 llaveros",
+                      "critica_lanzamiento":  false
+                  },
+                  {
+                      "id":  "TAR-014",
+                      "titulo":  "Revisar Detalles de Decoración para Materiales de Xiembra",
+                      "fase":  "ready_to_sell",
+                      "area":  "marketing",
+                      "estado":  "pendiente",
+                      "prioridad":  "baja",
+                      "responsable":  "Roger",
+                      "fecha_limite":  "2026-09-25",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Catálogo de proveedores de stands/ferias",
+                      "critica_lanzamiento":  false
+                  },
+                  {
+                      "id":  "TAR-015",
+                      "titulo":  "Averiguar Sello en Relieve para Empaques y Papelería",
+                      "fase":  "ready_to_sell",
+                      "area":  "packaging",
+                      "estado":  "pendiente",
+                      "prioridad":  "baja",
+                      "responsable":  "Karla",
+                      "fecha_limite":  "2026-09-25",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Cotización imprenta",
+                      "critica_lanzamiento":  false
+                  },
+                  {
+                      "id":  "TAR-016",
+                      "titulo":  "Averiguar Lapiceros Institucionales (\u003c S/ 100)",
+                      "fase":  "ready_to_sell",
+                      "area":  "marketing",
+                      "estado":  "pendiente",
+                      "prioridad":  "baja",
+                      "responsable":  "Karla",
+                      "fecha_limite":  "2026-09-25",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Cotización de merchandising menor a S/ 100",
+                      "critica_lanzamiento":  false
+                  },
+                  {
+                      "id":  "TAR-017",
+                      "titulo":  "Comprar Muestras de Competencia Directa Relleno Café (Britt u otras)",
+                      "fase":  "ready_to_sell",
+                      "area":  "producto",
+                      "estado":  "pendiente",
+                      "prioridad":  "baja",
+                      "responsable":  "Ambos",
+                      "fecha_limite":  "2026-09-23",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Compra en supermercado/tienda",
+                      "critica_lanzamiento":  false
+                  },
+                  {
+                      "id":  "TAR-018",
+                      "titulo":  "Elaborar Cuestionario Dinámico para Colocar en QR de Empaque",
+                      "fase":  "ready_to_sell",
+                      "area":  "marketing",
+                      "estado":  "pendiente",
+                      "prioridad":  "media",
+                      "responsable":  "Karla",
+                      "fecha_limite":  "2026-09-24",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Plataforma de formularios (Google Forms o Typeform)",
+                      "critica_lanzamiento":  false
+                  },
+                  {
+                      "id":  "TAR-019",
+                      "titulo":  "Adelanto a Multipack por Diseño de Clissés (9x11 cm y 9x14 cm)",
+                      "fase":  "ready_to_scale",
+                      "area":  "packaging",
+                      "estado":  "terminado",
+                      "prioridad":  "alta",
+                      "responsable":  "Roger",
+                      "fecha_limite":  "2026-09-10",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Cotización COT-00001951 de Multipack Impresiones SAC",
+                      "critica_lanzamiento":  false
+                  },
+                  {
+                      "id":  "TAR-020",
+                      "titulo":  "Producción y Entrega de 20,000 Bolsas Trilaminadas Multipack",
+                      "fase":  "ready_to_scale",
+                      "area":  "packaging",
+                      "estado":  "esperando",
+                      "prioridad":  "alta",
+                      "responsable":  "Roger",
+                      "fecha_limite":  "2026-10-05",
+                      "bloqueado":  true,
+                      "motivo_bloqueo":  "En proceso de fotograbado de clissés por Multipack (tiempo estimado 15-20 días hábiles).",
+                      "dependencia":  "Aprobación de fotograbado de clissés",
+                      "critica_lanzamiento":  false
+                  },
+                  {
+                      "id":  "TAR-021",
+                      "titulo":  "Fabricación de Lote Industrial de 100 kg con Highland Coffee",
+                      "fase":  "ready_to_scale",
+                      "area":  "producto",
+                      "estado":  "esperando",
+                      "prioridad":  "alta",
+                      "responsable":  "Roger",
+                      "fecha_limite":  "2026-10-10",
+                      "bloqueado":  true,
+                      "motivo_bloqueo":  "Pendiente fecha de programación de planta Chanchamayo tras recepción de empaques.",
+                      "dependencia":  "Recepción de bolsas trilaminadas de Multipack",
+                      "critica_lanzamiento":  false
+                  },
+                  {
+                      "id":  "TAR-022",
+                      "titulo":  "Averiguar Cajas Máster y Recibidores para Pedidos en Cantidad",
+                      "fase":  "ready_to_scale",
+                      "area":  "operaciones",
+                      "estado":  "pendiente",
+                      "prioridad":  "media",
+                      "responsable":  "Karla",
+                      "fecha_limite":  "2026-09-24",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Medidas finales de empaques de Multipack",
+                      "critica_lanzamiento":  false
+                  },
+                  {
+                      "id":  "TAR-023",
+                      "titulo":  "Convenio con Operador Logístico Express 24h en Lima",
+                      "fase":  "ready_to_scale",
+                      "area":  "operaciones",
+                      "estado":  "pendiente",
+                      "prioridad":  "media",
+                      "responsable":  "Roger",
+                      "fecha_limite":  "2026-10-15",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Rutas comerciales recurrentes en Lima Metropolitana",
+                      "critica_lanzamiento":  false
+                  },
+                  {
+                      "id":  "TAR-024",
+                      "titulo":  "Reunión de Seguimiento Proyecto California con Ryan Vieira",
+                      "fase":  "ready_to_scale",
+                      "area":  "comercial",
+                      "estado":  "pendiente",
+                      "prioridad":  "media",
+                      "responsable":  "Roger",
+                      "fecha_limite":  "2026-09-23",
+                      "bloqueado":  false,
+                      "motivo_bloqueo":  "",
+                      "dependencia":  "Reunión virtual Google Calendar con Ryan Vieira",
+                      "critica_lanzamiento":  false
+                  }
+              ],
+    "clients":  [
+                    {
+                        "id_cliente":  "CLI-001",
+                        "empresa":  "La Sanahoria",
+                        "contacto":  "+51 913 733 367",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "2026-09-15",
+                        "proximo_contacto":  "2026-09-19",
+                        "potencial":  "alto",
+                        "notas":  "San Isidro, Calle Miguel Dasso 101. Canal ancla prioritario (Caja 100g y 20g)."
+                    },
+                    {
+                        "id_cliente":  "CLI-002",
+                        "empresa":  "Organa",
+                        "contacto":  "+51 986 425 088",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "2026-09-19",
+                        "potencial":  "alto",
+                        "notas":  "Av. Alfredo Benavides 455, Miraflores. Prioritario"
+                    },
+                    {
+                        "id_cliente":  "CLI-003",
+                        "empresa":  "Flora y Fauna",
+                        "contacto":  "+51 934 990 745",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "2026-09-20",
+                        "potencial":  "alto",
+                        "notas":  "Av. Mariscal La Mar 1110, Miraflores. Prioritario"
+                    },
+                    {
+                        "id_cliente":  "CLI-004",
+                        "empresa":  "Kahee Biomarket",
+                        "contacto":  "+51 950 878 585",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Calle Berlín 169, Miraflores. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-005",
+                        "empresa":  "Que Tentación",
+                        "contacto":  "+51 942 877 757",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Calle 2 de Mayo 679 Int. 202, Miraflores. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-006",
+                        "empresa":  "Punto Orgánico",
+                        "contacto":  "+51 923 610 132",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Surquillo. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-007",
+                        "empresa":  "Greta Market",
+                        "contacto":  "+51 956 520 498",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Ca. Piura 196, Miraflores. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-008",
+                        "empresa":  "Verde Natural Market",
+                        "contacto":  "+51 971 066 550",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Calle Bolognesi 125, Miraflores. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-009",
+                        "empresa":  "Madre Natura",
+                        "contacto":  "(01) 445 2522",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Av. Comandante Espinar 473, Miraflores. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-010",
+                        "empresa":  "Fresh2go",
+                        "contacto":  "+51 979 300 062",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Calle Porta 186, Miraflores. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-011",
+                        "empresa":  "Bio Inkagri",
+                        "contacto":  "+51 998 527 244",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Calle Shell 331, Miraflores. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-012",
+                        "empresa":  "Mystika Tienda Saludable",
+                        "contacto":  "+51 992 761 894",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Av. Alfredo Benavides 3601, Santiago de Surco. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-013",
+                        "empresa":  "Biodeli Orgánico",
+                        "contacto":  "(01) 242 0224",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Av. Petit Thouars 4828, Miraflores. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-014",
+                        "empresa":  "Eco Tienda Orgánica",
+                        "contacto":  "+51 963 184 773",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "C. Baltazar La Torre 270, San Isidro. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-015",
+                        "empresa":  "Naturlandia",
+                        "contacto":  "+51 979 745 694",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Ca. Narciso de la Colina 145, Miraflores. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-016",
+                        "empresa":  "Nuna Orgánica",
+                        "contacto":  "En cartera",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "bajo",
+                        "notas":  "Múltiples sedes Lima Norte (Los Olivos / SMP / SJL / Comas). En cartera"
+                    },
+                    {
+                        "id_cliente":  "CLI-017",
+                        "empresa":  "Natural Chef Gluten Free",
+                        "contacto":  "+51 905 449 515",
+                        "canal":  "cafeteria",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Av. Caminos del Inca 267 / Ca. Alcanfores 350, Surco/Miraflores. Counter 20g"
+                    },
+                    {
+                        "id_cliente":  "CLI-018",
+                        "empresa":  "Verdea",
+                        "contacto":  "+51 906 413 682",
+                        "canal":  "cafeteria",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Av. Jorge Chávez 131, Miraflores. Counter 20g"
+                    },
+                    {
+                        "id_cliente":  "CLI-019",
+                        "empresa":  "GOURMETY Biomarket \u0026 Café",
+                        "contacto":  "Presencial",
+                        "canal":  "cafeteria",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Av. Ricardo Rivera Navarrete 575, San Isidro. Counter 20g"
+                    },
+                    {
+                        "id_cliente":  "CLI-020",
+                        "empresa":  "Sano Protein Bar",
+                        "contacto":  "Presencial",
+                        "canal":  "cafeteria",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Magdalena del Mar. Counter 20g"
+                    },
+                    {
+                        "id_cliente":  "CLI-021",
+                        "empresa":  "Barra Botánica",
+                        "contacto":  "+51 997 580 841",
+                        "canal":  "cafeteria",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Ca. Libertad 439, Miraflores. Counter 20g"
+                    },
+                    {
+                        "id_cliente":  "CLI-022",
+                        "empresa":  "Manzana Verde",
+                        "contacto":  "+1 (205) 782-9108",
+                        "canal":  "cafeteria",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Ca. Arica 299, Miraflores. Counter 20g"
+                    },
+                    {
+                        "id_cliente":  "CLI-023",
+                        "empresa":  "Pickadeli",
+                        "contacto":  "+51 960 869 050",
+                        "canal":  "cafeteria",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Ca. Enrique Palacios 361, Miraflores. Counter 20g"
+                    },
+                    {
+                        "id_cliente":  "CLI-024",
+                        "empresa":  "Nola Pastelería Saludable",
+                        "contacto":  "+51 989 973 429",
+                        "canal":  "cafeteria",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Ca. Piura 713, Miraflores. Counter 20g"
+                    },
+                    {
+                        "id_cliente":  "CLI-025",
+                        "empresa":  "Tía Basi - Postres Saludables",
+                        "contacto":  "+51 907 812 748",
+                        "canal":  "cafeteria",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "C. Colón 112, Miraflores. Counter 20g"
+                    }
+                ],
+      "inventory": {
+        "inv-20g": { "id": "inv-20g", "nombre": "Grajeas 20g (Retail)", "cantidad": 120, "unidad": "unids", "precio_unitario": 4.80 },
+        "inv-100g": { "id": "inv-100g", "nombre": "Caja Gourmet 100g", "cantidad": 45, "unidad": "cajas", "precio_unitario": 17.50 },
+        "inv-polos": { "id": "inv-polos", "nombre": "Polos Camiseros", "cantidad": 24, "unidad": "polos", "precio_unitario": 0.00 },
+        "inv-llaveros": { "id": "inv-llaveros", "nombre": "Llaveros Xiembra", "cantidad": 50, "unidad": "unids", "precio_unitario": 0.00 }
+      },
+      "sales": []
+    };
+    // State management
+    let appData = { tasks: [], clients: [], inventory: {}, sales: [] };
+    let activeUser = 'Karla'; // Default: Karla
+    let activeView = 'inicio';
+    let taskFilterUser = 'karla'; // 'karla' | 'roger' | 'todos'
+    let currentTaskViewMode = 'kanban'; // 'kanban' | 'tabla'
+    let editingTaskId = null;
+    let viewingClientId = null;
+    let pendingCompleteTaskId = null;
+
+    // Initialize App
+    document.addEventListener('DOMContentLoaded', () => {
+      loadData();
+      renderAll();
+      lucide.createIcons();
+    });
+
+    // Load data from localStorage or initial JSON
+    function loadData() {
+      const saved = localStorage.getItem('xiembra_control_center_v1');
+      if (saved) {
+        try {
+          appData = JSON.parse(saved);
+          if (!appData.inventory) {
+            appData.inventory = JSON.parse(JSON.stringify(INITIAL_DATA.inventory));
+          }
+          if (!appData.sales) {
+            appData.sales = JSON.parse(JSON.stringify(INITIAL_DATA.sales));
+          }
+        } catch (e) {
+          appData = JSON.parse(JSON.stringify(INITIAL_DATA));
+        }
+      } else {
+        appData = JSON.parse(JSON.stringify(INITIAL_DATA));
+      }
+      populateClientsDropdowns();
+    }
+
+    function persistData() {
+      localStorage.setItem('xiembra_control_center_v1', JSON.stringify(appData));
+      renderAll();
+    }
+
+    function resetToInitialData() {
+      if (confirm('¿Restablecer datos originales del Vault? Se perderán las modificaciones locales.')) {
+        appData = JSON.parse(JSON.stringify(INITIAL_DATA));
+        localStorage.removeItem('xiembra_control_center_v1');
+        renderAll();
+        showToast('Datos restablecidos al estado del Vault');
+      }
+    }
+
+    function exportAllData() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `xiembra_data_backup_${new Date().toISOString().slice(0,10)}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showToast('Respaldo descargado exitosamente');
+    }
+
+    // Switch active view
+    function switchView(viewName) {
+      activeView = viewName;
+      document.querySelectorAll('.view-pane').forEach(el => el.classList.remove('active'));
+      const target = document.getElementById(`view-${viewName}`);
+      if (target) target.classList.add('active');
+
+      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+      const navBtn = document.getElementById(`nav-${viewName}`);
+      if (navBtn) navBtn.classList.add('active');
+
+      // Update Top Bar titles
+      const titles = {
+        inicio: ['Centro de Comando', 'Panel ejecutivo y seguimiento operativo diario'],
+        tareas: ['Gestión de Tareas', 'Tablero Kanban y lista de actividades operativas'],
+        clientes: ['Directorio de Clientes B2B', 'Fichas de biomarkets, cafeterías y contactos comerciales'],
+        pipeline: ['Pipeline Comercial', 'Embudo de conversión para las 3–5 primeras tiendas ancla'],
+        inventario: ['Inventario y Stock', 'Control físico de grajeas, cajas, polos y merchandising'],
+        ventas: ['Ventas y Facturación', 'Asistente tributario SUNAT y emisión rápida de comprobantes'],
+        finanzas: ['Finanzas y Costos', 'Márgenes de producción, maquila y precios mayoristas'],
+        calendario: ['Calendario Operativo', 'Cronograma de visitas comerciales y fechas límites'],
+        reportes: ['Reportes de Lanzamiento', 'Estado de avance de Ready to Sell y Ready to Scale'],
+        jarvis: ['JARVIS 24/7', 'Asistente de inteligencia ejecutiva en la nube'],
+        configuracion: ['Configuración', 'Datos fiscales de la empresa y preferencias locales']
+      };
+
+      if (titles[viewName]) {
+        document.getElementById('view-title').textContent = titles[viewName][0];
+        document.getElementById('view-subtitle').textContent = titles[viewName][1];
+      }
+
+      // Close mobile sidebar if open
+      const sb = document.getElementById('sidebar');
+      if (!sb.classList.contains('-translate-x-full')) {
+        toggleMobileSidebar();
+      }
+
+      lucide.createIcons();
+    }
+
+    // Toggle active user between Karla and Roger
+    function toggleActiveUser() {
+      if (activeUser === 'Karla') {
+        activeUser = 'Roger';
+        document.getElementById('user-avatar').textContent = 'RK';
+        document.getElementById('user-name').textContent = 'Roger Kirby';
+        document.getElementById('user-role').textContent = 'Dirección Comercial';
+        setUserFilter('roger');
+      } else {
+        activeUser = 'Karla';
+        document.getElementById('user-avatar').textContent = 'KL';
+        document.getElementById('user-name').textContent = 'Karla Linares';
+        document.getElementById('user-role').textContent = 'Operaciones & Campo';
+        setUserFilter('karla');
+      }
+      showToast(`Modo cambiado a: ${activeUser}`);
+    }
+
+    function setUserFilter(mode) {
+      taskFilterUser = mode;
+      ['karla', 'roger', 'todos'].forEach(m => {
+        const btn = document.getElementById(`filter-user-${m}`);
+        if (m === mode) {
+          btn.className = "px-2.5 py-1 rounded-md font-semibold bg-brand-surface text-brand-campo shadow-sm";
+        } else {
+          btn.className = "px-2.5 py-1 rounded-md text-brand-textMuted hover:text-brand-textMain font-medium";
+        }
+      });
+      renderInicio();
+    }
+
+    function toggleMobileSidebar() {
+      const sb = document.getElementById('sidebar');
+      const bd = document.getElementById('mobile-backdrop');
+      sb.classList.toggle('-translate-x-full');
+      bd.classList.toggle('hidden');
+    }
+
+    // Modal Helpers
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.showModal();
+      lucide.createIcons();
+    }
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.close();
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      t.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        t.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+
+    // Render All Views
+    function renderAll() {
+      renderInicio();
+      renderTasks();
+      renderClients();
+      renderPipeline();
+      renderInventory();
+      renderVentas();
+    }
+
+    // ========================================================
+    // RENDER VIEW: INICIO (DASHBOARD)
+    // ========================================================
+    function renderInicio() {
+      // 1. Calculate Metrics
+      const rtsTasks = appData.tasks.filter(t => t.fase === 'ready_to_sell');
+      const rtsTerminadas = rtsTasks.filter(t => t.estado === 'terminado').length;
+      const rtsBloqueadas = rtsTasks.filter(t => t.bloqueado).length;
+      const rtsPct = rtsTasks.length ? Math.round((rtsTerminadas / rtsTasks.length) * 100) : 0;
+
+      document.getElementById('stat-rts-pct').textContent = `${rtsPct}%`;
+      document.getElementById('stat-rts-ratio').textContent = `${rtsTerminadas} de ${rtsTasks.length} tareas`;
+      document.getElementById('bar-rts').style.width = `${rtsPct}%`;
+      document.getElementById('rts-block-count').textContent = `${rtsBloqueadas} bloqueos`;
+
+      if (rtsBloqueadas > 0) {
+        document.getElementById('badge-rts-status').textContent = '🔴 Bloqueado';
+        document.getElementById('badge-rts-status').className = 'inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200';
+      } else if (rtsTerminadas === rtsTasks.length) {
+        document.getElementById('badge-rts-status').textContent = '🟢 Habilitado';
+        document.getElementById('badge-rts-status').className = 'inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200';
+      } else {
+        document.getElementById('badge-rts-status').textContent = '🟡 Pendiente';
+        document.getElementById('badge-rts-status').className = 'inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200';
+      }
+
+      // Ready to Scale
+      const scaleTasks = appData.tasks.filter(t => t.fase === 'ready_to_scale');
+      const scaleTerminadas = scaleTasks.filter(t => t.estado === 'terminado').length;
+      const scalePct = scaleTasks.length ? Math.round((scaleTerminadas / scaleTasks.length) * 100) : 0;
+      document.getElementById('stat-scale-pct').textContent = `${scalePct}%`;
+      document.getElementById('stat-scale-ratio').textContent = `${scaleTerminadas} de ${scaleTasks.length} tareas`;
+      document.getElementById('bar-scale').style.width = `${scalePct}%`;
+
+      // Clients stats
+      document.getElementById('stat-prospectos-total').textContent = appData.clients.length;
+      const contactados = appData.clients.filter(c => c.etapa !== 'prospeccion').length;
+      document.getElementById('stat-prospectos-contactados').textContent = `${contactados} en contacto`;
+
+      // Sales KPI in Inicio
+      const totalVentas = (appData.sales || []).reduce((acc, v) => acc + (v.total || 0), 0);
+      const statVentasEl = document.getElementById('stat-ventas-monto');
+      if (statVentasEl) statVentasEl.textContent = `S/ ${totalVentas.toFixed(2)}`;
+
+      // 2. Render HOY Section
+      let todayList = appData.tasks.filter(t => t.estado !== 'terminado');
+      if (taskFilterUser === 'karla') {
+        todayList = todayList.filter(t => t.responsable === 'Karla' || t.responsable === 'Ambos');
+        document.getElementById('greeting-title').textContent = '¡Hola, Karla!';
+      } else if (taskFilterUser === 'roger') {
+        todayList = todayList.filter(t => t.responsable === 'Roger' || t.responsable === 'Ambos');
+        document.getElementById('greeting-title').textContent = '¡Hola, Roger!';
+      } else {
+        document.getElementById('greeting-title').textContent = '¡Hola, Equipo Xiembra!';
+      }
+
+      document.getElementById('greeting-task-count').textContent = `${todayList.length} tareas pendientes`;
+
+      // Sort by priority (critica > alta > media > baja)
+      const prioOrder = { critica: 0, alta: 1, media: 2, baja: 3 };
+      todayList.sort((a,b) => (prioOrder[a.prioridad] || 3) - (prioOrder[b.prioridad] || 3));
+
+      // Limit to 5 items
+      const visibleToday = todayList.slice(0, 5);
+      const containerToday = document.getElementById('today-tasks-container');
+      containerToday.innerHTML = '';
+
+      if (visibleToday.length === 0) {
+        containerToday.innerHTML = '<p class="py-6 text-center text-xs text-brand-textMuted">🎉 ¡Todo al día! No hay tareas pendientes para este filtro.</p>';
+      } else {
+        visibleToday.forEach(t => {
+          const prioBadges = {
+            critica: '<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200">Crítica</span>',
+            alta: '<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200">Alta</span>',
+            media: '<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">Media</span>',
+            baja: '<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">Baja</span>'
+          };
+          const respBadges = {
+            Karla: '<span class="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Karla</span>',
+            Roger: '<span class="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-blue-100 text-blue-800">Roger</span>',
+            Ambos: '<span class="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-purple-100 text-purple-800">Ambos</span>'
+          };
+
+          const isBlockedBadge = t.bloqueado ? '<span class="text-[10px] font-bold text-rose-600 flex items-center gap-0.5">🔴 Bloqueado</span>' : '';
+
+          const item = document.createElement('div');
+          item.className = 'py-2.5 flex items-start gap-3 hover:bg-brand-arena/40 px-2 rounded-xl transition group';
+          item.innerHTML = `
+            <input type="checkbox" onchange="promptCompleteTask('${t.id}')" class="mt-1 rounded text-brand-campo focus:ring-0 cursor-pointer">
+            <div class="flex-1 min-w-0 cursor-pointer" onclick="openEditTask('${t.id}')">
+              <p class="text-xs font-bold text-brand-textMain group-hover:text-brand-campo transition truncate">${t.titulo}</p>
+              <div class="flex flex-wrap items-center gap-2 mt-1">
+                ${respBadges[t.responsable] || ''}
+                ${prioBadges[t.prioridad] || ''}
+                ${isBlockedBadge}
+                <span class="text-[11px] text-brand-textMuted flex items-center gap-1"><i data-lucide="calendar" class="w-3 h-3"></i> ${t.fecha_limite}</span>
+              </div>
+            </div>
+            <button onclick="openEditTask('${t.id}')" class="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-brand-arena text-brand-textMuted transition">
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
+          `;
+          containerToday.appendChild(item);
+        });
+      }
+
+      // 3. Render Blocked Tasks (Exclusive to bloqueado: true)
+      const blockedList = appData.tasks.filter(t => t.bloqueado && t.fase === 'ready_to_sell');
+      const containerBlocked = document.getElementById('blocked-tasks-container');
+      containerBlocked.innerHTML = '';
+
+      if (blockedList.length === 0) {
+        containerBlocked.innerHTML = '<p class="py-4 text-center text-xs text-emerald-700 bg-emerald-50 rounded-xl font-medium">✨ Cero bloqueos en Ready to Sell.</p>';
+      } else {
+        blockedList.forEach(t => {
+          const card = document.createElement('div');
+          card.className = 'p-3.5 rounded-xl bg-rose-50/50 border border-rose-200 text-xs space-y-1.5 cursor-pointer hover:bg-rose-50 transition';
+          card.onclick = () => openEditTask(t.id);
+          card.innerHTML = `
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-rose-900">${t.titulo}</span>
+              <span class="text-[10px] font-bold text-rose-700 uppercase bg-white px-2 py-0.5 rounded-full border border-rose-200">Resp: ${t.responsable}</span>
+            </div>
+            <p class="text-[11px] text-rose-800 leading-relaxed"><strong>Motivo:</strong> ${t.motivo_bloqueo}</p>
+            <p class="text-[10px] text-rose-600"><strong>Dependencia:</strong> ${t.dependencia || 'Validación pendiente'}</p>
+          `;
+          containerBlocked.appendChild(card);
+        });
+      }
+
+      // 4. Render Pipeline Stepper Counts
+      const stages = ['prospeccion', 'contactado', 'visita_agendada', 'muestra_entregada', 'en_negociacion', 'cerrado'];
+      stages.forEach(st => {
+        const count = appData.clients.filter(c => c.etapa === st).length;
+        const el = document.getElementById(`step-count-${st}`);
+        if (el) el.textContent = count;
+      });
+
+      lucide.createIcons();
+    }
+
+    // ========================================================
+    // RENDER VIEW: TAREAS (KANBAN & TABLE)
+    // ========================================================
+    function setTaskViewMode(mode) {
+      currentTaskViewMode = mode;
+      const kView = document.getElementById('tasks-kanban-view');
+      const tView = document.getElementById('tasks-table-view');
+      const btnK = document.getElementById('btn-task-kanban');
+      const btnT = document.getElementById('btn-task-tabla');
+
+      if (mode === 'kanban') {
+        kView.classList.remove('hidden');
+        tView.classList.add('hidden');
+        btnK.className = "px-3 py-1 rounded-md text-xs font-bold bg-brand-surface text-brand-campo shadow-sm flex items-center gap-1.5";
+        btnT.className = "px-3 py-1 rounded-md text-xs font-medium text-brand-textMuted hover:text-brand-textMain flex items-center gap-1.5";
+      } else {
+        kView.classList.add('hidden');
+        tView.classList.remove('hidden');
+        btnT.className = "px-3 py-1 rounded-md text-xs font-bold bg-brand-surface text-brand-campo shadow-sm flex items-center gap-1.5";
+        btnK.className = "px-3 py-1 rounded-md text-xs font-medium text-brand-textMuted hover:text-brand-textMain flex items-center gap-1.5";
+      }
+      renderTasks();
+    }
+
+    function renderTasks() {
+      const q = (document.getElementById('search-tareas')?.value || '').toLowerCase();
+      const faseF = document.getElementById('filter-task-fase')?.value || 'todas';
+      const respF = document.getElementById('filter-task-resp')?.value || 'todos';
+      const bloqF = document.getElementById('filter-task-bloq')?.value || 'todos';
+
+      let filtered = appData.tasks.filter(t => {
+        const matchQ = t.titulo.toLowerCase().includes(q) || t.id.toLowerCase().includes(q);
+        const matchFase = (faseF === 'todas') || (t.fase === faseF);
+        const matchResp = (respF === 'todos') || (t.responsable === respF);
+        let matchBloq = true;
+        if (bloqF === 'bloqueadas') matchBloq = t.bloqueado;
+        if (bloqF === 'activas') matchBloq = t.estado !== 'terminado';
+        if (bloqF === 'terminadas') matchBloq = t.estado === 'terminado';
+        return matchQ && matchFase && matchResp && matchBloq;
+      });
+
+      // Render Kanban
+      const cols = ['pendiente', 'en_progreso', 'esperando', 'terminado'];
+      cols.forEach(col => {
+        const colList = filtered.filter(t => t.estado === col);
+        document.getElementById(`col-count-${col}`).textContent = colList.length;
+        const colContainer = document.getElementById(`kanban-col-${col}`);
+        colContainer.innerHTML = '';
+
+        colList.forEach(t => {
+          const card = document.createElement('div');
+          card.className = "bg-brand-surface p-3.5 rounded-xl border border-brand-border hover:shadow-card transition cursor-pointer space-y-2";
+          card.onclick = () => openEditTask(t.id);
+
+          const prioColor = t.prioridad === 'critica' ? 'text-rose-600 bg-rose-50' : (t.prioridad === 'alta' ? 'text-amber-600 bg-amber-50' : 'text-slate-600 bg-slate-100');
+          const faseBadge = t.fase === 'ready_to_sell' ? '<span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700">Sell</span>' : '<span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-50 text-blue-700">Scale</span>';
+          const blockBadge = t.bloqueado ? '<span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 flex items-center gap-0.5">🔴 Bloqueado</span>' : '';
+
+          card.innerHTML = `
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-brand-textMuted uppercase">${t.id}</span>
+              <div class="flex items-center gap-1">${faseBadge}${blockBadge}</div>
+            </div>
+            <p class="text-xs font-bold text-brand-textMain line-clamp-2 leading-snug">${t.titulo}</p>
+            <div class="pt-2 border-t border-brand-borderLight flex items-center justify-between text-[11px]">
+              <span class="font-bold text-brand-campoDark">${t.responsable}</span>
+              <span class="text-brand-textMuted">${t.fecha_limite}</span>
+            </div>
+          `;
+          colContainer.appendChild(card);
+        });
+      });
+
+      // Render Table
+      const tableBody = document.getElementById('tasks-table-body');
+      tableBody.innerHTML = '';
+      filtered.forEach(t => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-brand-arena/30 transition cursor-pointer";
+        tr.onclick = () => openEditTask(t.id);
+        tr.innerHTML = `
+          <td class="p-3.5 font-bold text-brand-textMuted">${t.id}</td>
+          <td class="p-3.5 font-bold text-brand-textMain">${t.titulo}</td>
+          <td class="p-3.5"><span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${t.fase === 'ready_to_sell' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800'}">${t.fase === 'ready_to_sell' ? 'Ready to Sell' : 'Ready to Scale'}</span></td>
+          <td class="p-3.5 font-semibold text-brand-textMain">${t.responsable}</td>
+          <td class="p-3.5"><span class="text-[10px] font-bold px-2 py-0.5 rounded uppercase ${t.prioridad === 'critica' ? 'text-rose-700 bg-rose-50' : 'text-slate-600 bg-slate-100'}">${t.prioridad}</span></td>
+          <td class="p-3.5 font-semibold">${t.estado}</td>
+          <td class="p-3.5 text-brand-textMuted">${t.fecha_limite}</td>
+          <td class="p-3.5 text-right"><button class="text-brand-campo hover:underline font-bold text-xs">Editar</button></td>
+        `;
+        tableBody.appendChild(tr);
+      });
+
+      lucide.createIcons();
+    }
+
+    // ========================================================
+    // RENDER VIEW: CLIENTES B2B & PIPELINE
+    // ========================================================
+    function renderClients() {
+      const q = (document.getElementById('search-clientes')?.value || '').toLowerCase();
+      const canalF = document.getElementById('filter-cliente-canal')?.value || 'todos';
+      const etapaF = document.getElementById('filter-cliente-etapa')?.value || 'todas';
+
+      const filtered = appData.clients.filter(c => {
+        const matchQ = c.empresa.toLowerCase().includes(q) || (c.notas || '').toLowerCase().includes(q);
+        const matchCanal = (canalF === 'todos') || (c.canal === canalF);
+        const matchEtapa = (etapaF === 'todas') || (c.etapa === etapaF);
+        return matchQ && matchCanal && matchEtapa;
+      });
+
+      const grid = document.getElementById('clients-grid');
+      grid.innerHTML = '';
+
+      filtered.forEach(c => {
+        const card = document.createElement('div');
+        card.className = "bg-brand-surface p-4 rounded-2xl border border-brand-border hover:shadow-hover transition flex flex-col justify-between space-y-3 cursor-pointer";
+        card.onclick = () => openClientDetail(c.id_cliente);
+
+        const etapaLabels = {
+          prospeccion: 'Prospección',
+          contactado: 'Contactado',
+          visita_agendada: 'Visita Agendada',
+          muestra_entregada: 'Muestra Entregada',
+          en_negociacion: 'En Negociación',
+          cerrado: 'Cerrado 🎉'
+        };
+
+        const etapaPill = c.etapa === 'cerrado' ? 'bg-emerald-100 text-emerald-800' : (c.etapa === 'contactado' ? 'bg-blue-100 text-blue-800' : 'bg-slate-100 text-slate-700');
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-brand-textMuted uppercase">${c.id_cliente}</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${etapaPill}">${etapaLabels[c.etapa] || c.etapa}</span>
+            </div>
+            <h5 class="font-display font-bold text-base text-brand-textMain mt-1 leading-snug">${c.empresa}</h5>
+            <p class="text-xs text-brand-textMuted mt-1 line-clamp-1">${c.notas || 'Sin dirección registrada'}</p>
+          </div>
+
+          <div class="pt-2 border-t border-brand-borderLight flex items-center justify-between text-xs">
+            <span class="text-brand-textMuted">Tel: <strong class="text-brand-textMain">${c.contacto}</strong></span>
+            <span class="font-bold text-brand-campo">Resp: ${c.responsable}</span>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    function renderPipeline() {
+      const stages = ['prospeccion', 'contactado', 'visita_agendada', 'muestra_entregada', 'en_negociacion', 'cerrado'];
+      stages.forEach(st => {
+        const list = appData.clients.filter(c => c.etapa === st);
+        document.getElementById(`pipe-count-${st}`).textContent = list.length;
+        const col = document.getElementById(`pipe-col-${st}`);
+        col.innerHTML = '';
+
+        list.forEach(c => {
+          const card = document.createElement('div');
+          card.className = "bg-brand-surface p-3 rounded-xl border border-brand-border shadow-sm hover:shadow-card transition cursor-pointer space-y-1.5";
+          card.onclick = () => openClientDetail(c.id_cliente);
+          card.innerHTML = `
+            <p class="text-xs font-bold text-brand-textMain leading-tight">${c.empresa}</p>
+            <p class="text-[10px] text-brand-textMuted truncate">${c.notas || c.canal}</p>
+            <div class="flex items-center justify-between text-[10px] pt-1 text-brand-campoDark font-semibold">
+              <span>${c.responsable}</span>
+              <span class="text-brand-textMuted">${c.proximo_contacto || ''}</span>
+            </div>
+          `;
+          col.appendChild(card);
+        });
+      });
+      lucide.createIcons();
+    }
+
+    function populateClientsDropdowns() {
+      const selSeg = document.getElementById('modal-seg-cliente');
+      if (selSeg) {
+        selSeg.innerHTML = '';
+        appData.clients.forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = c.empresa;
+          opt.textContent = `${c.empresa} (${c.canal})`;
+          selSeg.appendChild(opt);
+        });
+      }
+    }
+
+    // ========================================================
+    // KARLA ACTIONS: EDIT TASK, COMPLETE TASK, CLIENT DRAWER
+    // ========================================================
+    function promptCompleteTask(id) {
+      pendingCompleteTaskId = id;
+      const t = appData.tasks.find(x => x.id === id);
+      if (t) {
+        document.getElementById('confirm-task-title').textContent = `"${t.titulo}"`;
+        openModal('modal-confirm-task');
+      }
+    }
+
+    function executeConfirmComplete() {
+      if (!pendingCompleteTaskId) return;
+      const t = appData.tasks.find(x => x.id === pendingCompleteTaskId);
+      if (t) {
+        t.estado = 'terminado';
+        persistData();
+        closeModal('modal-confirm-task');
+        showToast('🎉 Tarea completada con éxito!');
+      }
+      pendingCompleteTaskId = null;
+    }
+
+    function openEditTask(id) {
+      editingTaskId = id;
+      const t = appData.tasks.find(x => x.id === id);
+      if (!t) return;
+
+      document.getElementById('edit-task-id').textContent = t.id;
+      document.getElementById('edit-task-title').textContent = t.titulo;
+      document.getElementById('edit-task-resp').value = t.responsable;
+      document.getElementById('edit-task-fecha').value = t.fecha_limite;
+      document.getElementById('edit-task-bloq').checked = t.bloqueado;
+      document.getElementById('edit-task-motivo').value = t.motivo_bloqueo || '';
+      document.getElementById('edit-task-dep').value = t.dependencia || '';
+
+      document.getElementById('edit-block-section').classList.toggle('hidden', !t.bloqueado);
+
+      setEditTaskState(t.estado);
+      openModal('modal-editar-tarea');
+    }
+
+    let currentEditingState = 'pendiente';
+    function setEditTaskState(st) {
+      currentEditingState = st;
+      ['pendiente', 'en_progreso', 'esperando', 'terminado'].forEach(s => {
+        const btn = document.getElementById(`btn-state-${s}`);
+        if (s === st) {
+          btn.className = "py-1.5 rounded-lg font-bold text-xs transition text-center bg-brand-campo text-white shadow-sm";
+        } else {
+          btn.className = "py-1.5 rounded-lg font-bold text-xs transition text-center text-brand-textMuted hover:text-brand-textMain";
+        }
+      });
+    }
+
+    function saveTaskEdits() {
+      if (!editingTaskId) return;
+      const t = appData.tasks.find(x => x.id === editingTaskId);
+      if (t) {
+        t.estado = currentEditingState;
+        t.responsable = document.getElementById('edit-task-resp').value;
+        t.fecha_limite = document.getElementById('edit-task-fecha').value;
+        t.bloqueado = document.getElementById('edit-task-bloq').checked;
+        t.motivo_bloqueo = document.getElementById('edit-task-motivo').value;
+        t.dependencia = document.getElementById('edit-task-dep').value;
+        persistData();
+        closeModal('modal-editar-tarea');
+        showToast('Tarea actualizada correctamente');
+      }
+    }
+
+    function deleteCurrentTask() {
+      if (confirm('¿Eliminar esta tarea del tablero?')) {
+        appData.tasks = appData.tasks.filter(x => x.id !== editingTaskId);
+        persistData();
+        closeModal('modal-editar-tarea');
+        showToast('Tarea eliminada');
+      }
+    }
+
+    function saveNewTask(e) {
+      e.preventDefault();
+      const count = appData.tasks.length + 1;
+      const id = `TAR-${String(count).padStart(3, '0')}`;
+      const isBloq = document.getElementById('nueva-tarea-bloqueada').checked;
+
+      const newTask = {
+        id: id,
+        titulo: document.getElementById('nueva-tarea-titulo').value,
+        fase: document.getElementById('nueva-tarea-fase').value,
+        area: 'operaciones',
+        estado: 'pendiente',
+        prioridad: document.getElementById('nueva-tarea-prio').value,
+        responsable: document.getElementById('nueva-tarea-resp').value,
+        fecha_limite: document.getElementById('nueva-tarea-fecha').value,
+        bloqueado: isBloq,
+        motivo_bloqueo: isBloq ? document.getElementById('nueva-tarea-motivo').value : '',
+        dependencia: isBloq ? document.getElementById('nueva-tarea-dep').value : '',
+        critica_lanzamiento: isBloq
+      };
+
+      appData.tasks.unshift(newTask);
+      persistData();
+      closeModal('modal-nueva-tarea');
+      e.target.reset();
+      showToast('Nueva tarea agregada al tablero');
+    }
+
+    // Client Detail Modal
+    function openClientDetail(id) {
+      viewingClientId = id;
+      const c = appData.clients.find(x => x.id_cliente === id);
+      if (!c) return;
+
+      document.getElementById('det-cliente-id').textContent = c.id_cliente;
+      document.getElementById('det-cliente-empresa').textContent = c.empresa;
+      document.getElementById('det-cliente-canal').textContent = c.canal;
+      document.getElementById('det-cliente-notas').textContent = c.notas || 'Sin dirección';
+      document.getElementById('det-cliente-contacto').textContent = c.contacto || 'Sin teléfono';
+      document.getElementById('det-cliente-etapa').value = c.etapa;
+      document.getElementById('det-cliente-prox').value = c.proximo_contacto || '';
+      document.getElementById('det-cliente-resp').value = c.responsable || 'Karla';
+
+      openModal('modal-cliente-detalle');
+    }
+
+    function saveClientEdits() {
+      if (!viewingClientId) return;
+      const c = appData.clients.find(x => x.id_cliente === viewingClientId);
+      if (c) {
+        c.etapa = document.getElementById('det-cliente-etapa').value;
+        c.proximo_contacto = document.getElementById('det-cliente-prox').value;
+        c.responsable = document.getElementById('det-cliente-resp').value;
+        persistData();
+        closeModal('modal-cliente-detalle');
+        showToast('Ficha de cliente actualizada');
+      }
+    }
+
+    function saveNewClient(e) {
+      e.preventDefault();
+      const count = appData.clients.length + 1;
+      const id = `CLI-${String(count).padStart(3, '0')}`;
+
+      const newClient = {
+        id_cliente: id,
+        empresa: document.getElementById('nuevo-cliente-empresa').value,
+        contacto: document.getElementById('nuevo-cliente-contacto').value,
+        canal: document.getElementById('nuevo-cliente-canal').value,
+        etapa: document.getElementById('nuevo-cliente-etapa').value,
+        responsable: document.getElementById('nuevo-cliente-resp').value,
+        ultimo_contacto: new Date().toISOString().slice(0, 10),
+        proximo_contacto: '',
+        potencial: 'medio',
+        notas: document.getElementById('nuevo-cliente-notas').value
+      };
+
+      appData.clients.unshift(newClient);
+      persistData();
+      closeModal('modal-nuevo-cliente');
+      e.target.reset();
+      showToast('Nuevo prospecto guardado en cartera');
+    }
+
+    function openWhatsAppChat() {
+      if (!viewingClientId) return;
+      const c = appData.clients.find(x => x.id_cliente === viewingClientId);
+      if (c && c.contacto) {
+        const cleanPhone = c.contacto.replace(/[^0-9]/g, '');
+        window.open(`https://wa.me/${cleanPhone}`, '_blank');
+      } else {
+        alert('Este cliente no tiene teléfono válido registrado.');
+      }
+    }
+
+    // ========================================================
+    // INVENTARIO & VENTAS HELPERS
+    // ========================================================
+    function renderInventory() {
+      if (!appData.inventory) return;
+      for (const [id, item] of Object.entries(appData.inventory)) {
+        const el = document.getElementById(id);
+        if (el) {
+          el.innerHTML = `${item.cantidad} <span class="text-sm font-normal text-brand-textMuted">${item.unidad}</span>`;
+        }
+      }
+    }
+
+    function adjustInventory(elementId, delta) {
+      if (!appData.inventory || !appData.inventory[elementId]) return;
+      appData.inventory[elementId].cantidad = Math.max(0, appData.inventory[elementId].cantidad + delta);
+      persistData();
+      renderInventory();
+      showToast(`Stock de ${appData.inventory[elementId].nombre}: ${appData.inventory[elementId].cantidad} ${appData.inventory[elementId].unidad}`);
+    }
+
+    function confirmInventoryUpdate() {
+      const item = document.getElementById('modal-inv-item').value;
+      const cant = parseInt(document.getElementById('modal-inv-cant').value) || 0;
+      if (appData.inventory && appData.inventory[item]) {
+        appData.inventory[item].cantidad = Math.max(0, cant);
+        persistData();
+        renderInventory();
+        showToast(`Inventario actualizado: ${appData.inventory[item].nombre} = ${appData.inventory[item].cantidad}`);
+      }
+      closeModal('modal-actualizar-inventario');
+    }
+
+    function calculateVenta() {
+      const c20 = parseInt(document.getElementById('venta-cant-20g').value) || 0;
+      const c100 = parseInt(document.getElementById('venta-cant-100g').value) || 0;
+
+      const tot20 = c20 * 4.80;
+      const tot100 = c100 * 17.50;
+      const total = tot20 + tot100;
+
+      const base = total / 1.18;
+      const igv = total - base;
+
+      document.getElementById('calc-base').textContent = `S/ ${base.toFixed(2)}`;
+      document.getElementById('calc-igv').textContent = `S/ ${igv.toFixed(2)}`;
+      document.getElementById('calc-total').textContent = `S/ ${total.toFixed(2)}`;
+    }
+
+    function copyBillingMessage() {
+      const cliente = document.getElementById('venta-cliente').value;
+      const c20 = parseInt(document.getElementById('venta-cant-20g').value) || 0;
+      const c100 = parseInt(document.getElementById('venta-cant-100g').value) || 0;
+      const total = document.getElementById('calc-total').textContent;
+
+      const msg = `Estimados ${cliente},
+Muchas gracias por su pedido con Xiembra. Detallamos su orden:
+- ${c20} unids. Chocograjeas Café 20g (Retail): S/ ${(c20 * 4.80).toFixed(2)}
+- ${c100} unids. Caja Gourmet Chocograjeas 100g: S/ ${(c100 * 17.50).toFixed(2)}
+TOTAL A PAGAR: ${total} (Inc. IGV)
+
+Datos para transferencia:
+Banco: BCP Soles Corriente
+Titular: Xiembra Agroindustrial S.A.C.
+RUC: 20616165365
+Cuenta: 193-9821482-0-45
+CCI: 002-19300982148204518
+
+Adjuntamos Factura Electrónica. Favor de enviarnos el voucher para despachar su pedido.`;
+
+      navigator.clipboard.writeText(msg).then(() => {
+        showToast('Mensaje de cobranza copiado al portapapeles!');
+      });
+    }
+
+    function renderVentas() {
+      const sales = appData.sales || [];
+      const totalMonto = sales.reduce((acc, v) => acc + (v.total || 0), 0);
+      const totalEl = document.getElementById('stat-ventas-monto');
+      if (totalEl) {
+        totalEl.textContent = `S/ ${totalMonto.toFixed(2)}`;
+      }
+
+      const countBadge = document.getElementById('ventas-count-badge');
+      if (countBadge) {
+        countBadge.textContent = `${sales.length} ${sales.length === 1 ? 'venta registrada' : 'ventas registradas'}`;
+      }
+
+      const tbody = document.getElementById('ventas-table-body');
+      if (!tbody) return;
+
+      tbody.innerHTML = '';
+      if (sales.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="9" class="py-8 text-center text-xs text-brand-textMuted">
+              <i data-lucide="receipt" class="w-6 h-6 mx-auto mb-2 opacity-40"></i>
+              Sin ventas registradas aún. Utiliza la calculadora superior o el botón "+ Registrar Venta" para emitir la primera orden piloto.
+            </td>
+          </tr>
+        `;
+      } else {
+        sales.forEach(v => {
+          const tr = document.createElement('tr');
+          tr.className = "hover:bg-brand-arena/30 transition";
+          tr.innerHTML = `
+            <td class="py-3 font-bold text-brand-campoDark font-mono text-[11px]">${v.id}</td>
+            <td class="py-3 text-brand-textMuted">${v.fecha_hora}</td>
+            <td class="py-3 font-bold text-brand-textMain">${v.cliente}</td>
+            <td class="py-3"><span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">${v.canal}</span></td>
+            <td class="py-3 font-medium text-brand-textMain">${v.producto}</td>
+            <td class="py-3 text-right font-semibold text-brand-textMuted">S/ ${Number(v.subtotal).toFixed(2)}</td>
+            <td class="py-3 text-right font-semibold text-brand-textMuted">S/ ${Number(v.igv).toFixed(2)}</td>
+            <td class="py-3 text-right font-bold text-brand-campo">S/ ${Number(v.total).toFixed(2)}</td>
+            <td class="py-3 text-center"><span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 uppercase">${v.estado}</span></td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+      lucide.createIcons();
+    }
+
+    function confirmRegisterVenta() {
+      const cliente = document.getElementById('venta-cliente').value;
+      const c20 = parseInt(document.getElementById('venta-cant-20g').value) || 0;
+      const c100 = parseInt(document.getElementById('venta-cant-100g').value) || 0;
+
+      if (c20 === 0 && c100 === 0) {
+        showToast('Ingresa al menos 1 unidad de producto');
+        return;
+      }
+
+      const tot20 = c20 * 4.80;
+      const tot100 = c100 * 17.50;
+      const total = tot20 + tot100;
+      const base = total / 1.18;
+      const igv = total - base;
+
+      const itemsDesc = [];
+      if (c20 > 0) itemsDesc.push(`${c20} unids 20g`);
+      if (c100 > 0) itemsDesc.push(`${c100} cajas 100g`);
+
+      const now = new Date();
+      const fechaHora = now.toISOString().slice(0, 10) + ' ' + now.toTimeString().slice(0, 5);
+      const count = (appData.sales ? appData.sales.length : 0) + 1;
+      const id = `VTA-${String(count).padStart(3, '0')}`;
+
+      const nuevaVenta = {
+        id: id,
+        fecha_hora: fechaHora,
+        producto: itemsDesc.join(' + '),
+        cantidad: c20 + c100,
+        precio_unitario: "S/ 4.80 (20g) / S/ 17.50 (100g)",
+        subtotal: parseFloat(base.toFixed(2)),
+        igv: parseFloat(igv.toFixed(2)),
+        total: parseFloat(total.toFixed(2)),
+        cliente: cliente,
+        canal: "B2B Retail",
+        estado: "completado"
+      };
+
+      if (!appData.sales) appData.sales = [];
+      appData.sales.unshift(nuevaVenta);
+      persistData();
+      renderVentas();
+      showToast(`¡Venta ${id} registrada para ${cliente}! Total: S/ ${total.toFixed(2)}`);
+    }
+
+    function confirmModalVenta() {
+      const cliente = document.getElementById('modal-venta-cliente').value;
+      const c20 = parseInt(document.getElementById('modal-venta-cant-20g').value) || 0;
+      const c100 = parseInt(document.getElementById('modal-venta-cant-100g').value) || 0;
+
+      if (c20 === 0 && c100 === 0) {
+        showToast('Ingresa al menos 1 unidad de producto');
+        return;
+      }
+
+      const tot20 = c20 * 4.80;
+      const tot100 = c100 * 17.50;
+      const total = tot20 + tot100;
+      const base = total / 1.18;
+      const igv = total - base;
+
+      const itemsDesc = [];
+      if (c20 > 0) itemsDesc.push(`${c20} unids 20g`);
+      if (c100 > 0) itemsDesc.push(`${c100} cajas 100g`);
+
+      const now = new Date();
+      const fechaHora = now.toISOString().slice(0, 10) + ' ' + now.toTimeString().slice(0, 5);
+      const count = (appData.sales ? appData.sales.length : 0) + 1;
+      const id = `VTA-${String(count).padStart(3, '0')}`;
+
+      const nuevaVenta = {
+        id: id,
+        fecha_hora: fechaHora,
+        producto: itemsDesc.join(' + '),
+        cantidad: c20 + c100,
+        precio_unitario: "S/ 4.80 (20g) / S/ 17.50 (100g)",
+        subtotal: parseFloat(base.toFixed(2)),
+        igv: parseFloat(igv.toFixed(2)),
+        total: parseFloat(total.toFixed(2)),
+        cliente: cliente,
+        canal: cliente === "Venta Directa" ? "Directo / Feria" : "B2B Retail",
+        estado: "completado"
+      };
+
+      if (!appData.sales) appData.sales = [];
+      appData.sales.unshift(nuevaVenta);
+      persistData();
+      renderVentas();
+      closeModal('modal-registrar-venta');
+      showToast(`Venta ${id} de S/ ${total.toFixed(2)} registrada para ${cliente}`);
+    }
+
+    function confirmSeguimiento() {
+      const cliente = document.getElementById('modal-seg-cliente').value;
+      const etapa = document.getElementById('modal-seg-etapa').value;
+      const nota = document.getElementById('modal-seg-nota').value;
+
+      const c = appData.clients.find(x => x.empresa === cliente);
+      if (c) {
+        c.etapa = etapa;
+        c.ultimo_contacto = new Date().toISOString().slice(0, 10);
+        c.proximo_contacto = document.getElementById('modal-seg-prox').value;
+        if (nota) {
+          c.notas = `${c.notas ? c.notas + ' | ' : ''}${nota}`;
+        }
+        persistData();
+      }
+      closeModal('modal-registrar-seguimiento');
+      showToast(`Seguimiento registrado para ${cliente}`);
+    }
+  </script>
+</body>
+</html>
