@@ -11,8 +11,8 @@ export default function middleware(request) {
   const base64Credentials = authHeader.split(" ")[1];
   const [user, pwd] = atob(base64Credentials).split(":");
 
-  const validUser = process.env.BASIC_AUTH_USER || "admin";
-  const validPass = process.env.BASIC_AUTH_PASSWORD || "xiembra2026";
+  const validUser = process.env.BASIC_AUTH_USER;
+  const validPass = process.env.BASIC_AUTH_PASSWORD;
 
   if (user === validUser && pwd === validPass) {
     // Continue to the original request
