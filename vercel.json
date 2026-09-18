@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/",
-      "destination": "/control-center.html"
+      "destination": "/control-center"
     },
     {
       "source": "/control-center",
