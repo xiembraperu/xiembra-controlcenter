@@ -5,24 +5,14 @@ const vaultPath = "C:/Users/Usuario/Documents/Xiembra Vault";
 const htmlPath = path.join("C:/Users/Usuario/Documents/xiembra-controlcenter", "control-center.html");
 
 function parseYAML(filePath) {
-    // Read as binary buffer first, try UTF-8, fallback to latin1
+    // Read as binary buffer first, and handle UTF-8 BOM
     const buf = fs.readFileSync(filePath);
     let content;
     // Check for UTF-8 BOM or valid UTF-8
     if (buf[0] === 0xEF && buf[1] === 0xBB && buf[2] === 0xBF) {
         content = buf.toString("utf-8").substring(1); // skip BOM
     } else {
-        // Try UTF-8, but if we find bytes 0x80-0xFF that aren't valid UTF-8 multibyte, use latin1
-        const hasHighBytes = buf.some(b => b >= 0x80);
-        if (hasHighBytes) {
-            // Check if it's valid UTF-8 by looking for proper multibyte sequences
-            const utf8 = buf.toString("utf-8");
-            const latin1 = buf.toString("latin1");
-            // If UTF-8 decoding produces replacement characters, use latin1
-            content = utf8.includes("\uFFFD") ? latin1 : utf8;
-        } else {
-            content = buf.toString("utf-8");
-        }
+        content = buf.toString("utf-8");
     }
     content = content.replace(/\r\n/g, "\n");
     const match = content.match(/^---\n([\s\S]*?)\n---/);
