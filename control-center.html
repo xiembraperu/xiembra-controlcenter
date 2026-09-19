@@ -1034,55 +1034,36 @@
       <!-- ==================================================== -->
       <!-- VIEW 8: CALENDARIO                                   -->
       <!-- ==================================================== -->
-      <section id="view-calendario" class="view-pane space-y-6">
+      <section id="view-calendario" class="view-pane space-y-6 hidden">
         <div class="bg-brand-surface p-6 rounded-2xl border border-brand-border shadow-card">
-          <div class="flex items-center justify-between pb-4 border-b border-brand-borderLight mb-4">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-              <h4 class="font-display font-bold text-base text-brand-textMain">📅 Cronograma de Lanzamiento & Hitos Clave</h4>
-              <p class="text-xs text-brand-textMuted">Fechas límites y compromisos estratégicos</p>
+              <h4 class="font-display font-bold text-lg text-brand-textMain">📅 Calendario de Contenido (Instagram)</h4>
+              <p class="text-sm text-brand-textMuted mt-1">Gestión simplificada para Roger — Desde Ideas hasta Publicado</p>
             </div>
-            <span class="text-xs font-bold text-brand-campo bg-brand-crema/60 px-3 py-1 rounded-full border border-brand-lemon/60">
-              Septiembre – Octubre 2026
-            </span>
           </div>
-
-          <div class="relative border-l-2 border-brand-border pl-6 ml-3 space-y-6 my-2 text-xs">
-            
-            <div class="relative">
-              <span class="absolute -left-[31px] top-0.5 w-3.5 h-3.5 rounded-full bg-emerald-600 border-2 border-white"></span>
-              <p class="text-[10px] font-bold text-emerald-700 uppercase">15 Septiembre 2026 · Concluido</p>
-              <h5 class="font-bold text-brand-textMain mt-0.5">Contacto Inicial con La Sanahoria (San Isidro)</h5>
-              <p class="text-brand-textMuted text-[11px] mt-0.5">Primer contacto telefónico y de WhatsApp con gerencia de tienda.</p>
+        </div>
+        <div id="content-kanban-view" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-brand-surface rounded-2xl border border-brand-border flex flex-col h-[600px]">
+            <div class="p-4 border-b border-brand-borderLight flex items-center justify-between bg-amber-50 rounded-t-2xl">
+              <h5 class="font-bold text-amber-800 flex items-center gap-2">💡 IDEA</h5>
+              <span id="count-content-idea" class="text-xs font-bold text-amber-900 bg-amber-200 px-2 py-0.5 rounded-full">0</span>
             </div>
-
-            <div class="relative">
-              <span class="absolute -left-[31px] top-0.5 w-3.5 h-3.5 rounded-full bg-amber-500 border-2 border-white"></span>
-              <p class="text-[10px] font-bold text-amber-700 uppercase">18 – 22 Septiembre 2026 · En curso</p>
-              <h5 class="font-bold text-brand-textMain mt-0.5">Ruta de Visitas Presenciales y Entrega de Muestras</h5>
-              <p class="text-brand-textMuted text-[11px] mt-0.5">Visitas de Karla y Roger a La Sanahoria (Dasso) y Organa (Benavides).</p>
+            <div id="col-content-idea" class="p-3 flex-1 overflow-y-auto space-y-3 bg-brand-arena/20"></div>
+          </div>
+          <div class="bg-brand-surface rounded-2xl border border-brand-border flex flex-col h-[600px]">
+            <div class="p-4 border-b border-brand-borderLight flex items-center justify-between bg-blue-50 rounded-t-2xl">
+              <h5 class="font-bold text-blue-800 flex items-center gap-2">📝 LISTO</h5>
+              <span id="count-content-listo" class="text-xs font-bold text-blue-900 bg-blue-200 px-2 py-0.5 rounded-full">0</span>
             </div>
-
-            <div class="relative">
-              <span class="absolute -left-[31px] top-0.5 w-3.5 h-3.5 rounded-full bg-blue-600 border-2 border-white"></span>
-              <p class="text-[10px] font-bold text-blue-700 uppercase">23 Septiembre 2026 · 10:00 AM</p>
-              <h5 class="font-bold text-brand-textMain mt-0.5">Reunión Proyecto California con Ryan Vieira</h5>
-              <p class="text-brand-textMuted text-[11px] mt-0.5">Agendada en Google Calendar con vieiraryan@hotmail.com sobre microdosis.</p>
+            <div id="col-content-listo" class="p-3 flex-1 overflow-y-auto space-y-3 bg-brand-arena/20"></div>
+          </div>
+          <div class="bg-brand-surface rounded-2xl border border-brand-border flex flex-col h-[600px]">
+            <div class="p-4 border-b border-brand-borderLight flex items-center justify-between bg-emerald-50 rounded-t-2xl">
+              <h5 class="font-bold text-emerald-800 flex items-center gap-2">✅ PUBLICADO</h5>
+              <span id="count-content-publicado" class="text-xs font-bold text-emerald-900 bg-emerald-200 px-2 py-0.5 rounded-full">0</span>
             </div>
-
-            <div class="relative">
-              <span class="absolute -left-[31px] top-0.5 w-3.5 h-3.5 rounded-full bg-slate-400 border-2 border-white"></span>
-              <p class="text-[10px] font-bold text-slate-600 uppercase">05 Octubre 2026 · Estimado</p>
-              <h5 class="font-bold text-brand-textMain mt-0.5">Entrega de 20,000 Bolsas Trilaminadas Multipack</h5>
-              <p class="text-brand-textMuted text-[11px] mt-0.5">Recepción de bobinas y bolsas impresas para inicio de lote industrial.</p>
-            </div>
-
-            <div class="relative">
-              <span class="absolute -left-[31px] top-0.5 w-3.5 h-3.5 rounded-full bg-slate-400 border-2 border-white"></span>
-              <p class="text-[10px] font-bold text-slate-600 uppercase">10 Octubre 2026 · Estimado</p>
-              <h5 class="font-bold text-brand-textMain mt-0.5">Fabricación de Lote Industrial 100 kg en Highland Coffee</h5>
-              <p class="text-brand-textMuted text-[11px] mt-0.5">Producción y envasado en planta Chanchamayo (500 cajas 100g + 2,500 bolsas 20g).</p>
-            </div>
-
+            <div id="col-content-publicado" class="p-3 flex-1 overflow-y-auto space-y-3 bg-brand-arena/20"></div>
           </div>
         </div>
       </section>
@@ -2443,10 +2424,22 @@
             "precio_unitario": 0
         }
     },
-    "sales": []
+    "sales": [],
+    "content": [
+        {
+            "titulo": "Origen del Cacao Xiembra",
+            "tipo": "contenido",
+            "proyecto": "Xiembra",
+            "formato": "reel",
+            "pilar": "origen",
+            "estado": "idea",
+            "fecha_publicacion": "2026-09-25",
+            "copy_corto": "Descubre de d�nde viene nuestro cacao."
+        }
+    ]
 };
     // State management
-    let appData = { tasks: [], clients: [], inventory: {}, sales: [] };
+    let appData = { tasks: [], clients: [], content: [], inventory: {}, sales: [] };
     let activeUser = 'Karla'; // Default: Karla
     let activeView = 'inicio';
     let taskFilterUser = 'karla'; // 'karla' | 'roger' | 'todos'
@@ -2528,7 +2521,7 @@
         inventario: ['Inventario y Stock', 'Control físico de grajeas, cajas, polos y merchandising'],
         ventas: ['Ventas y Facturación', 'Asistente tributario SUNAT y emisión rápida de comprobantes'],
         finanzas: ['Finanzas y Costos', 'Márgenes de producción, maquila y precios mayoristas'],
-        calendario: ['Calendario Operativo', 'Cronograma de visitas comerciales y fechas límites'],
+        calendario: ['Calendario de Contenido', 'Gestión de posts para Instagram y redes'],
         reportes: ['Reportes de Lanzamiento', 'Estado de avance de Ready to Sell y Ready to Scale'],
         jarvis: ['JARVIS 24/7', 'Asistente de inteligencia ejecutiva en la nube'],
         configuracion: ['Configuración', 'Datos fiscales de la empresa y preferencias locales']

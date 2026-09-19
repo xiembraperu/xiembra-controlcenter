@@ -69,10 +69,19 @@ if (clientsFailed.length > 0) {
     clientsFailed.forEach(c => console.warn(`  - ${c.file}`));
 }
 
+
+const contentDir = path.join(vaultPath, "Content");
+let contentItems = [];
+if (fs.existsSync(contentDir)) {
+    const contentFiles = fs.readdirSync(contentDir).filter(f => f.endsWith(".md") && !f.startsWith("_"));
+    const contentRaw = contentFiles.map(f => ({ file: f, data: parseYAML(path.join(contentDir, f)) }));
+    contentItems = contentRaw.filter(c => c.data).map(c => c.data);
+}
+
 // Read existing HTML and preserve inventory/sales
 let html = fs.readFileSync(htmlPath, "utf-8");
 const dataMatch = html.match(/const INITIAL_DATA = (\{[\s\S]*?\});/);
-let initialData = { tasks: [], clients: [], inventory: {}, sales: [] };
+let initialData = { tasks: [], clients: [], content: [], inventory: {}, sales: [] };
 if (dataMatch) {
     try {
         initialData = JSON.parse(dataMatch[1]);
@@ -106,11 +115,12 @@ const clientsMapped = clientes.map(c => {
 
 // Keep existing inventory/sales from the current INITIAL_DATA
 initialData.tasks = tasks;
-initialData.clients = clientsMapped;  // frontend expects "clients", not "clientes"
+initialData.clients = clientsMapped;
+initialData.content = contentItems;  // frontend expects "clients", not "clientes"
 delete initialData.clientes;          // remove stale key if present
 
 const newJSON = JSON.stringify(initialData, null, 4);
 html = html.replace(/const INITIAL_DATA = \{[\s\S]*?\};/, `const INITIAL_DATA = ${newJSON};`);
 fs.writeFileSync(htmlPath, html);
 console.log("INITIAL_DATA synced successfully.");
-console.log(`  Tasks: ${tasks.length} | Clients: ${clientsMapped.length}`);
+console.log(`  Tasks: ${tasks.length} | Clients: ${clientsMapped.length} | Content: ${contentItems.length}`);
