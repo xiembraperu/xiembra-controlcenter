@@ -1631,6 +1631,7 @@
     "tasks": [
         {
             "id": "TAR-010",
+            "titulo": "Actualizar Lista de Compras del Focus Group con Facturas",
             "tipo": "tarea",
             "proyecto": "Xiembra",
             "fase": "ready_to_sell",
@@ -1649,6 +1650,7 @@
         },
         {
             "id": "TAR-019",
+            "titulo": "Adelanto a Multipack por Diseño de Clissés (9x11 cm y 9x14 cm)",
             "tipo": "tarea",
             "proyecto": "Xiembra",
             "fase": "ready_to_scale",
@@ -1667,6 +1669,7 @@
         },
         {
             "id": "TAR-016",
+            "titulo": "Averiguar Lapiceros Institucionales (< S/ 100)",
             "tipo": "tarea",
             "proyecto": "Xiembra",
             "fase": "ready_to_sell",
@@ -1685,6 +1688,7 @@
         },
         {
             "id": "TAR-017",
+            "titulo": "Comprar Muestras de Competencia Directa Relleno Café (Britt u otras)",
             "tipo": "tarea",
             "proyecto": "Xiembra",
             "fase": "ready_to_sell",
@@ -1703,6 +1707,7 @@
         },
         {
             "id": "TAR-007",
+            "titulo": "Configuración de Jarvis para Asistencia en Campo vía WhatsApp",
             "tipo": "tarea",
             "proyecto": "Xiembra",
             "fase": "ready_to_sell",
@@ -2398,7 +2403,7 @@
       const bloqF = document.getElementById('filter-task-bloq')?.value || 'todos';
 
       let filtered = appData.tasks.filter(t => {
-        const matchQ = t.titulo.toLowerCase().includes(q) || t.id.toLowerCase().includes(q);
+        const matchQ = (t.titulo || '').toLowerCase().includes(q) || (t.id || '').toLowerCase().includes(q);
         const matchFase = (faseF === 'todas') || (t.fase === faseF);
         const matchResp = (respF === 'todos') || (t.responsable === respF);
         let matchBloq = true;
@@ -2472,7 +2477,7 @@
       const etapaF = document.getElementById('filter-cliente-etapa')?.value || 'todas';
 
       const filtered = appData.clients.filter(c => {
-        const matchQ = c.empresa.toLowerCase().includes(q) || (c.notas || '').toLowerCase().includes(q);
+        const matchQ = (c.empresa || '').toLowerCase().includes(q) || (c.notas || '').toLowerCase().includes(q);
         const matchCanal = (canalF === 'todos') || (c.canal === canalF);
         const matchEtapa = (etapaF === 'todas') || (c.etapa === etapaF);
         return matchQ && matchCanal && matchEtapa;
