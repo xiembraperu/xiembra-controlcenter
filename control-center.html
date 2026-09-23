@@ -1034,36 +1034,55 @@
       <!-- ==================================================== -->
       <!-- VIEW 8: CALENDARIO                                   -->
       <!-- ==================================================== -->
-      <section id="view-calendario" class="view-pane space-y-6 hidden">
+      <section id="view-calendario" class="view-pane space-y-6">
         <div class="bg-brand-surface p-6 rounded-2xl border border-brand-border shadow-card">
-          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div class="flex items-center justify-between pb-4 border-b border-brand-borderLight mb-4">
             <div>
-              <h4 class="font-display font-bold text-lg text-brand-textMain">📅 Calendario de Contenido (Instagram)</h4>
-              <p class="text-sm text-brand-textMuted mt-1">Gestión simplificada para Roger — Desde Ideas hasta Publicado</p>
+              <h4 class="font-display font-bold text-base text-brand-textMain">📅 Cronograma de Lanzamiento & Hitos Clave</h4>
+              <p class="text-xs text-brand-textMuted">Fechas límites y compromisos estratégicos</p>
             </div>
+            <span class="text-xs font-bold text-brand-campo bg-brand-crema/60 px-3 py-1 rounded-full border border-brand-lemon/60">
+              Septiembre – Octubre 2026
+            </span>
           </div>
-        </div>
-        <div id="content-kanban-view" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="bg-brand-surface rounded-2xl border border-brand-border flex flex-col h-[600px]">
-            <div class="p-4 border-b border-brand-borderLight flex items-center justify-between bg-amber-50 rounded-t-2xl">
-              <h5 class="font-bold text-amber-800 flex items-center gap-2">💡 IDEA</h5>
-              <span id="count-content-idea" class="text-xs font-bold text-amber-900 bg-amber-200 px-2 py-0.5 rounded-full">0</span>
+
+          <div class="relative border-l-2 border-brand-border pl-6 ml-3 space-y-6 my-2 text-xs">
+            
+            <div class="relative">
+              <span class="absolute -left-[31px] top-0.5 w-3.5 h-3.5 rounded-full bg-emerald-600 border-2 border-white"></span>
+              <p class="text-[10px] font-bold text-emerald-700 uppercase">15 Septiembre 2026 · Concluido</p>
+              <h5 class="font-bold text-brand-textMain mt-0.5">Contacto Inicial con La Sanahoria (San Isidro)</h5>
+              <p class="text-brand-textMuted text-[11px] mt-0.5">Primer contacto telefónico y de WhatsApp con gerencia de tienda.</p>
             </div>
-            <div id="col-content-idea" class="p-3 flex-1 overflow-y-auto space-y-3 bg-brand-arena/20"></div>
-          </div>
-          <div class="bg-brand-surface rounded-2xl border border-brand-border flex flex-col h-[600px]">
-            <div class="p-4 border-b border-brand-borderLight flex items-center justify-between bg-blue-50 rounded-t-2xl">
-              <h5 class="font-bold text-blue-800 flex items-center gap-2">📝 LISTO</h5>
-              <span id="count-content-listo" class="text-xs font-bold text-blue-900 bg-blue-200 px-2 py-0.5 rounded-full">0</span>
+
+            <div class="relative">
+              <span class="absolute -left-[31px] top-0.5 w-3.5 h-3.5 rounded-full bg-amber-500 border-2 border-white"></span>
+              <p class="text-[10px] font-bold text-amber-700 uppercase">18 – 22 Septiembre 2026 · En curso</p>
+              <h5 class="font-bold text-brand-textMain mt-0.5">Ruta de Visitas Presenciales y Entrega de Muestras</h5>
+              <p class="text-brand-textMuted text-[11px] mt-0.5">Visitas de Karla y Roger a La Sanahoria (Dasso) y Organa (Benavides).</p>
             </div>
-            <div id="col-content-listo" class="p-3 flex-1 overflow-y-auto space-y-3 bg-brand-arena/20"></div>
-          </div>
-          <div class="bg-brand-surface rounded-2xl border border-brand-border flex flex-col h-[600px]">
-            <div class="p-4 border-b border-brand-borderLight flex items-center justify-between bg-emerald-50 rounded-t-2xl">
-              <h5 class="font-bold text-emerald-800 flex items-center gap-2">✅ PUBLICADO</h5>
-              <span id="count-content-publicado" class="text-xs font-bold text-emerald-900 bg-emerald-200 px-2 py-0.5 rounded-full">0</span>
+
+            <div class="relative">
+              <span class="absolute -left-[31px] top-0.5 w-3.5 h-3.5 rounded-full bg-blue-600 border-2 border-white"></span>
+              <p class="text-[10px] font-bold text-blue-700 uppercase">23 Septiembre 2026 · 10:00 AM</p>
+              <h5 class="font-bold text-brand-textMain mt-0.5">Reunión Proyecto California con Ryan Vieira</h5>
+              <p class="text-brand-textMuted text-[11px] mt-0.5">Agendada en Google Calendar con vieiraryan@hotmail.com sobre microdosis.</p>
             </div>
-            <div id="col-content-publicado" class="p-3 flex-1 overflow-y-auto space-y-3 bg-brand-arena/20"></div>
+
+            <div class="relative">
+              <span class="absolute -left-[31px] top-0.5 w-3.5 h-3.5 rounded-full bg-slate-400 border-2 border-white"></span>
+              <p class="text-[10px] font-bold text-slate-600 uppercase">05 Octubre 2026 · Estimado</p>
+              <h5 class="font-bold text-brand-textMain mt-0.5">Entrega de 20,000 Bolsas Trilaminadas Multipack</h5>
+              <p class="text-brand-textMuted text-[11px] mt-0.5">Recepción de bobinas y bolsas impresas para inicio de lote industrial.</p>
+            </div>
+
+            <div class="relative">
+              <span class="absolute -left-[31px] top-0.5 w-3.5 h-3.5 rounded-full bg-slate-400 border-2 border-white"></span>
+              <p class="text-[10px] font-bold text-slate-600 uppercase">10 Octubre 2026 · Estimado</p>
+              <h5 class="font-bold text-brand-textMain mt-0.5">Fabricación de Lote Industrial 100 kg en Highland Coffee</h5>
+              <p class="text-brand-textMuted text-[11px] mt-0.5">Producción y envasado en planta Chanchamayo (500 cajas 100g + 2,500 bolsas 20g).</p>
+            </div>
+
           </div>
         </div>
       </section>
@@ -1611,179 +1630,8 @@
     const INITIAL_DATA = {
     "tasks": [
         {
-            "id": "TAR-010",
-            "titulo": "Actualizar Lista de Compras del Focus Group con Facturas",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_sell",
-            "area": "regulatorio",
-            "estado": "pendiente",
-            "prioridad": "media",
-            "responsable": "Karla",
-            "fecha_limite": "2026-09-21",
-            "bloqueado": false,
-            "motivo_bloqueo": "",
-            "dependencia": "Comprobantes de pago de compras de insumos",
-            "critica_lanzamiento": false,
-            "peso": 2,
-            "horizonte": "traccion",
-            "impacto_venta": false
-        },
-        {
-            "id": "TAR-019",
-            "titulo": "Adelanto a Multipack por Diseño de Clissés (9x11 cm y 9x14 cm)",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_scale",
-            "area": "packaging",
-            "estado": "terminado",
-            "prioridad": "alta",
-            "responsable": "Roger",
-            "fecha_limite": "2026-09-10",
-            "bloqueado": false,
-            "motivo_bloqueo": "",
-            "dependencia": "Cotización COT-00001951 de Multipack Impresiones SAC",
-            "critica_lanzamiento": false,
-            "peso": 4,
-            "horizonte": "expansion",
-            "impacto_venta": false
-        },
-        {
-            "id": "TAR-022",
-            "titulo": "Averiguar Cajas Máster y Recibidores para Pedidos en Cantidad",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_scale",
-            "area": "logistica",
-            "estado": "pendiente",
-            "prioridad": "media",
-            "responsable": "Karla",
-            "fecha_limite": "2026-09-24",
-            "bloqueado": false,
-            "motivo_bloqueo": "",
-            "dependencia": "Medidas finales de empaques de Multipack",
-            "critica_lanzamiento": false,
-            "peso": 2,
-            "horizonte": "expansion",
-            "impacto_venta": true
-        },
-        {
-            "id": "TAR-016",
-            "titulo": "Averiguar Lapiceros Institucionales (< S/ 100)",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_sell",
-            "area": "marketing",
-            "estado": "pendiente",
-            "prioridad": "baja",
-            "responsable": "Karla",
-            "fecha_limite": "2026-09-25",
-            "bloqueado": false,
-            "motivo_bloqueo": "",
-            "dependencia": "Cotización de merchandising menor a S/ 100",
-            "critica_lanzamiento": false,
-            "peso": 1,
-            "horizonte": "traccion",
-            "impacto_venta": false
-        },
-        {
-            "id": "TAR-015",
-            "titulo": "Averiguar Sello en Relieve para Empaques y Papelería",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_sell",
-            "area": "packaging",
-            "estado": "pendiente",
-            "prioridad": "baja",
-            "responsable": "Karla",
-            "fecha_limite": "2026-09-25",
-            "bloqueado": false,
-            "motivo_bloqueo": "",
-            "dependencia": "Cotización imprenta",
-            "critica_lanzamiento": false,
-            "peso": 2,
-            "horizonte": "traccion",
-            "impacto_venta": false
-        },
-        {
-            "id": "TAR-017",
-            "titulo": "Comprar Muestras de Competencia Directa Relleno Café (Britt u otras)",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_sell",
-            "area": "producto",
-            "estado": "pendiente",
-            "prioridad": "baja",
-            "responsable": "Ambos",
-            "fecha_limite": "2026-09-23",
-            "bloqueado": false,
-            "motivo_bloqueo": "",
-            "dependencia": "Compra en supermercado/tienda",
-            "critica_lanzamiento": false,
-            "peso": 1,
-            "horizonte": "traccion",
-            "impacto_venta": false
-        },
-        {
-            "id": "TAR-006",
-            "titulo": "Configuración de Flujo Asistido de Facturación y Cobro con Jarvis",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_sell",
-            "area": "regulatorio",
-            "estado": "terminado",
-            "prioridad": "critica",
-            "responsable": "Roger",
-            "fecha_limite": "2026-09-17",
-            "bloqueado": false,
-            "motivo_bloqueo": "",
-            "dependencia": "Protocolo tributario SUNAT y cuentas bancarias",
-            "critica_lanzamiento": true,
-            "peso": 4,
-            "horizonte": "ahora",
-            "impacto_venta": true
-        },
-        {
-            "id": "TAR-007",
-            "titulo": "Configuración de Jarvis para Asistencia en Campo vía WhatsApp",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_sell",
-            "area": "comercial",
-            "estado": "terminado",
-            "prioridad": "alta",
-            "responsable": "Roger",
-            "fecha_limite": "2026-09-16",
-            "bloqueado": false,
-            "motivo_bloqueo": "",
-            "dependencia": "Servidor Oracle Cloud y Google Cloud Vertex AI",
-            "critica_lanzamiento": true,
-            "peso": 3,
-            "horizonte": "ahora",
-            "impacto_venta": true
-        },
-        {
-            "id": "TAR-023",
-            "titulo": "Convenio con Operador Logístico Express 24h en Lima",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_scale",
-            "area": "logistica",
-            "estado": "pendiente",
-            "prioridad": "media",
-            "responsable": "Roger",
-            "fecha_limite": "2026-10-15",
-            "bloqueado": false,
-            "motivo_bloqueo": "",
-            "dependencia": "Rutas comerciales recurrentes en Lima Metropolitana",
-            "critica_lanzamiento": false,
-            "peso": 3,
-            "horizonte": "expansion",
-            "impacto_venta": true
-        },
-        {
+            "titulo": "Diseno de Ficha Tecnica Oficial B2B 1 Pagina",
             "id": "TAR-001",
-            "titulo": "Diseño de Ficha Técnica Oficial B2B (1 Página)",
             "tipo": "tarea",
             "proyecto": "Xiembra",
             "fase": "ready_to_sell",
@@ -1796,13 +1644,13 @@
             "motivo_bloqueo": "Falta maquetar en PDF de 1 página los ingredientes, alérgenos, tabla nutricional y Registro DIGESA para compras de retail.",
             "dependencia": "Validación final de tabla nutricional y arte de rotulado",
             "critica_lanzamiento": true,
-            "peso": 5,
+            "peso": "5",
             "horizonte": "ahora",
             "impacto_venta": true
         },
         {
+            "titulo": "Diseno e Impresion de Diptico Brochure Comercial",
             "id": "TAR-002",
-            "titulo": "Diseño e Impresión de Díptico Brochure Comercial",
             "tipo": "tarea",
             "proyecto": "Xiembra",
             "fase": "ready_to_sell",
@@ -1815,165 +1663,13 @@
             "motivo_bloqueo": "Falta arte final del díptico e impresión física de 100-200 unidades para visitas presenciales.",
             "dependencia": "Aprobación de diseño gráfico final e imprenta",
             "critica_lanzamiento": true,
-            "peso": 4,
+            "peso": "4",
             "horizonte": "ahora",
             "impacto_venta": true
         },
         {
-            "id": "TAR-018",
-            "titulo": "Elaborar Cuestionario Dinámico para Colocar en QR de Empaque",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_sell",
-            "area": "marketing",
-            "estado": "pendiente",
-            "prioridad": "media",
-            "responsable": "Karla",
-            "fecha_limite": "2026-09-24",
-            "bloqueado": false,
-            "motivo_bloqueo": "",
-            "dependencia": "Plataforma de formularios (Google Forms o Typeform)",
-            "critica_lanzamiento": false,
-            "peso": 2,
-            "horizonte": "traccion",
-            "impacto_venta": false
-        },
-        {
-            "id": "TAR-021",
-            "titulo": "Fabricación de Lote Industrial de 100 kg con Highland Coffee",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_scale",
-            "area": "producto",
-            "estado": "esperando",
-            "prioridad": "alta",
-            "responsable": "Roger",
-            "fecha_limite": "2026-10-10",
-            "bloqueado": true,
-            "motivo_bloqueo": "Pendiente fecha de programación de planta Chanchamayo tras recepción de empaques.",
-            "dependencia": "Recepción de bolsas trilaminadas de Multipack",
-            "critica_lanzamiento": false,
-            "peso": 5,
-            "horizonte": "expansion",
-            "impacto_venta": true
-        },
-        {
-            "id": "TAR-008",
-            "titulo": "Filtro y Registro de Consultas Entrantes en WhatsApp e Instagram",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_sell",
-            "area": "marketing",
-            "estado": "en_progreso",
-            "prioridad": "alta",
-            "responsable": "Karla",
-            "fecha_limite": "2026-09-30",
-            "bloqueado": false,
-            "motivo_bloqueo": "",
-            "dependencia": "Líneas de WhatsApp (+51 981 011 816) e Instagram",
-            "critica_lanzamiento": true,
-            "peso": 3,
-            "horizonte": "ahora",
-            "impacto_venta": true
-        },
-        {
-            "id": "TAR-009",
-            "titulo": "Inventario Físico y Custodia de 24 Polos Institucionales",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_sell",
-            "area": "logistica",
-            "estado": "terminado",
-            "prioridad": "media",
-            "responsable": "Karla",
-            "fecha_limite": "2026-09-08",
-            "bloqueado": false,
-            "motivo_bloqueo": "",
-            "dependencia": "Recepción de confección de 24 polos",
-            "critica_lanzamiento": false,
-            "peso": 2,
-            "horizonte": "traccion",
-            "impacto_venta": true
-        },
-        {
-            "id": "TAR-013",
-            "titulo": "Pago Final de Llaveros Xiembra (Saldo S/ 50 + IGV)",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_sell",
-            "area": "regulatorio",
-            "estado": "pendiente",
-            "prioridad": "baja",
-            "responsable": "Roger",
-            "fecha_limite": "2026-09-24",
-            "bloqueado": false,
-            "motivo_bloqueo": "",
-            "dependencia": "Entrega final de lote de 50 llaveros",
-            "critica_lanzamiento": false,
-            "peso": 1,
-            "horizonte": "traccion",
-            "impacto_venta": false
-        },
-        {
-            "id": "TAR-012",
-            "titulo": "Pedir Muestras Highland Coffee (Envío con Empaques)",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_sell",
-            "area": "producto",
-            "estado": "pendiente",
-            "prioridad": "media",
-            "responsable": "Roger",
-            "fecha_limite": "2026-09-22",
-            "bloqueado": false,
-            "motivo_bloqueo": "",
-            "dependencia": "Coordinación con planta Chanchamayo",
-            "critica_lanzamiento": false,
-            "peso": 3,
-            "horizonte": "traccion",
-            "impacto_venta": true
-        },
-        {
-            "id": "TAR-005",
-            "titulo": "Preparación de Muestras de Degustación en Bolsitas para Visitas",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_sell",
-            "area": "logistica",
-            "estado": "en_progreso",
-            "prioridad": "critica",
-            "responsable": "Karla",
-            "fecha_limite": "2026-09-19",
-            "bloqueado": false,
-            "motivo_bloqueo": "",
-            "dependencia": "Stock de contingencia de chocograjeas",
-            "critica_lanzamiento": true,
-            "peso": 5,
-            "horizonte": "ahora",
-            "impacto_venta": true
-        },
-        {
-            "id": "TAR-020",
-            "titulo": "Producción y Entrega de 20,000 Bolsas Trilaminadas Multipack",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_scale",
-            "area": "packaging",
-            "estado": "esperando",
-            "prioridad": "alta",
-            "responsable": "Roger",
-            "fecha_limite": "2026-10-05",
-            "bloqueado": true,
-            "motivo_bloqueo": "En proceso de fotograbado de clissés por Multipack (tiempo estimado 15-20 días hábiles).",
-            "dependencia": "Aprobación de fotograbado de clissés",
-            "critica_lanzamiento": false,
-            "peso": 5,
-            "horizonte": "expansion",
-            "impacto_venta": true
-        },
-        {
+            "titulo": "Protocolo de Visitas y Entrega de Kits de Muestras",
             "id": "TAR-003",
-            "titulo": "Protocolo de Visitas y Entrega de Kits de Muestras B2B",
             "tipo": "tarea",
             "proyecto": "Xiembra",
             "fase": "ready_to_sell",
@@ -1986,51 +1682,13 @@
             "motivo_bloqueo": "",
             "dependencia": "Coordinación interna con Karla",
             "critica_lanzamiento": true,
-            "peso": 5,
+            "peso": "5",
             "horizonte": "ahora",
             "impacto_venta": true
         },
         {
-            "id": "TAR-024",
-            "titulo": "Reunión de Seguimiento Proyecto California con Ryan Vieira",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_scale",
-            "area": "comercial",
-            "estado": "pendiente",
-            "prioridad": "media",
-            "responsable": "Roger",
-            "fecha_limite": "2026-09-23",
-            "bloqueado": false,
-            "motivo_bloqueo": "",
-            "dependencia": "Reunión virtual Google Calendar con Ryan Vieira",
-            "critica_lanzamiento": false,
-            "peso": 2,
-            "horizonte": "expansion",
-            "impacto_venta": false
-        },
-        {
-            "id": "TAR-014",
-            "titulo": "Revisar Detalles de Decoración para Materiales de Xiembra",
-            "tipo": "tarea",
-            "proyecto": "Xiembra",
-            "fase": "ready_to_sell",
-            "area": "marketing",
-            "estado": "pendiente",
-            "prioridad": "baja",
-            "responsable": "Roger",
-            "fecha_limite": "2026-09-25",
-            "bloqueado": false,
-            "motivo_bloqueo": "",
-            "dependencia": "Catálogo de proveedores de stands/ferias",
-            "critica_lanzamiento": false,
-            "peso": 1,
-            "horizonte": "traccion",
-            "impacto_venta": false
-        },
-        {
+            "titulo": "Seguimiento a Prospectos Prioritarios Biomarkets",
             "id": "TAR-004",
-            "titulo": "Seguimiento a Prospectos Prioritarios en Biomarkets (La Sanahoria y Organa)",
             "tipo": "tarea",
             "proyecto": "Xiembra",
             "fase": "ready_to_sell",
@@ -2043,13 +1701,127 @@
             "motivo_bloqueo": "",
             "dependencia": "Directorio comercial de Canales D2C y B2B",
             "critica_lanzamiento": true,
-            "peso": 5,
+            "peso": "5",
             "horizonte": "ahora",
             "impacto_venta": true
         },
         {
-            "id": "TAR-011",
+            "titulo": "Preparacion de Muestras de Degustacion en Bolsitas",
+            "id": "TAR-005",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_sell",
+            "area": "logistica",
+            "estado": "en_progreso",
+            "prioridad": "critica",
+            "responsable": "Karla",
+            "fecha_limite": "2026-09-19",
+            "bloqueado": false,
+            "motivo_bloqueo": "",
+            "dependencia": "Stock de contingencia de chocograjeas",
+            "critica_lanzamiento": true,
+            "peso": "5",
+            "horizonte": "ahora",
+            "impacto_venta": true
+        },
+        {
+            "titulo": "Configuracion de Flujo Asistido de Facturacion y Cobro con Jarvis",
+            "id": "TAR-006",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_sell",
+            "area": "regulatorio",
+            "estado": "terminado",
+            "prioridad": "critica",
+            "responsable": "Roger",
+            "fecha_limite": "2026-09-17",
+            "bloqueado": false,
+            "motivo_bloqueo": "",
+            "dependencia": "Protocolo tributario SUNAT y cuentas bancarias",
+            "critica_lanzamiento": true,
+            "peso": "4",
+            "horizonte": "ahora",
+            "impacto_venta": true
+        },
+        {
+            "titulo": "Configuracion de Jarvis para Visitas en Campo",
+            "id": "TAR-007",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_sell",
+            "area": "comercial",
+            "estado": "terminado",
+            "prioridad": "alta",
+            "responsable": "Roger",
+            "fecha_limite": "2026-09-16",
+            "bloqueado": false,
+            "motivo_bloqueo": "",
+            "dependencia": "Servidor Oracle Cloud y Google Cloud Vertex AI",
+            "critica_lanzamiento": true,
+            "peso": "3",
+            "horizonte": "ahora",
+            "impacto_venta": true
+        },
+        {
+            "titulo": "Filtro y Registro de Consultas en Canales Digitales",
+            "id": "TAR-008",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_sell",
+            "area": "marketing",
+            "estado": "en_progreso",
+            "prioridad": "alta",
+            "responsable": "Karla",
+            "fecha_limite": "2026-09-30",
+            "bloqueado": false,
+            "motivo_bloqueo": "",
+            "dependencia": "Líneas de WhatsApp (+51 981 011 816) e Instagram",
+            "critica_lanzamiento": true,
+            "peso": "3",
+            "horizonte": "ahora",
+            "impacto_venta": true
+        },
+        {
+            "titulo": "Inventario Fisico y Custodia de Polos Institucionales",
+            "id": "TAR-009",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_sell",
+            "area": "logistica",
+            "estado": "terminado",
+            "prioridad": "media",
+            "responsable": "Karla",
+            "fecha_limite": "2026-09-08",
+            "bloqueado": false,
+            "motivo_bloqueo": "",
+            "dependencia": "Recepción de confección de 24 polos",
+            "critica_lanzamiento": false,
+            "peso": "2",
+            "horizonte": "traccion",
+            "impacto_venta": true
+        },
+        {
+            "titulo": "Actualizar Lista de Compras del Focus Group con Facturas",
+            "id": "TAR-010",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_sell",
+            "area": "regulatorio",
+            "estado": "pendiente",
+            "prioridad": "media",
+            "responsable": "Karla",
+            "fecha_limite": "2026-09-21",
+            "bloqueado": false,
+            "motivo_bloqueo": "",
+            "dependencia": "Comprobantes de pago de compras de insumos",
+            "critica_lanzamiento": false,
+            "peso": "2",
+            "horizonte": "traccion",
+            "impacto_venta": false
+        },
+        {
             "titulo": "Seguir Enviando Encuesta Focus Group",
+            "id": "TAR-011",
             "tipo": "tarea",
             "proyecto": "Xiembra",
             "fase": "ready_to_sell",
@@ -2062,384 +1834,588 @@
             "motivo_bloqueo": "",
             "dependencia": "Formulario online y contactos de consumidores",
             "critica_lanzamiento": false,
-            "peso": 2,
+            "peso": "2",
             "horizonte": "traccion",
+            "impacto_venta": false
+        },
+        {
+            "titulo": "Pedir Muestras Highland Coffee",
+            "id": "TAR-012",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_sell",
+            "area": "producto",
+            "estado": "pendiente",
+            "prioridad": "media",
+            "responsable": "Roger",
+            "fecha_limite": "2026-09-22",
+            "bloqueado": false,
+            "motivo_bloqueo": "",
+            "dependencia": "Coordinación con planta Chanchamayo",
+            "critica_lanzamiento": false,
+            "peso": "3",
+            "horizonte": "traccion",
+            "impacto_venta": true
+        },
+        {
+            "titulo": "Pago Final de Llaveros Xiembra",
+            "id": "TAR-013",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_sell",
+            "area": "regulatorio",
+            "estado": "pendiente",
+            "prioridad": "baja",
+            "responsable": "Roger",
+            "fecha_limite": "2026-09-24",
+            "bloqueado": false,
+            "motivo_bloqueo": "",
+            "dependencia": "Entrega final de lote de 50 llaveros",
+            "critica_lanzamiento": false,
+            "peso": "1",
+            "horizonte": "traccion",
+            "impacto_venta": false
+        },
+        {
+            "titulo": "Revisar Detalles de Decoracion para Materiales Xiembra",
+            "id": "TAR-014",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_sell",
+            "area": "marketing",
+            "estado": "pendiente",
+            "prioridad": "baja",
+            "responsable": "Roger",
+            "fecha_limite": "2026-09-25",
+            "bloqueado": false,
+            "motivo_bloqueo": "",
+            "dependencia": "Catálogo de proveedores de stands/ferias",
+            "critica_lanzamiento": false,
+            "peso": "1",
+            "horizonte": "traccion",
+            "impacto_venta": false
+        },
+        {
+            "titulo": "Averiguar Sello en Relieve",
+            "id": "TAR-015",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_sell",
+            "area": "packaging",
+            "estado": "pendiente",
+            "prioridad": "baja",
+            "responsable": "Karla",
+            "fecha_limite": "2026-09-25",
+            "bloqueado": false,
+            "motivo_bloqueo": "",
+            "dependencia": "Cotización imprenta",
+            "critica_lanzamiento": false,
+            "peso": "2",
+            "horizonte": "traccion",
+            "impacto_venta": false
+        },
+        {
+            "titulo": "Averiguar Lapiceros Institucionales",
+            "id": "TAR-016",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_sell",
+            "area": "marketing",
+            "estado": "pendiente",
+            "prioridad": "baja",
+            "responsable": "Karla",
+            "fecha_limite": "2026-09-25",
+            "bloqueado": false,
+            "motivo_bloqueo": "",
+            "dependencia": "Cotización de merchandising menor a S/ 100",
+            "critica_lanzamiento": false,
+            "peso": "1",
+            "horizonte": "traccion",
+            "impacto_venta": false
+        },
+        {
+            "titulo": "Comprar Muestras de Competencia Directa Relleno Cafe",
+            "id": "TAR-017",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_sell",
+            "area": "producto",
+            "estado": "pendiente",
+            "prioridad": "baja",
+            "responsable": "Ambos",
+            "fecha_limite": "2026-09-23",
+            "bloqueado": false,
+            "motivo_bloqueo": "",
+            "dependencia": "Compra en supermercado/tienda",
+            "critica_lanzamiento": false,
+            "peso": "1",
+            "horizonte": "traccion",
+            "impacto_venta": false
+        },
+        {
+            "titulo": "Elaborar Cuestionario para Colocar en QR",
+            "id": "TAR-018",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_sell",
+            "area": "marketing",
+            "estado": "pendiente",
+            "prioridad": "media",
+            "responsable": "Karla",
+            "fecha_limite": "2026-09-24",
+            "bloqueado": false,
+            "motivo_bloqueo": "",
+            "dependencia": "Plataforma de formularios (Google Forms o Typeform)",
+            "critica_lanzamiento": false,
+            "peso": "2",
+            "horizonte": "traccion",
+            "impacto_venta": false
+        },
+        {
+            "titulo": "Adelanto a Multipack por Diseno de Clisses",
+            "id": "TAR-019",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_scale",
+            "area": "packaging",
+            "estado": "terminado",
+            "prioridad": "alta",
+            "responsable": "Roger",
+            "fecha_limite": "2026-09-10",
+            "bloqueado": false,
+            "motivo_bloqueo": "",
+            "dependencia": "Cotización COT-00001951 de Multipack Impresiones SAC",
+            "critica_lanzamiento": false,
+            "peso": "4",
+            "horizonte": "expansion",
+            "impacto_venta": false
+        },
+        {
+            "titulo": "Produccion y Entrega de 20000 Bolsas Trilaminadas Multipack",
+            "id": "TAR-020",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_scale",
+            "area": "packaging",
+            "estado": "esperando",
+            "prioridad": "alta",
+            "responsable": "Roger",
+            "fecha_limite": "2026-10-05",
+            "bloqueado": true,
+            "motivo_bloqueo": "En proceso de fotograbado de clissés por Multipack (tiempo estimado 15-20 días hábiles).",
+            "dependencia": "Aprobación de fotograbado de clissés",
+            "critica_lanzamiento": false,
+            "peso": "5",
+            "horizonte": "expansion",
+            "impacto_venta": true
+        },
+        {
+            "titulo": "Fabricacion de Lote Industrial 100 kg Highland Coffee",
+            "id": "TAR-021",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_scale",
+            "area": "producto",
+            "estado": "esperando",
+            "prioridad": "alta",
+            "responsable": "Roger",
+            "fecha_limite": "2026-10-10",
+            "bloqueado": true,
+            "motivo_bloqueo": "Pendiente fecha de programación de planta Chanchamayo tras recepción de empaques.",
+            "dependencia": "Recepción de bolsas trilaminadas de Multipack",
+            "critica_lanzamiento": false,
+            "peso": "5",
+            "horizonte": "expansion",
+            "impacto_venta": true
+        },
+        {
+            "titulo": "Averiguar Cajas Master Recibidores para Pedidos",
+            "id": "TAR-022",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_scale",
+            "area": "logistica",
+            "estado": "pendiente",
+            "prioridad": "media",
+            "responsable": "Karla",
+            "fecha_limite": "2026-09-24",
+            "bloqueado": false,
+            "motivo_bloqueo": "",
+            "dependencia": "Medidas finales de empaques de Multipack",
+            "critica_lanzamiento": false,
+            "peso": "2",
+            "horizonte": "expansion",
+            "impacto_venta": true
+        },
+        {
+            "titulo": "Convenio con Operador Logistico Courier Express 24h Lima",
+            "id": "TAR-023",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_scale",
+            "area": "logistica",
+            "estado": "pendiente",
+            "prioridad": "media",
+            "responsable": "Roger",
+            "fecha_limite": "2026-10-15",
+            "bloqueado": false,
+            "motivo_bloqueo": "",
+            "dependencia": "Rutas comerciales recurrentes en Lima Metropolitana",
+            "critica_lanzamiento": false,
+            "peso": "3",
+            "horizonte": "expansion",
+            "impacto_venta": true
+        },
+        {
+            "titulo": "Reunion de Seguimiento Proyecto California con Ryan Vieira",
+            "id": "TAR-024",
+            "tipo": "tarea",
+            "proyecto": "Xiembra",
+            "fase": "ready_to_scale",
+            "area": "comercial",
+            "estado": "pendiente",
+            "prioridad": "media",
+            "responsable": "Roger",
+            "fecha_limite": "2026-09-23",
+            "bloqueado": false,
+            "motivo_bloqueo": "",
+            "dependencia": "Reunión virtual Google Calendar con Ryan Vieira",
+            "critica_lanzamiento": false,
+            "peso": "2",
+            "horizonte": "expansion",
             "impacto_venta": false
         }
     ],
-    "clients": [
-        {
-            "id_cliente": "CLI-021",
-            "empresa": "Barra Botánica",
-            "contacto": "+51 997 580 841",
-            "canal": "cafeteria",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Ca. Libertad 439, Miraflores. Counter 20g",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-011",
-            "empresa": "Bio Inkagri",
-            "contacto": "+51 998 527 244",
-            "canal": "biomarket",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Calle Shell 331, Miraflores. Prospección activa",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-013",
-            "empresa": "Biodeli Orgánico",
-            "contacto": "(01) 242 0224",
-            "canal": "biomarket",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Av. Petit Thouars 4828, Miraflores. Prospección activa",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-014",
-            "empresa": "Eco Tienda Orgánica",
-            "contacto": "+51 963 184 773",
-            "canal": "biomarket",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "C. Baltazar La Torre 270, San Isidro. Prospección activa",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-003",
-            "empresa": "Flora y Fauna",
-            "contacto": "+51 934 990 745",
-            "canal": "biomarket",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": "2026-09-20",
-            "potencial": "alto",
-            "notas": "Av. Mariscal La Mar 1110, Miraflores. Prioritario",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-010",
-            "empresa": "Fresh2go",
-            "contacto": "+51 979 300 062",
-            "canal": "biomarket",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Calle Porta 186, Miraflores. Prospección activa",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-019",
-            "empresa": "GOURMETY Biomarket & Café",
-            "contacto": "Presencial",
-            "canal": "cafeteria",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Av. Ricardo Rivera Navarrete 575, San Isidro. Counter 20g",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-007",
-            "empresa": "Greta Market",
-            "contacto": "+51 956 520 498",
-            "canal": "biomarket",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Ca. Piura 196, Miraflores. Prospección activa",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-004",
-            "empresa": "Kahee Biomarket",
-            "contacto": "+51 950 878 585",
-            "canal": "biomarket",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Calle Berlín 169, Miraflores. Prospección activa",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-001",
-            "empresa": "La Sanahoria",
-            "contacto": "+51 913 733 367",
-            "canal": "biomarket",
-            "responsable": "Karla",
-            "ultimo_contacto": "2026-09-15",
-            "proximo_contacto": "2026-09-19",
-            "potencial": "alto",
-            "notas": "San Isidro, Calle Miguel Dasso 101. Canal ancla prioritario (Caja 100g y 20g).",
-            "tags": "",
-            "etapa": "contactado"
-        },
-        {
-            "id_cliente": "CLI-009",
-            "empresa": "Madre Natura",
-            "contacto": "(01) 445 2522",
-            "canal": "biomarket",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Av. Comandante Espinar 473, Miraflores. Prospección activa",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-022",
-            "empresa": "Manzana Verde",
-            "contacto": "+1 (205) 782-9108",
-            "canal": "cafeteria",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Ca. Arica 299, Miraflores. Counter 20g",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-012",
-            "empresa": "Mystika Tienda Saludable",
-            "contacto": "+51 992 761 894",
-            "canal": "biomarket",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Av. Alfredo Benavides 3601, Santiago de Surco. Prospección activa",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-017",
-            "empresa": "Natural Chef Gluten Free",
-            "contacto": "+51 905 449 515",
-            "canal": "cafeteria",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Av. Caminos del Inca 267 / Ca. Alcanfores 350, Surco/Miraflores. Counter 20g",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-015",
-            "empresa": "Naturlandia",
-            "contacto": "+51 979 745 694",
-            "canal": "biomarket",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Ca. Narciso de la Colina 145, Miraflores. Prospección activa",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-024",
-            "empresa": "Nola Pastelería Saludable",
-            "contacto": "+51 989 973 429",
-            "canal": "cafeteria",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Ca. Piura 713, Miraflores. Counter 20g",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-016",
-            "empresa": "Nuna Orgánica",
-            "contacto": "En cartera",
-            "canal": "biomarket",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "bajo",
-            "notas": "Múltiples sedes Lima Norte (Los Olivos / SMP / SJL / Comas). En cartera",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-002",
-            "empresa": "Organa",
-            "contacto": "+51 986 425 088",
-            "canal": "biomarket",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": "2026-09-19",
-            "potencial": "alto",
-            "notas": "Av. Alfredo Benavides 455, Miraflores. Prioritario",
-            "tags": "",
-            "etapa": "contactado"
-        },
-        {
-            "id_cliente": "CLI-023",
-            "empresa": "Pickadeli",
-            "contacto": "+51 960 869 050",
-            "canal": "cafeteria",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Ca. Enrique Palacios 361, Miraflores. Counter 20g",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-006",
-            "empresa": "Punto Orgánico",
-            "contacto": "+51 923 610 132",
-            "canal": "biomarket",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Surquillo. Prospección activa",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-005",
-            "empresa": "Que Tentación",
-            "contacto": "+51 942 877 757",
-            "canal": "biomarket",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Calle 2 de Mayo 679 Int. 202, Miraflores. Prospección activa",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-020",
-            "empresa": "Sano Protein Bar",
-            "contacto": "Presencial",
-            "canal": "cafeteria",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Magdalena del Mar. Counter 20g",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-025",
-            "empresa": "Tía Basi - Postres Saludables",
-            "contacto": "+51 907 812 748",
-            "canal": "cafeteria",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "C. Colón 112, Miraflores. Counter 20g",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-008",
-            "empresa": "Verde Natural Market",
-            "contacto": "+51 971 066 550",
-            "canal": "biomarket",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Calle Bolognesi 125, Miraflores. Prospección activa",
-            "tags": "",
-            "etapa": "prospeccion"
-        },
-        {
-            "id_cliente": "CLI-018",
-            "empresa": "Verdea",
-            "contacto": "+51 906 413 682",
-            "canal": "cafeteria",
-            "responsable": "Karla",
-            "ultimo_contacto": null,
-            "proximo_contacto": null,
-            "potencial": "medio",
-            "notas": "Av. Jorge Chávez 131, Miraflores. Counter 20g",
-            "tags": "",
-            "etapa": "prospeccion"
-        }
-    ],
-    "inventory": {
-        "inv-20g": {
-            "id": "inv-20g",
-            "nombre": "Grajeas 20g (Retail)",
-            "cantidad": 120,
-            "unidad": "unids",
-            "precio_unitario": 4.8
-        },
-        "inv-100g": {
-            "id": "inv-100g",
-            "nombre": "Caja Gourmet 100g",
-            "cantidad": 45,
-            "unidad": "cajas",
-            "precio_unitario": 17.5
-        },
-        "inv-polos": {
-            "id": "inv-polos",
-            "nombre": "Polos Camiseros",
-            "cantidad": 24,
-            "unidad": "polos",
-            "precio_unitario": 0
-        },
-        "inv-llaveros": {
-            "id": "inv-llaveros",
-            "nombre": "Llaveros Xiembra",
-            "cantidad": 50,
-            "unidad": "unids",
-            "precio_unitario": 0
-        }
-    },
-    "sales": [],
-    "content": [
-        {
-            "titulo": "Origen del Cacao Xiembra",
-            "tipo": "contenido",
-            "proyecto": "Xiembra",
-            "formato": "reel",
-            "pilar": "origen",
-            "estado": "idea",
-            "fecha_publicacion": "2026-09-25",
-            "copy_corto": "Descubre de d�nde viene nuestro cacao."
-        }
-    ]
-};
+    "clients":  [
+                    {
+                        "id_cliente":  "CLI-001",
+                        "empresa":  "La Sanahoria",
+                        "contacto":  "+51 913 733 367",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "2026-09-15",
+                        "proximo_contacto":  "2026-09-19",
+                        "potencial":  "alto",
+                        "notas":  "San Isidro, Calle Miguel Dasso 101. Canal ancla prioritario (Caja 100g y 20g)."
+                    },
+                    {
+                        "id_cliente":  "CLI-002",
+                        "empresa":  "Organa",
+                        "contacto":  "+51 986 425 088",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "2026-09-19",
+                        "potencial":  "alto",
+                        "notas":  "Av. Alfredo Benavides 455, Miraflores. Prioritario"
+                    },
+                    {
+                        "id_cliente":  "CLI-003",
+                        "empresa":  "Flora y Fauna",
+                        "contacto":  "+51 934 990 745",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "2026-09-20",
+                        "potencial":  "alto",
+                        "notas":  "Av. Mariscal La Mar 1110, Miraflores. Prioritario"
+                    },
+                    {
+                        "id_cliente":  "CLI-004",
+                        "empresa":  "Kahee Biomarket",
+                        "contacto":  "+51 950 878 585",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Calle Berlín 169, Miraflores. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-005",
+                        "empresa":  "Que Tentación",
+                        "contacto":  "+51 942 877 757",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Calle 2 de Mayo 679 Int. 202, Miraflores. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-006",
+                        "empresa":  "Punto Orgánico",
+                        "contacto":  "+51 923 610 132",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Surquillo. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-007",
+                        "empresa":  "Greta Market",
+                        "contacto":  "+51 956 520 498",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Ca. Piura 196, Miraflores. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-008",
+                        "empresa":  "Verde Natural Market",
+                        "contacto":  "+51 971 066 550",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Calle Bolognesi 125, Miraflores. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-009",
+                        "empresa":  "Madre Natura",
+                        "contacto":  "(01) 445 2522",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Av. Comandante Espinar 473, Miraflores. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-010",
+                        "empresa":  "Fresh2go",
+                        "contacto":  "+51 979 300 062",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Calle Porta 186, Miraflores. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-011",
+                        "empresa":  "Bio Inkagri",
+                        "contacto":  "+51 998 527 244",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Calle Shell 331, Miraflores. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-012",
+                        "empresa":  "Mystika Tienda Saludable",
+                        "contacto":  "+51 992 761 894",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Av. Alfredo Benavides 3601, Santiago de Surco. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-013",
+                        "empresa":  "Biodeli Orgánico",
+                        "contacto":  "(01) 242 0224",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Av. Petit Thouars 4828, Miraflores. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-014",
+                        "empresa":  "Eco Tienda Orgánica",
+                        "contacto":  "+51 963 184 773",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "C. Baltazar La Torre 270, San Isidro. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-015",
+                        "empresa":  "Naturlandia",
+                        "contacto":  "+51 979 745 694",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Ca. Narciso de la Colina 145, Miraflores. Prospección activa"
+                    },
+                    {
+                        "id_cliente":  "CLI-016",
+                        "empresa":  "Nuna Orgánica",
+                        "contacto":  "En cartera",
+                        "canal":  "biomarket",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "bajo",
+                        "notas":  "Múltiples sedes Lima Norte (Los Olivos / SMP / SJL / Comas). En cartera"
+                    },
+                    {
+                        "id_cliente":  "CLI-017",
+                        "empresa":  "Natural Chef Gluten Free",
+                        "contacto":  "+51 905 449 515",
+                        "canal":  "cafeteria",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Av. Caminos del Inca 267 / Ca. Alcanfores 350, Surco/Miraflores. Counter 20g"
+                    },
+                    {
+                        "id_cliente":  "CLI-018",
+                        "empresa":  "Verdea",
+                        "contacto":  "+51 906 413 682",
+                        "canal":  "cafeteria",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Av. Jorge Chávez 131, Miraflores. Counter 20g"
+                    },
+                    {
+                        "id_cliente":  "CLI-019",
+                        "empresa":  "GOURMETY Biomarket \u0026 Café",
+                        "contacto":  "Presencial",
+                        "canal":  "cafeteria",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Av. Ricardo Rivera Navarrete 575, San Isidro. Counter 20g"
+                    },
+                    {
+                        "id_cliente":  "CLI-020",
+                        "empresa":  "Sano Protein Bar",
+                        "contacto":  "Presencial",
+                        "canal":  "cafeteria",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Magdalena del Mar. Counter 20g"
+                    },
+                    {
+                        "id_cliente":  "CLI-021",
+                        "empresa":  "Barra Botánica",
+                        "contacto":  "+51 997 580 841",
+                        "canal":  "cafeteria",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Ca. Libertad 439, Miraflores. Counter 20g"
+                    },
+                    {
+                        "id_cliente":  "CLI-022",
+                        "empresa":  "Manzana Verde",
+                        "contacto":  "+1 (205) 782-9108",
+                        "canal":  "cafeteria",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Ca. Arica 299, Miraflores. Counter 20g"
+                    },
+                    {
+                        "id_cliente":  "CLI-023",
+                        "empresa":  "Pickadeli",
+                        "contacto":  "+51 960 869 050",
+                        "canal":  "cafeteria",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Ca. Enrique Palacios 361, Miraflores. Counter 20g"
+                    },
+                    {
+                        "id_cliente":  "CLI-024",
+                        "empresa":  "Nola Pastelería Saludable",
+                        "contacto":  "+51 989 973 429",
+                        "canal":  "cafeteria",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "Ca. Piura 713, Miraflores. Counter 20g"
+                    },
+                    {
+                        "id_cliente":  "CLI-025",
+                        "empresa":  "Tía Basi - Postres Saludables",
+                        "contacto":  "+51 907 812 748",
+                        "canal":  "cafeteria",
+                        "etapa":  "prospeccion",
+                        "responsable":  "Karla",
+                        "ultimo_contacto":  "",
+                        "proximo_contacto":  "",
+                        "potencial":  "medio",
+                        "notas":  "C. Colón 112, Miraflores. Counter 20g"
+                    }
+                ],
+      "inventory": {
+        "inv-20g": { "id": "inv-20g", "nombre": "Grajeas 20g (Retail)", "cantidad": 120, "unidad": "unids", "precio_unitario": 4.80 },
+        "inv-100g": { "id": "inv-100g", "nombre": "Caja Gourmet 100g", "cantidad": 45, "unidad": "cajas", "precio_unitario": 17.50 },
+        "inv-polos": { "id": "inv-polos", "nombre": "Polos Camiseros", "cantidad": 24, "unidad": "polos", "precio_unitario": 0.00 },
+        "inv-llaveros": { "id": "inv-llaveros", "nombre": "Llaveros Xiembra", "cantidad": 50, "unidad": "unids", "precio_unitario": 0.00 }
+      },
+      "sales": []
+    };
     // State management
-    let appData = { tasks: [], clients: [], content: [], inventory: {}, sales: [] };
+    let appData = { tasks: [], clients: [], inventory: {}, sales: [] };
+
+    // API Configuration
+    const API_BASE = 'https://api.xiembra.net/api/tareas';
+    const API_CREDENTIALS = btoa('xiembra-api:xmb_api_9f8d7c6b5a4e3d2c1b');
+    
+    async function apiFetch(url, options = {}) {
+      if (!options.headers) options.headers = {};
+      options.headers['Authorization'] = `Basic ${API_CREDENTIALS}`;
+      options.headers['Content-Type'] = 'application/json';
+      
+      const res = await fetch(url, options);
+      if (!res.ok) {
+         if (res.status === 401) throw new Error('API no autorizada. Revisa credenciales.');
+         throw new Error(`Error del API: ${res.status}`);
+      }
+      return await res.json();
+    }
+
     let activeUser = 'Karla'; // Default: Karla
     let activeView = 'inicio';
     let taskFilterUser = 'karla'; // 'karla' | 'roger' | 'todos'
@@ -2456,7 +2432,7 @@
     });
 
     // Load data from localStorage or initial JSON
-    function loadData() {
+    async function loadData() {
       const saved = localStorage.getItem('xiembra_control_center_v1');
       if (saved) {
         try {
@@ -2473,7 +2449,18 @@
       } else {
         appData = JSON.parse(JSON.stringify(INITIAL_DATA));
       }
+      
+      // Override tasks with live data from API
+      try {
+        const liveTasks = await apiFetch(API_BASE);
+        appData.tasks = liveTasks;
+      } catch (err) {
+        console.error(err);
+        showToast('Error cargando tareas en vivo: ' + err.message);
+      }
+      
       populateClientsDropdowns();
+      renderAll();
     }
 
     function persistData() {
@@ -2521,7 +2508,7 @@
         inventario: ['Inventario y Stock', 'Control físico de grajeas, cajas, polos y merchandising'],
         ventas: ['Ventas y Facturación', 'Asistente tributario SUNAT y emisión rápida de comprobantes'],
         finanzas: ['Finanzas y Costos', 'Márgenes de producción, maquila y precios mayoristas'],
-        calendario: ['Calendario de Contenido', 'Gestión de posts para Instagram y redes'],
+        calendario: ['Calendario Operativo', 'Cronograma de visitas comerciales y fechas límites'],
         reportes: ['Reportes de Lanzamiento', 'Estado de avance de Ready to Sell y Ready to Scale'],
         jarvis: ['JARVIS 24/7', 'Asistente de inteligencia ejecutiva en la nube'],
         configuracion: ['Configuración', 'Datos fiscales de la empresa y preferencias locales']
@@ -2781,7 +2768,7 @@
       const bloqF = document.getElementById('filter-task-bloq')?.value || 'todos';
 
       let filtered = appData.tasks.filter(t => {
-        const matchQ = (t.titulo || '').toLowerCase().includes(q) || (t.id || '').toLowerCase().includes(q);
+        const matchQ = t.titulo.toLowerCase().includes(q) || t.id.toLowerCase().includes(q);
         const matchFase = (faseF === 'todas') || (t.fase === faseF);
         const matchResp = (respF === 'todos') || (t.responsable === respF);
         let matchBloq = true;
@@ -2855,7 +2842,7 @@
       const etapaF = document.getElementById('filter-cliente-etapa')?.value || 'todas';
 
       const filtered = appData.clients.filter(c => {
-        const matchQ = (c.empresa || '').toLowerCase().includes(q) || (c.notas || '').toLowerCase().includes(q);
+        const matchQ = c.empresa.toLowerCase().includes(q) || (c.notas || '').toLowerCase().includes(q);
         const matchCanal = (canalF === 'todos') || (c.canal === canalF);
         const matchEtapa = (etapaF === 'todas') || (c.etapa === etapaF);
         return matchQ && matchCanal && matchEtapa;
@@ -2952,16 +2939,37 @@
       }
     }
 
-    function executeConfirmComplete() {
+    async function executeConfirmComplete() {
       if (!pendingCompleteTaskId) return;
-      const t = appData.tasks.find(x => x.id === pendingCompleteTaskId);
-      if (t) {
-        t.estado = 'terminado';
-        persistData();
+      
+      const submitBtn = document.querySelector('#modal-confirm-task button.bg-brand-campo');
+      const originalText = submitBtn.innerText;
+      submitBtn.innerText = 'Guardando...';
+      submitBtn.disabled = true;
+
+      try {
+        const updates = { estado: 'terminado' };
+        
+        const res = await apiFetch(`${API_BASE}/${pendingCompleteTaskId}`, {
+            method: 'PATCH',
+            body: JSON.stringify(updates)
+        });
+
+        const tIndex = appData.tasks.findIndex(x => x.id === pendingCompleteTaskId);
+        if (tIndex > -1) {
+            appData.tasks[tIndex] = res.task;
+        }
+        
+        renderAll();
         closeModal('modal-confirm-task');
-        showToast('🎉 Tarea completada con éxito!');
+        showToast('🎉 Tarea completada y sincronizada al Vault!');
+      } catch (err) {
+        alert('Error al completar tarea: ' + err.message);
+      } finally {
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+        pendingCompleteTaskId = null;
       }
-      pendingCompleteTaskId = null;
     }
 
     function openEditTask(id) {
@@ -2996,19 +3004,42 @@
       });
     }
 
-    function saveTaskEdits() {
+    async function saveTaskEdits() {
       if (!editingTaskId) return;
-      const t = appData.tasks.find(x => x.id === editingTaskId);
-      if (t) {
-        t.estado = currentEditingState;
-        t.responsable = document.getElementById('edit-task-resp').value;
-        t.fecha_limite = document.getElementById('edit-task-fecha').value;
-        t.bloqueado = document.getElementById('edit-task-bloq').checked;
-        t.motivo_bloqueo = document.getElementById('edit-task-motivo').value;
-        t.dependencia = document.getElementById('edit-task-dep').value;
-        persistData();
-        closeModal('modal-editar-tarea');
-        showToast('Tarea actualizada correctamente');
+      
+      const submitBtn = document.querySelector('#modal-editar-tarea button.bg-brand-campo');
+      const originalText = submitBtn.innerText;
+      submitBtn.innerText = 'Guardando...';
+      submitBtn.disabled = true;
+
+      try {
+          const updates = {
+            estado: currentEditingState,
+            responsable: document.getElementById('edit-task-resp').value,
+            fecha_limite: document.getElementById('edit-task-fecha').value,
+            bloqueado: document.getElementById('edit-task-bloq').checked,
+            motivo_bloqueo: document.getElementById('edit-task-motivo').value,
+            dependencia: document.getElementById('edit-task-dep').value
+          };
+
+          const res = await apiFetch(`${API_BASE}/${editingTaskId}`, {
+              method: 'PATCH',
+              body: JSON.stringify(updates)
+          });
+
+          const tIndex = appData.tasks.findIndex(x => x.id === editingTaskId);
+          if (tIndex > -1) {
+              appData.tasks[tIndex] = res.task;
+          }
+          
+          renderAll(); // Re-render tasks
+          closeModal('modal-editar-tarea');
+          showToast('Tarea actualizada y sincronizada al Vault');
+      } catch (err) {
+          alert('Error al actualizar tarea: ' + err.message);
+      } finally {
+          submitBtn.innerText = originalText;
+          submitBtn.disabled = false;
       }
     }
 
@@ -3021,32 +3052,50 @@
       }
     }
 
-    function saveNewTask(e) {
+    async function saveNewTask(e) {
       e.preventDefault();
-      const count = appData.tasks.length + 1;
-      const id = `TAR-${String(count).padStart(3, '0')}`;
-      const isBloq = document.getElementById('nueva-tarea-bloqueada').checked;
+      
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerText;
+      submitBtn.innerText = 'Guardando...';
+      submitBtn.disabled = true;
 
-      const newTask = {
-        id: id,
-        titulo: document.getElementById('nueva-tarea-titulo').value,
-        fase: document.getElementById('nueva-tarea-fase').value,
-        area: 'operaciones',
-        estado: 'pendiente',
-        prioridad: document.getElementById('nueva-tarea-prio').value,
-        responsable: document.getElementById('nueva-tarea-resp').value,
-        fecha_limite: document.getElementById('nueva-tarea-fecha').value,
-        bloqueado: isBloq,
-        motivo_bloqueo: isBloq ? document.getElementById('nueva-tarea-motivo').value : '',
-        dependencia: isBloq ? document.getElementById('nueva-tarea-dep').value : '',
-        critica_lanzamiento: isBloq
-      };
+      try {
+          const count = appData.tasks.length + 1;
+          const id = `TAR-${String(count).padStart(3, '0')}`;
+          const isBloq = document.getElementById('nueva-tarea-bloqueada').checked;
 
-      appData.tasks.unshift(newTask);
-      persistData();
-      closeModal('modal-nueva-tarea');
-      e.target.reset();
-      showToast('Nueva tarea agregada al tablero');
+          const newTask = {
+            id: id,
+            titulo: document.getElementById('nueva-tarea-titulo').value,
+            fase: document.getElementById('nueva-tarea-fase').value,
+            area: 'operaciones',
+            estado: 'pendiente',
+            prioridad: document.getElementById('nueva-tarea-prio').value,
+            responsable: document.getElementById('nueva-tarea-resp').value,
+            fecha_limite: document.getElementById('nueva-tarea-fecha').value,
+            bloqueado: isBloq,
+            motivo_bloqueo: isBloq ? document.getElementById('nueva-tarea-motivo').value : '',
+            dependencia: isBloq ? document.getElementById('nueva-tarea-dep').value : '',
+            critica_lanzamiento: isBloq
+          };
+
+          const res = await apiFetch(API_BASE, {
+              method: 'POST',
+              body: JSON.stringify(newTask)
+          });
+
+          appData.tasks.unshift(res.task);
+          renderAll(); // Re-render tasks
+          closeModal('modal-nueva-tarea');
+          e.target.reset();
+          showToast('Nueva tarea agregada y sincronizada al Vault');
+      } catch (err) {
+          alert('Error al guardar tarea: ' + err.message);
+      } finally {
+          submitBtn.innerText = originalText;
+          submitBtn.disabled = false;
+      }
     }
 
     // Client Detail Modal
