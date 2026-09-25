@@ -2959,7 +2959,7 @@
     async function executeConfirmComplete() {
       if (!pendingCompleteTaskId) return;
       
-      const submitBtn = document.querySelector('#modal-confirm-task button.bg-brand-campo');
+      const submitBtn = document.querySelector('#modal-confirm-task button.bg-emerald-600');
       const originalText = submitBtn.innerText;
       submitBtn.innerText = 'Guardando...';
       submitBtn.disabled = true;
@@ -3412,6 +3412,29 @@ Adjuntamos Factura Electrónica. Favor de enviarnos el voucher para despachar su
       closeModal('modal-registrar-seguimiento');
       showToast(`Seguimiento registrado para ${cliente}`);
     }
+    // --- SILENT AUTO REFRESH ---
+    async function refreshTasksSilently() {
+      if (document.querySelector('dialog[open]')) return; // Do not interrupt if a modal is open
+      try {
+        const liveTasks = await apiFetch(API_BASE);
+        appData.tasks = liveTasks;
+        if (activeView === 'tareas') {
+          renderTasks();
+        } else if (activeView === 'inicio') {
+          renderInicio();
+        }
+      } catch (e) {
+        console.error('Silent refresh error:', e);
+      }
+    }
+
+    setInterval(refreshTasksSilently, 60000);
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        refreshTasksSilently();
+      }
+    });
   </script>
 </body>
 </html>
