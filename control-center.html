@@ -3078,12 +3078,9 @@
       submitBtn.disabled = true;
 
       try {
-          const count = appData.tasks.length + 1;
-          const id = `TAR-${String(count).padStart(3, '0')}`;
           const isBloq = document.getElementById('nueva-tarea-bloqueada').checked;
 
           const newTask = {
-            id: id,
             titulo: document.getElementById('nueva-tarea-titulo').value,
             fase: document.getElementById('nueva-tarea-fase').value,
             area: document.getElementById('nueva-tarea-area').value,
