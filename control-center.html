@@ -2408,7 +2408,7 @@
       }
       
       try {
-        const liveInv = await apiFetch('http://localhost:3001/api/inventario');
+        const liveInv = await apiFetch('https://api.xiembra.net/api/inventario');
         appData.inventoryV2 = liveInv;
       } catch (err) {
         console.error(err);
@@ -3199,7 +3199,7 @@
         if (!motivo) return;
         
         try {
-            const API_INV_BASE = 'http://localhost:3001/api/inventario'; // Local test URL
+            const API_INV_BASE = 'https://api.xiembra.net/api/inventario'; // Local test URL
             const res = await apiFetch(`${API_INV_BASE}/${id}/ajuste`, {
                 method: 'PATCH',
                 body: JSON.stringify({ ubicacion, variante, delta, motivo, usuario: activeUser })
